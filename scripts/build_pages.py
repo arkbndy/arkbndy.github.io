@@ -1,0 +1,1101 @@
+#!/usr/bin/env python3
+"""
+Assemble the five site pages from one template.
+
+Run from the repository root:  python3 scripts/build_pages.py
+Edit the copy here, not in the generated .html files.
+"""
+import json
+import pathlib
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+
+SITE = "https://arkbndy.github.io/"
+NAME = "Arka Bandyopadhyay"
+
+NAV = [("index.html", "Home"), ("research.html", "Research"),
+       ("publications.html", "Publications"), ("news.html", "News"),
+       ("cv.html", "CV"), ("index.html#contact", "Contact")]
+
+JSONLD = """
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Arka Bandyopadhyay",
+  "givenName": "Arka",
+  "familyName": "Bandyopadhyay",
+  "jobTitle": "Postdoctoral Researcher in Theoretical Condensed Matter Physics",
+  "email": "mailto:arka.bandyopadhyay@uni-wuerzburg.de",
+  "url": "https://arkbndy.github.io/",
+  "image": "https://arkbndy.github.io/assets/img/portrait.jpg",
+  "affiliation": {
+    "@type": "Organization",
+    "name": "Julius-Maximilians-Universit\\u00e4t W\\u00fcrzburg",
+    "department": "Institute for Theoretical Physics and Astrophysics"
+  },
+  "memberOf": { "@type": "Organization", "name": "Cluster of Excellence ct.qmat" },
+  "knowsAbout": ["Quantum materials","Theoretical condensed matter physics","Quantum geometry",
+    "Berry curvature","Nonlinear Hall effect","Topological materials","Flat bands","Kagome lattices",
+    "Altermagnetism","Electronic correlations","Spin-orbit coupling","Oxide interfaces",
+    "Density functional theory","Wannier functions","Quantum transport","Two-dimensional materials"],
+  "identifier": "https://orcid.org/0000-0003-3386-4289",
+  "sameAs": [
+    "https://orcid.org/0000-0003-3386-4289",
+    "https://scholar.google.com/citations?user=EcM27vQAAAAJ",
+    "https://github.com/arkbndy",
+    "https://www.physik.uni-wuerzburg.de/en/cqm/team/postdocs/dr-arka-bandyopadhyay/"
+  ]
+}
+</script>"""
+
+FOOTER = """
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p>&copy; <span id="year">2026</span> Arka Bandyopadhyay &middot; W&uuml;rzburg</p>
+    <div class="idlinks">
+      <a href="https://orcid.org/0000-0003-3386-4289" target="_blank" rel="noopener">ORCID 0000-0003-3386-4289</a>
+      <a href="https://scholar.google.com/citations?user=EcM27vQAAAAJ" target="_blank" rel="noopener">Google Scholar</a>
+      <a href="https://github.com/arkbndy" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</footer>"""
+
+
+def header(current):
+    items = []
+    for href, label in NAV:
+        cur = ' aria-current="page"' if href == current else ''
+        items.append('        <li><a href="%s"%s>%s</a></li>' % (href, cur, label))
+    return """
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="index.html"><b>Arka Bandyopadhyay</b><span>Quantum Materials Theory</span></a>
+    <nav aria-label="Primary">
+      <ul class="nav-links" id="nav-links">
+%s
+      </ul>
+    </nav>
+    <button class="icon-btn theme-toggle" type="button" aria-label="Switch colour theme">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    </button>
+    <button class="icon-btn nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+</header>"""  % "\n".join(items)
+
+
+def page(filename, title, description, body, current, extra_head=""):
+    canonical = SITE + ("" if filename == "index.html" else filename)
+    html = """<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>%(title)s</title>
+<meta name="description" content="%(desc)s">
+<meta name="author" content="Arka Bandyopadhyay">
+<link rel="canonical" href="%(canonical)s">
+
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="Arka Bandyopadhyay">
+<meta property="og:title" content="%(title)s">
+<meta property="og:description" content="%(desc)s">
+<meta property="og:url" content="%(canonical)s">
+<meta property="og:image" content="%(site)sassets/img/portrait.jpg">
+<meta name="twitter:card" content="summary">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+%(extra)s
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+%(header)s
+<main id="main">
+%(body)s
+</main>
+%(footer)s
+<script src="assets/js/site.js"></script>
+</body>
+</html>
+""" % dict(title=title, desc=description, canonical=canonical, site=SITE,
+           extra=extra_head, header=header(current), body=body, footer=FOOTER)
+    (ROOT / filename).write_text(html, encoding="utf-8")
+    return filename
+
+
+# =========================================================================
+#  Figures
+# =========================================================================
+
+MAP_SVG = """<svg viewBox="0 0 960 250" role="img" aria-labelledby="maptitle mapdesc">
+  <title id="maptitle">How the research programme fits together</title>
+  <desc id="mapdesc">Five linked stages: materials and structure; symmetry and electronic structure;
+  quantum geometry, topology, magnetism and correlations; emergent states and unconventional transport;
+  measurable signatures. A feedback arrow runs from measurable signatures back to the models.</desc>
+  <defs>
+    <marker id="mArrow" markerWidth="9" markerHeight="9" refX="7" refY="3.2" orient="auto">
+      <path d="M0,0 L7,3.2 L0,6.4 z" style="fill:var(--accent)"/>
+    </marker>
+  </defs>
+  <text x="480" y="26" text-anchor="middle" style="fill:var(--accent);font:650 12px var(--sans);letter-spacing:.22em">QUANTUM MATERIALS</text>
+  <line x1="60" y1="38" x2="900" y2="38" style="stroke:var(--accent-line);stroke-width:1"/>
+
+  <g style="fill:var(--surface);stroke:var(--rule);stroke-width:1">
+    <rect x="20"  y="62" width="168" height="104" rx="8"/>
+    <rect x="208" y="62" width="168" height="104" rx="8"/>
+    <rect x="396" y="62" width="168" height="104" rx="8"/>
+    <rect x="584" y="62" width="168" height="104" rx="8"/>
+    <rect x="772" y="62" width="168" height="104" rx="8"/>
+  </g>
+
+  <g style="fill:var(--ink);font:600 13px var(--sans)" text-anchor="middle">
+    <text x="104" y="94">Materials</text><text x="104" y="112">&amp; structure</text>
+    <text x="292" y="94">Symmetry &amp;</text><text x="292" y="112">electronic structure</text>
+    <text x="480" y="94">Quantum geometry,</text><text x="480" y="112">topology, magnetism</text>
+    <text x="668" y="94">Emergent states &amp;</text><text x="668" y="112">unconventional transport</text>
+    <text x="856" y="94">Measurable</text><text x="856" y="112">signatures</text>
+  </g>
+  <g style="fill:var(--muted);font:400 10.5px var(--sans)" text-anchor="middle">
+    <text x="104" y="136">crystal chemistry,</text><text x="104" y="150">interfaces, molecules</text>
+    <text x="292" y="136">first-principles, Wannier,</text><text x="292" y="150">tight-binding models</text>
+    <text x="480" y="136">Berry curvature, quantum</text><text x="480" y="150">metric, correlations</text>
+    <text x="668" y="136">nonlinear Hall, anomalous</text><text x="668" y="150">Hall and Nernst, flat bands</text>
+    <text x="856" y="136">transport, ARPES,</text><text x="856" y="150">spectroscopy</text>
+  </g>
+
+  <g style="stroke:var(--accent);stroke-width:1.6;fill:none" marker-end="url(#mArrow)">
+    <path d="M190 114 H204"/><path d="M378 114 H392"/><path d="M566 114 H580"/><path d="M754 114 H768"/>
+  </g>
+
+  <path d="M856 168 V212 H292 V178" style="stroke:var(--accent-line);stroke-width:1.4;fill:none;stroke-dasharray:5 4" marker-end="url(#mArrow)"/>
+  <text x="574" y="234" text-anchor="middle" style="fill:var(--muted);font:italic 400 11.5px var(--serif)">what experiment sees feeds back into which mechanism the model must contain</text>
+</svg>"""
+
+FIG_GEOMETRY = """<svg viewBox="0 0 360 240" role="img" aria-label="Berry curvature distributed asymmetrically over a Fermi surface, converting a drive at frequency omega into a transverse current at twice omega">
+  <defs>
+    <radialGradient id="gPos"><stop offset="0" stop-color="#b4553f" stop-opacity=".85"/><stop offset="1" stop-color="#b4553f" stop-opacity="0"/></radialGradient>
+    <radialGradient id="gNeg"><stop offset="0" stop-color="#1c6b66" stop-opacity=".85"/><stop offset="1" stop-color="#1c6b66" stop-opacity="0"/></radialGradient>
+    <marker id="gArr" markerWidth="9" markerHeight="9" refX="7" refY="3.2" orient="auto"><path d="M0,0 L7,3.2 L0,6.4 z" style="fill:var(--accent)"/></marker>
+  </defs>
+  <rect x="72" y="40" width="216" height="140" rx="10" style="fill:none;stroke:var(--rule);stroke-width:1.2"/>
+  <text x="82" y="58" style="fill:var(--muted);font:500 10px var(--sans)">Brillouin zone</text>
+  <ellipse cx="140" cy="112" rx="50" ry="42" fill="url(#gPos)"/>
+  <ellipse cx="220" cy="112" rx="50" ry="42" fill="url(#gNeg)"/>
+  <path d="M106 112 a34 34 0 1 0 68 0 a34 34 0 1 0 -68 0" style="fill:none;stroke:var(--ink-2);stroke-width:1;opacity:.45"/>
+  <path d="M186 112 a34 34 0 1 0 68 0 a34 34 0 1 0 -68 0" style="fill:none;stroke:var(--ink-2);stroke-width:1;opacity:.45"/>
+  <text x="140" y="117" text-anchor="middle" style="fill:var(--ink);font:600 14px var(--sans)">+&#937;</text>
+  <text x="220" y="117" text-anchor="middle" style="fill:var(--ink);font:600 14px var(--sans)">&#8722;&#937;</text>
+  <path d="M16 112 H64" style="stroke:var(--accent);stroke-width:1.8;fill:none" marker-end="url(#gArr)"/>
+  <text x="16" y="100" style="fill:var(--ink-2);font:600 11px var(--sans)">E(&#969;)</text>
+  <path d="M180 224 V192" style="stroke:var(--accent);stroke-width:1.8;fill:none" marker-end="url(#gArr)"/>
+  <text x="190" y="219" style="fill:var(--ink-2);font:600 11px var(--sans)">J&#8869;(2&#969;)</text>
+  <text x="298" y="112" style="fill:var(--muted);font:italic 400 11px var(--serif)">D &#8733; &#8747; &#8706;&#937;/&#8706;k</text>
+</svg>"""
+
+FIG_KAGOME = """<svg viewBox="0 0 360 240" role="img" aria-label="A kagome lattice and its band structure, showing a flat band above two dispersive bands that touch at a Dirac point">
+  <g style="stroke:var(--accent);stroke-width:1.4;fill:none;opacity:.92">
+    <path d="M16 172 L46 120 L76 172 Z"/><path d="M76 172 L106 120 L136 172 Z"/>
+    <path d="M46 120 L76 68 L106 120 Z"/><path d="M106 120 L136 68 L166 120 Z"/>
+    <path d="M76 68 L106 16 L136 68 Z"/>
+    <path d="M46 120 H166"/><path d="M16 172 H136"/><path d="M76 68 H136"/>
+  </g>
+  <g style="fill:var(--accent)">
+    <circle cx="46" cy="120" r="3.6"/><circle cx="106" cy="120" r="3.6"/><circle cx="166" cy="120" r="3.6"/>
+    <circle cx="16" cy="172" r="3.6"/><circle cx="76" cy="172" r="3.6"/><circle cx="136" cy="172" r="3.6"/>
+    <circle cx="76" cy="68" r="3.6"/><circle cx="136" cy="68" r="3.6"/><circle cx="106" cy="16" r="3.6"/>
+  </g>
+  <path d="M214 204 V30 M214 204 H344" style="stroke:var(--rule);stroke-width:1.2;fill:none"/>
+  <path d="M221 60 H340" style="stroke:var(--accent);stroke-width:2.8;fill:none"/>
+  <path d="M221 176 Q280 60 340 176" style="stroke:var(--ink-2);stroke-width:1.5;fill:none;opacity:.7"/>
+  <path d="M221 60 Q280 176 340 60" style="stroke:var(--ink-2);stroke-width:1.5;fill:none;opacity:.7"/>
+  <circle cx="280" cy="118" r="3.2" style="fill:var(--ink-2)"/>
+  <text x="343" y="54" text-anchor="end" style="fill:var(--accent);font:600 10.5px var(--sans)">flat band</text>
+  <text x="290" y="113" style="fill:var(--muted);font:500 10px var(--sans)">band touching</text>
+  <text x="207" y="38" text-anchor="end" style="fill:var(--muted);font:500 11px var(--sans)">E</text>
+  <text x="344" y="222" text-anchor="end" style="fill:var(--muted);font:500 11px var(--sans)">k</text>
+</svg>"""
+
+FIG_DECIMATION = """<svg viewBox="0 0 360 240" role="img" aria-label="Real-space decimation reduces a lattice to an energy-dependent effective lattice; in the non-Hermitian case the complex eigenvalues coalesce at exceptional points">
+  <defs><marker id="dArr" markerWidth="9" markerHeight="9" refX="7" refY="3.2" orient="auto"><path d="M0,0 L7,3.2 L0,6.4 z" style="fill:var(--accent)"/></marker></defs>
+  <text x="18" y="20" style="fill:var(--muted);font:500 10px var(--sans)">lattice</text>
+  <path d="M18 44 H178" style="stroke:var(--rule);stroke-width:1.4;fill:none"/>
+  <g style="fill:var(--accent)"><circle cx="18" cy="44" r="5"/><circle cx="98" cy="44" r="5"/><circle cx="178" cy="44" r="5"/></g>
+  <g style="fill:var(--muted);opacity:.5"><circle cx="58" cy="44" r="3.8"/><circle cx="138" cy="44" r="3.8"/></g>
+  <path d="M200 44 H242" style="stroke:var(--accent);stroke-width:1.7;fill:none" marker-end="url(#dArr)"/>
+  <text x="221" y="34" text-anchor="middle" style="fill:var(--accent);font:600 9.5px var(--sans)">decimate</text>
+  <text x="264" y="20" style="fill:var(--muted);font:500 10px var(--sans)">effective</text>
+  <path d="M264 44 H342" style="stroke:var(--accent);stroke-width:2;fill:none"/>
+  <g style="fill:var(--accent)"><circle cx="264" cy="44" r="5"/><circle cx="303" cy="44" r="5"/><circle cx="342" cy="44" r="5"/></g>
+  <text x="303" y="66" text-anchor="middle" style="fill:var(--muted);font:italic 400 10px var(--serif)">t(E), &#949;(E)</text>
+  <path d="M18 86 H342" style="stroke:var(--rule);stroke-width:1;stroke-dasharray:4 4;opacity:.7"/>
+  <path d="M34 166 H336 M184 106 V230" style="stroke:var(--rule);stroke-width:1.2"/>
+  <path d="M100 166 C100 118 184 118 184 166 C184 214 268 214 268 166" style="stroke:var(--accent);stroke-width:2;fill:none"/>
+  <path d="M100 166 C100 214 184 214 184 166 C184 118 268 118 268 166" style="stroke:var(--ink-2);stroke-width:2;fill:none;opacity:.7"/>
+  <circle cx="100" cy="166" r="5" style="fill:var(--accent)"/><circle cx="268" cy="166" r="5" style="fill:var(--accent)"/>
+  <text x="100" y="190" text-anchor="middle" style="fill:var(--ink-2);font:600 10.5px var(--sans)">EP</text>
+  <text x="268" y="152" text-anchor="middle" style="fill:var(--ink-2);font:600 10.5px var(--sans)">EP</text>
+  <text x="340" y="159" text-anchor="end" style="fill:var(--muted);font:500 10px var(--sans)">Re E</text>
+  <text x="191" y="116" style="fill:var(--muted);font:500 10px var(--sans)">Im E</text>
+</svg>"""
+
+FIG_MAGNETISM = """<svg viewBox="0 0 360 240" role="img" aria-label="Two magnetic sublattices in rotated crystal environments, and bands whose spin splitting reverses between two directions in the Brillouin zone">
+  <defs><marker id="sUp" markerWidth="8" markerHeight="8" refX="4" refY="1" orient="auto"><path d="M0,6 L4,0 L8,6" style="fill:none;stroke:#b4553f;stroke-width:1.6"/></marker></defs>
+  <g style="stroke:var(--rule);stroke-width:1.2;fill:none">
+    <g transform="rotate(16 56 74)"><rect x="34" y="52" width="44" height="44" rx="4"/></g>
+    <g transform="rotate(-16 130 74)"><rect x="108" y="52" width="44" height="44" rx="4"/></g>
+  </g>
+  <g style="stroke:#b4553f;stroke-width:2;fill:none"><path d="M56 92 V56" marker-end="url(#sUp)"/></g>
+  <g style="stroke:var(--accent);stroke-width:2;fill:none"><path d="M130 56 V92" marker-end="url(#sUp)"/></g>
+  <text x="93" y="122" text-anchor="middle" style="fill:var(--muted);font:500 10px var(--sans)">opposite spins, rotated environments</text>
+  <text x="93" y="24" text-anchor="middle" style="fill:var(--ink);font:600 11px var(--sans)">no net magnetisation</text>
+
+  <path d="M210 200 V150 M210 200 H344" style="stroke:var(--rule);stroke-width:1.2"/>
+  <path d="M210 158 Q244 186 278 158" style="stroke:#b4553f;stroke-width:2;fill:none"/>
+  <path d="M210 172 Q244 200 278 172" style="stroke:var(--accent);stroke-width:2;fill:none"/>
+  <path d="M278 172 Q311 200 344 172" style="stroke:#b4553f;stroke-width:2;fill:none"/>
+  <path d="M278 158 Q311 186 344 158" style="stroke:var(--accent);stroke-width:2;fill:none"/>
+  <line x1="278" y1="150" x2="278" y2="200" style="stroke:var(--rule);stroke-width:1;stroke-dasharray:3 3"/>
+  <text x="244" y="216" text-anchor="middle" style="fill:var(--muted);font:500 10px var(--sans)">&#915;&#8594;X</text>
+  <text x="311" y="216" text-anchor="middle" style="fill:var(--muted);font:500 10px var(--sans)">&#915;&#8594;Y</text>
+  <text x="203" y="145" text-anchor="end" style="fill:var(--muted);font:500 11px var(--sans)">E</text>
+  <text x="277" y="140" text-anchor="middle" style="fill:var(--ink);font:600 11px var(--sans)">spin splitting reverses with direction</text>
+</svg>"""
+
+FIG_INTERFACE = """<svg viewBox="0 0 360 240" role="img" aria-label="Oxygen octahedra tilting across an oxide interface, altering the local spin-orbit environment of the layer above">
+  <defs><marker id="iArr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" style="fill:var(--accent)"/></marker></defs>
+  <rect x="20" y="24" width="320" height="92" rx="4" style="fill:var(--accent);opacity:.05"/>
+  <rect x="20" y="124" width="320" height="92" rx="4" style="fill:var(--muted);opacity:.06"/>
+  <path d="M20 120 H340" style="stroke:var(--accent);stroke-width:1.8;stroke-dasharray:6 4"/>
+  <text x="336" y="114" text-anchor="end" style="fill:var(--accent);font:600 10px var(--sans)">interface</text>
+  <g style="stroke:var(--accent);stroke-width:1.5;fill:none">
+    <g transform="rotate(11 64 70)"><path d="M42 70 L64 48 L86 70 L64 92 Z"/><path d="M42 70 H86 M64 48 V92"/></g>
+    <g transform="rotate(-11 140 70)"><path d="M118 70 L140 48 L162 70 L140 92 Z"/><path d="M118 70 H162 M140 48 V92"/></g>
+    <g transform="rotate(11 216 70)"><path d="M194 70 L216 48 L238 70 L216 92 Z"/><path d="M194 70 H238 M216 48 V92"/></g>
+    <g transform="rotate(-11 292 70)"><path d="M270 70 L292 48 L314 70 L292 92 Z"/><path d="M270 70 H314 M292 48 V92"/></g>
+  </g>
+  <g style="stroke:var(--ink-2);stroke-width:1.4;fill:none;opacity:.55">
+    <path d="M42 170 L64 148 L86 170 L64 192 Z"/><path d="M42 170 H86 M64 148 V192"/>
+    <path d="M118 170 L140 148 L162 170 L140 192 Z"/><path d="M118 170 H162 M140 148 V192"/>
+    <path d="M194 170 L216 148 L238 170 L216 192 Z"/><path d="M194 170 H238 M216 148 V192"/>
+    <path d="M270 170 L292 148 L314 170 L292 192 Z"/><path d="M270 170 H314 M292 148 V192"/>
+  </g>
+  <g style="stroke:var(--accent);stroke-width:1.8;fill:none">
+    <path d="M102 56 V84" marker-end="url(#iArr)"/><path d="M178 84 V56" marker-end="url(#iArr)"/><path d="M254 56 V84" marker-end="url(#iArr)"/>
+  </g>
+  <text x="26" y="42" style="fill:var(--muted);font:500 10px var(--sans)">tilted; spin&#8211;orbit environment reconstructed</text>
+  <text x="26" y="210" style="fill:var(--muted);font:500 10px var(--sans)">bulk-like substrate</text>
+</svg>"""
+
+FIG_MATERIALS = """<svg viewBox="0 0 360 240" role="img" aria-label="A square-and-octagon carbon network and an anisotropic Dirac cone">
+  <g style="stroke:var(--accent);stroke-width:1.4;fill:none;opacity:.92">
+    <rect x="30" y="30" width="36" height="36"/><rect x="104" y="30" width="36" height="36"/>
+    <rect x="30" y="104" width="36" height="36"/><rect x="104" y="104" width="36" height="36"/>
+    <path d="M66 48 H104 M66 122 H104 M48 66 V104 M122 66 V104"/>
+    <path d="M30 48 H12 M140 48 H158 M30 122 H12 M140 122 H158 M48 30 V12 M122 30 V12 M48 140 V158 M122 140 V158"/>
+  </g>
+  <g style="fill:var(--accent)">
+    <circle cx="30" cy="30" r="3.2"/><circle cx="66" cy="30" r="3.2"/><circle cx="30" cy="66" r="3.2"/><circle cx="66" cy="66" r="3.2"/>
+    <circle cx="104" cy="30" r="3.2"/><circle cx="140" cy="30" r="3.2"/><circle cx="104" cy="66" r="3.2"/><circle cx="140" cy="66" r="3.2"/>
+    <circle cx="30" cy="104" r="3.2"/><circle cx="66" cy="104" r="3.2"/><circle cx="30" cy="140" r="3.2"/><circle cx="66" cy="140" r="3.2"/>
+    <circle cx="104" cy="104" r="3.2"/><circle cx="140" cy="104" r="3.2"/><circle cx="104" cy="140" r="3.2"/><circle cx="140" cy="140" r="3.2"/>
+  </g>
+  <text x="12" y="184" style="fill:var(--muted);font:500 10px var(--sans)">square-and-octagon carbon network</text>
+  <path d="M204 206 L272 122 L340 206" style="stroke:var(--accent);stroke-width:1.8;fill:none"/>
+  <path d="M204 38 L272 122 L340 38" style="stroke:var(--accent);stroke-width:1.8;fill:none"/>
+  <ellipse cx="272" cy="206" rx="68" ry="14" style="fill:none;stroke:var(--rule);stroke-width:1.1"/>
+  <ellipse cx="272" cy="38" rx="68" ry="14" style="fill:none;stroke:var(--rule);stroke-width:1.1"/>
+  <circle cx="272" cy="122" r="4" style="fill:var(--accent)"/>
+  <text x="282" y="119" style="fill:var(--muted);font:500 10px var(--sans)">Dirac point</text>
+</svg>"""
+
+CARD_FIGS = {"geometry": FIG_GEOMETRY, "topology": FIG_KAGOME, "magnetism": FIG_MAGNETISM,
+             "interfaces": FIG_INTERFACE, "materials": FIG_MATERIALS}
+
+# ---- counts, computed from data/publications.json so nothing is typed twice ----
+_DATA = json.loads((ROOT / "data" / "publications.json").read_text(encoding="utf-8"))
+_PILLAR_KEYS = ["geometry", "topology", "magnetism", "interfaces", "materials"]
+
+
+def _tally(key):
+    """(published, under review, in preparation) for one pillar."""
+    pub = sum(1 for x in _DATA["peer_reviewed"] if key in x.get("tags", []))
+    ur = prep = 0
+    for x in _DATA["preprints"]:
+        if key not in x.get("tags", []):
+            continue
+        if str(x.get("journal", "")).lower().startswith("under review"):
+            ur += 1
+        else:
+            prep += 1
+    return pub, ur, prep
+
+
+def count_line(key):
+    pub, ur, prep = _tally(key)
+    bits = ["%d paper%s" % (pub, "" if pub == 1 else "s")]
+    if ur:
+        bits.append("%d under review" % ur)
+    if prep:
+        bits.append("%d in preparation" % prep)
+    return " &middot; ".join(bits)
+
+
+PILLARS = [
+ ("geometry", "01", "Quantum geometry &amp; unconventional transport", count_line("geometry"),
+  "Berry curvature, the quantum metric and the transverse responses they generate — nonlinear Hall, "
+  "anomalous Hall and Nernst — in materials where symmetry allows them."),
+ ("topology", "02", "Topology, flat bands &amp; kagome quantum matter", count_line("topology"),
+  "Where flat bands come from in kagome and line-graph lattices, when they carry non-trivial topology, "
+  "and what exactly solvable lattice methods reveal that numerics alone do not."),
+ ("magnetism", "03", "Magnetism, correlations &amp; spin–orbit physics", count_line("magnetism"),
+  "Magnetic quantum materials, altermagnetism, and the interplay of spin–orbit coupling with electronic "
+  "correlations — the direction I am currently expanding most."),
+ ("interfaces", "04", "Interfaces &amp; materials-realistic quantum matter", count_line("interfaces"),
+  "Complex-oxide heterostructures, where a structural distortion of a few degrees reorganises the "
+  "electronic and magnetic state, tested directly against spectroscopy and transport."),
+ ("materials", "05", "Low-dimensional &amp; chemically designed materials", count_line("materials"),
+  "Predicting two-dimensional and molecular materials from first principles — Dirac systems beyond the "
+  "honeycomb, metal–organic lattices, and the functional properties that follow."),
+]
+
+
+def pillar_cards():
+    out = []
+    for key, n, title, count, blurb in PILLARS:
+        out.append("""        <a class="pillar-card" href="research.html#%s">
+          <span class="n">%s</span>
+          <h3>%s</h3>
+          <p>%s</p>
+          <span class="count">%s</span>
+          <span class="more">Read more &rarr;</span>
+        </a>""" % (key, n, title, blurb, count))
+    return "\n".join(out)
+
+
+# =========================================================================
+#  Home
+# =========================================================================
+HOME = """
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <p class="kicker">Theoretical Condensed-Matter Physicist</p>
+        <h1>Arka Bandyopadhyay</h1>
+        <p class="keywords">Quantum materials &middot; quantum geometry &middot; topology &middot; magnetism &middot; unconventional transport</p>
+        <p class="affil">Computational Quantum Materials, Institute for Theoretical Physics and Astrophysics<br>
+          Julius-Maximilians-Universit&auml;t W&uuml;rzburg &middot; Cluster of Excellence <em>ct.qmat</em></p>
+        <p class="lede">I am a theoretical condensed-matter physicist working on quantum materials. I am
+          interested in how symmetry, electronic structure, quantum geometry, topology, magnetism and
+          electronic correlations act together to produce unusual electronic states and transport. I combine
+          first-principles calculations with realistic lattice models, symmetry analysis, quantum transport
+          and many-body methods, and try to carry each question through to something a measurement can
+          decide. Much of the work develops with experimental groups, and with chemists who can change a
+          material&rsquo;s structure on purpose.</p>
+        <div class="actions">
+          <a class="btn btn--primary" href="research.html">Research programme</a>
+          <a class="btn" href="publications.html">Publications</a>
+          <a class="btn" href="cv.html">CV</a>
+          <a class="btn" href="mailto:arka.bandyopadhyay@uni-wuerzburg.de">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+            Email</a>
+        </div>
+      </div>
+      <div class="portrait-frame">
+        <img class="portrait" src="assets/img/portrait.jpg" width="560" height="627"
+             alt="Arka Bandyopadhyay">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-block:0 clamp(2.4rem,5vw,3.4rem)">
+  <div class="wrap"><div class="record" id="record"></div></div>
+</section>
+
+<section class="section section--tint" id="programme">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Research programme</p>
+      <h2>One question, five ways in</h2>
+      <p>How do symmetry, electronic structure, quantum geometry, topology, magnetism and electronic
+        correlations act together to produce unusual states and transport in quantum materials &mdash; and how
+        can those principles be turned into predictions an experiment can test, or into rules for designing a
+        material?</p>
+      <p>The five threads below are different entry points to that question. They share a method: start from
+        the structure and symmetry of a real material, build a model faithful enough to be quantitative, and
+        follow it through to something measurable.</p>
+    </div>
+    <figure class="map">
+      <div class="map-scroll" tabindex="0" role="group" aria-label="Diagram: how the research programme moves from structure to measurement (scrollable)">%(map)s</div>
+      <figcaption>The same path, whichever thread I am following. Structure and chemistry set the symmetry
+        and the orbitals; those fix the quantum geometry, the topology and the magnetic behaviour; and those
+        decide what a transport or spectroscopy measurement will see. The return arrow matters as much as the
+        forward one.</figcaption>
+    </figure>
+    <div class="pillars" style="margin-top:var(--s5)">
+%(cards)s
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Selected work</p>
+      <h2>Six papers, five threads</h2>
+      <p>Chosen to show the range of the programme rather than the journals. One line on each says what it
+        establishes; the complete record is on the <a href="publications.html">publications page</a>.</p>
+    </div>
+    <div class="selected" id="selected-pubs"></div>
+    <div class="actions" style="margin-top:var(--s4)">
+      <a class="btn" href="publications.html">Full publication record &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tint">
+  <div class="wrap">
+    <div class="section-head"><p class="eyebrow">Recent</p><h2>News</h2></div>
+    <ul class="timeline news-compact" data-news="4"></ul>
+    <noscript>
+      <p class="nojs">The news feed is generated from a data file, which needs JavaScript. Recent papers
+        and talks are listed on <a href="https://orcid.org/0000-0003-3386-4289" rel="noopener">ORCID</a>.</p>
+    </noscript>
+
+    <div class="actions" style="margin-top:var(--s2)"><a class="btn" href="news.html">All updates &rarr;</a></div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Get in touch</p>
+      <h2>Contact</h2>
+      <p>I am always glad to hear from researchers working on quantum materials, unconventional transport,
+        topology, magnetism and related problems &mdash; particularly where theory can work closely with
+        experiment or with materials design. A material worth calculating, a measurement that resists
+        explanation, or a question you want to think through are all good reasons to write.</p>
+    </div>
+    <div class="contact-grid">
+      <address>
+        <strong>Dr. Arka Bandyopadhyay</strong><br>
+        Institute for Theoretical Physics and Astrophysics<br>
+        Computational Quantum Materials<br>
+        Julius-Maximilians-Universit&auml;t W&uuml;rzburg<br>
+        Am Hubland, 97074 W&uuml;rzburg, Germany<br>
+        Building M1 (Informatik/Physik), Room 03.017
+      </address>
+      <div>
+        <p><a href="mailto:arka.bandyopadhyay@uni-wuerzburg.de">arka.bandyopadhyay@uni-wuerzburg.de</a><br>
+           <a href="mailto:arkbndy@gmail.com">arkbndy@gmail.com</a></p>
+        <div class="idlinks" style="margin-top:var(--s3)">
+          <a href="https://orcid.org/0000-0003-3386-4289" target="_blank" rel="noopener">ORCID</a>
+          <a href="https://scholar.google.com/citations?user=EcM27vQAAAAJ" target="_blank" rel="noopener">Google Scholar</a>
+          <a href="https://github.com/arkbndy" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.physik.uni-wuerzburg.de/en/cqm/team/postdocs/dr-arka-bandyopadhyay/" target="_blank" rel="noopener">Group page</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+""" % {"map": MAP_SVG, "cards": pillar_cards()}
+
+
+# =========================================================================
+#  Research
+# =========================================================================
+DETAIL = [
+ dict(key="geometry", n="01", figs=[(FIG_GEOMETRY,
+      "Berry curvature distributed asymmetrically across the Fermi surface. In a "
+      "time-reversal-symmetric metal without inversion symmetry this dipole converts a drive at "
+      "&omega; into a transverse current at 2&omega;, with no magnetic field.")],
+   title="Quantum geometry &amp; unconventional transport",
+   thesis="Band energies are only half the story: the wavefunctions carry a geometry of their own, and "
+          "it shows up directly in what a sample conducts.",
+   body="""<p>Berry curvature and the quantum metric describe how Bloch states change across the
+     Brillouin zone. Where symmetry permits, that geometry appears in transport. The nonlinear Hall
+     effect is the clearest case: in non-magnetic metals without inversion symmetry the leading
+     intrinsic contribution comes from the Berry-curvature dipole, whereas in magnetic systems
+     quantum-metric and disorder-induced mechanisms can dominate instead &mdash; so establishing which
+     applies in a given compound is part of the problem, not a detail.</p>
+     <p>My contribution has been to move these ideas from model Hamiltonians to specific materials, and
+     to look for handles that change the geometry itself rather than merely the band filling: gating,
+     strain, structural chirality, and the choice of molecular building block.</p>""",
+   highlights=[
+     "A perpendicular electric field reverses the sign and magnitude of the Berry-curvature dipole in silicene, germanene and stanene, making a quantum-geometric quantity gate-tunable",
+     "Strain plays the same role in layered phosphorene; structural chirality provides an independent handle in tellurium-based systems",
+     "Not every transverse response is geometric &mdash; refraction of carriers at an internal interface produces one without Berry curvature at all",
+     "Current work extends this to metal&ndash;organic frameworks, where the lattice geometry follows from the choice of linker",
+   ],
+   papers=[
+     ("Non-linear Hall effects: mechanisms and materials", "Materials Today Electronics <strong>8</strong>, 100101 (2024) &mdash; first and corresponding author"),
+     ("Electrically switchable giant Berry curvature dipole in silicene, germanene and stanene", "2D Materials <strong>9</strong>, 035013 (2022)"),
+     ("Refraction-induced transverse charge transport", "Phys. Rev. B <strong>114</strong>, 105406 (2026) &mdash; Editors&rsquo; Suggestion"),
+   ]),
+
+ dict(key="topology", n="02", figs=[(FIG_KAGOME,
+      "Destructive interference on the kagome lattice quenches the dispersion of one band entirely. "
+      "The flat band sits above two dispersive bands that touch at a symmetry-protected point."),
+      (FIG_DECIMATION,
+      "Decimation removes sites exactly, leaving an energy-dependent effective lattice. With gain and "
+      "loss the spectrum becomes complex and eigenvalues can coalesce at exceptional points.")],
+   title="Topology, flat bands &amp; kagome quantum matter",
+   thesis="Some lattices are generous: their structure alone tells you where the flat bands are, and "
+          "whether they carry topology.",
+   body="""<p>A flat band has no dispersion, so kinetic energy is quenched and interactions set the
+     scale. On kagome and line-graph lattices these bands arise from destructive interference, which
+     makes their origin structural rather than accidental &mdash; and therefore predictable. With coupled
+     kagome layers we traced the flat bands to their line-graph origin and identified the conditions
+     under which interlayer coupling gaps them into topologically non-trivial bands.</p>
+     <p>The same interest in exactly solvable structure runs through my work on real-space decimation,
+     which eliminates sites exactly and replaces a numerical parameter scan with a closed-form
+     condition. It extends naturally to non-Hermitian lattices, where gain and loss make the spectrum
+     complex and eigenvectors &mdash; not just eigenvalues &mdash; can coalesce.</p>""",
+   highlights=[
+     "Line-graph origin of the flat bands in coupled kagome lattices, and the criterion for non-trivial topology",
+     "Exact decimation yields closed-form conditions for flat bands and skin modes in decorated non-Hermitian lattices",
+     "Exceptional points located analytically in a dice-lattice Haldane model",
+     "With W&uuml;rzburg experimental groups, a minimal two-dimensional multi-orbital kagome model realised in a grown system and tested by photoemission (manuscript in preparation)",
+   ],
+   papers=[
+     ("Origin of flat bands and non-trivial topology in coupled kagome lattices", "Communications Physics <strong>8</strong>, 519 (2025) &mdash; joint first author"),
+     ("Non-Hermitian topology and flat bands via an exact real-space decimation scheme", "Phys. Rev. B <strong>110</strong>, 085431 (2024) &mdash; joint first author"),
+     ("Non-Hermiticity induced exceptional points and skin effect in the Haldane model on a dice lattice", "Phys. Rev. B <strong>107</strong>, 035403 (2023)"),
+   ]),
+
+ dict(key="magnetism", n="03", figs=[(FIG_MAGNETISM,
+      "In an altermagnet the two magnetic sublattices are related by a rotation rather than a "
+      "translation. The net magnetisation vanishes, yet the bands acquire a spin splitting whose sign "
+      "depends on the direction in the Brillouin zone.")],
+   title="Magnetism, correlations &amp; spin&ndash;orbit physics",
+   thesis="Magnetic order, spin&ndash;orbit coupling and interactions do not merely shift bands &mdash; "
+          "they change which responses are allowed at all.",
+   body="""<p>This is the direction I am currently expanding most. Magnetic order lowers symmetry, and
+     what survives determines whether an anomalous Hall or Nernst response can exist, how spin and
+     orbital degrees of freedom mix, and whether a flat band becomes a correlated state.
+     Altermagnetism is an instructive case: a collinear order with vanishing net magnetisation that
+     nonetheless produces a momentum-dependent spin splitting, because the two sublattices are related
+     by a rotation rather than a translation. Our review restates those symmetry conditions in the
+     language of crystal chemistry, so that they can be applied when choosing candidate compounds.</p>
+     <p>Alongside this I work on magnetism at the molecular scale, and I am bringing correlated methods
+     &mdash; dynamical mean-field theory and functional renormalisation group approaches &mdash; to bear
+     on flat-band and kagome problems. That part is in progress rather than concluded.</p>""",
+   highlights=[
+     "Altermagnetism restated as chemical and symmetry criteria that can guide the search for candidate materials",
+     "Anomalous Hall and Nernst responses tuned by composition in magnetic Weyl semimetals",
+     "Spin-state switching in manganese(III) complexes, where ligand-field chemistry and crystal packing set the magnetic state",
+     "Correlated approaches (DMFT via w2dynamics, FRG via divERGe) applied to flat-band and kagome systems &mdash; work in progress",
+   ],
+   papers=[
+     ("Altermagnetism from the viewpoint of chemistry", "Chem. Soc. Rev. (2026)"),
+     ("Tunable anomalous Hall and Nernst effects in magnetic Weyl semimetals Co<sub>2&minus;<i>x</i></sub>Cr<sub><i>x</i></sub>MnGe", "J. Phys.: Condens. Matter <strong>37</strong>, 365702 (2025)"),
+     ("Spin-state switching: chemical modulation and the impact of intermolecular interactions in manganese(III) complexes", "Dalton Trans. <strong>52</strong>, 11335 (2023)"),
+   ]),
+
+ dict(key="interfaces", n="04", figs=[(FIG_INTERFACE,
+      "Octahedral rotations propagate across a complex-oxide interface, changing orbital overlaps and "
+      "the local spin&ndash;orbit environment of the layer above.")],
+   title="Interfaces &amp; materials-realistic quantum matter",
+   thesis="At an oxide interface a few degrees of octahedral tilt can reorganise the spin&ndash;orbit "
+          "ground state.",
+   body="""<p>Where two perovskite oxides meet, the oxygen octahedra do not simply join: the tilt
+     pattern of one propagates into the other over several unit cells. That structural detail changes
+     orbital overlaps and the local spin&ndash;orbit environment, and with them the magnetic and
+     transport behaviour of the layer.</p>
+     <p>Working with groups performing X-ray spectroscopy, photoemission and transport, we established a
+     route from the measured tilt coupling to the reconstructed spin&ndash;orbit state. This is the part
+     of my work where theory is most tightly constrained by experiment: the calculations are done for
+     the structure that was actually grown, not an idealised one. The experimental measurements are my
+     collaborators&rsquo; work; my contribution is the electronic-structure modelling and its
+     interpretation.</p>""",
+   highlights=[
+     "Octahedral tilt coupling related to spin&ndash;orbit reconstruction at a complex-oxide interface, published in <em>Nature Communications</em>",
+     "Berry-curvature-dipole nonlinear Hall response predicted for oxide heterostructures",
+     "Antiferromagnetic tunnel barriers producing discrete tunnelling-magnetoresistance states &mdash; manuscript under review",
+     "Magnon&ndash;electromagnon anomalies in rare-earth-doped BiFeO<sub>3</sub> films &mdash; manuscript under review",
+   ],
+   papers=[
+     ("An unconventional pathway to correlate the octahedral tilt coupling and spin&ndash;orbit reconstruction at oxide interfaces", "Nature Communications <strong>17</strong>, 332 (2026) &mdash; joint first author"),
+     ("Berry curvature dipole-induced non-linear Hall effect in oxide heterostructures", "J. Mater. Chem. C <strong>14</strong>, 11561 (2026)"),
+   ]),
+
+ dict(key="materials", n="05", figs=[(FIG_MATERIALS,
+      "Dirac cones do not require a honeycomb. Square-and-octagon carbon networks host anisotropic "
+      "cones and nodal lines carrying non-trivial Zak indices.")],
+   title="Low-dimensional &amp; chemically designed materials",
+   thesis="Before you can ask about the quantum geometry of a material, someone has to propose the "
+          "material.",
+   body="""<p>This is the largest part of my published record and, in a real sense, the origin of the
+     rest. Beginning in my doctoral work I have predicted two-dimensional carbon, silicon and nitride
+     networks built from squares, octagons and acetylenic links, and worked out what their electrons do:
+     S-graphene, whose two Dirac cones survive distortion; 8-16-4 graphyne, a square-lattice nodal-line
+     semimetal with a non-trivial Zak index; the dumbbell C<sub>3</sub>NX family and its
+     quasi-one-dimensional derivatives. Two reviews map the wider landscape and have each received an
+     IOP India Top Cited Paper Award.</p>
+     <p>The same first-principles workflow, pointed at a device figure of merit rather than a topological
+     invariant, produced an earlier interdisciplinary thread on lithium storage, supercapacitance,
+     thermoelectrics, photocatalysis and redox polymers. It is not where my current questions lie, but it
+     shaped how I judge whether a predicted material is worth an experimentalist&rsquo;s time.</p>""",
+   highlights=[
+     "S-graphene and 8-16-4 graphyne: Dirac cones and nodal lines away from the honeycomb lattice",
+     "The dumbbell C<sub>3</sub>NX family (X = C, Si, Ge) and its quasi-one-dimensional derivatives",
+     "Semiconductor device responses from first principles &mdash; negative differential resistance, rectification, gas sensing &mdash; via Green-function and NEGF transport",
+     "Functional properties with chemists: lithium storage, supercapacitance, thermoelectrics, photocatalysis and &pi;-conjugated redox polymers",
+   ],
+   papers=[
+     ("8-16-4 graphyne: square-lattice two-dimensional nodal line semimetal with a nontrivial topological Zak index", "Phys. Rev. B <strong>103</strong>, 075137 (2021) &mdash; first author"),
+     ("The topology and robustness of two Dirac cones in S-graphene: a tight binding approach", "Scientific Reports <strong>10</strong>, 2502 (2020) &mdash; first author"),
+     ("A review on role of tetra-rings in the graphene systems and their possible applications", "Rep. Prog. Phys. <strong>83</strong>, 056501 (2020) &mdash; first author; IOP India Top Cited Paper Award"),
+   ]),
+]
+
+
+def pillar_sections():
+    out = []
+    for d in DETAIL:
+        figs = "\n".join(
+            '        <figure><div class="box">%s</div><figcaption>%s</figcaption></figure>' % (svg, cap)
+            for svg, cap in d["figs"])
+        hl = "\n".join("          <li>%s</li>" % h for h in d["highlights"])
+        pp = "\n".join('            <li>%s <span class="venue">%s</span></li>' % (t, v) for t, v in d["papers"])
+        out.append("""    <article class="pillar" id="%(key)s">
+      <div>
+        <span class="n">%(n)s</span>
+        <h2>%(title)s</h2>
+        <p class="thesis">%(thesis)s</p>
+        %(body)s
+        <ul class="highlights">
+%(hl)s
+        </ul>
+        <div class="keypapers">
+          <h3>Representative papers</h3>
+          <ul>
+%(pp)s
+          </ul>
+        </div>
+      </div>
+      <div class="figure">
+%(figs)s
+      </div>
+    </article>""" % dict(key=d["key"], n=d["n"], title=d["title"], thesis=d["thesis"],
+                         body=d["body"], hl=hl, pp=pp, figs=figs))
+    return "\n".join(out)
+
+
+# =========================================================================
+#  Collaborators
+# =========================================================================
+GS = "https://scholar.google.com/citations?user=%s"
+GROUPS = [
+ ("Universit&auml;t W&uuml;rzburg", [
+  ("Ronny Thomale", "Professor of Theoretical Physics", GS % "RJ8vWeoAAAAJ", "GS"),
+  ("Giorgio Sangiovanni", "Professor of Theoretical Physics", GS % "SeCV78UAAAAJ", "GS"),
+  ("Ralph Claessen", "Professor of Experimental Physics", GS % "t8wpk5sAAAAJ", "GS"),
+  ("J&ouml;rg Sch&auml;fer", "Professor of Experimental Physics", GS % "25yzQPYAAAAJ", "GS"),
+  ("Lennart Klebl", "Institute for Theoretical Physics and Astrophysics",
+   "https://www.physik.uni-wuerzburg.de/tp1/team/postdocs/dr-lennart-klebl/", "WEB"),
+  ("Manish Verma", "Computational Quantum Materials", GS % "7EljkOAAAAAJ", "GS")]),
+ ("Indian Institute of Science, Bengaluru", [
+  ("Awadhesh Narayan", "Associate Professor, Solid State and Structural Chemistry Unit", GS % "kHOQvgQAAAAJ", "GS"),
+  ("Diptiman Sen", "Professor, Centre for High Energy Physics", GS % "4TZdOPIAAAAJ", "GS"),
+  ("Sujit Das", "Assistant Professor, Materials Research Centre", GS % "L8j4ld8AAAAJ", "GS"),
+  ("Satish Patil", "Professor of Polymer Chemistry", GS % "Tyfe7LcAAAAJ", "GS"),
+  ("Bhagwati Prasad", "Department of Materials Engineering", GS % "8lDnePMAAAAJ", "GS"),
+  ("Abhishake Mondal", "Associate Professor, Solid State and Structural Chemistry Unit", GS % "wZkA5s0AAAAJ", "GS"),
+  ("Naga Phani B. Aetukuri", "Solid State and Structural Chemistry Unit", GS % "Te2ZTYgAAAAJ", "GS"),
+  ("N. Ravishankar", "Professor, Materials Research Centre", GS % "v5FUPi4AAAAJ", "GS"),
+  ("S. B. Krupanidhi", "Materials Research Centre", GS % "ieUCCasAAAAJ", "GS"),
+  ("Nesta Benno Joseph", "Solid State and Structural Chemistry Unit", GS % "3cfchUgAAAAJ", "GS"),
+  ("Ronika Sarkar", "Department of Physics", GS % "WuKSGW8AAAAJ", "GS"),
+  ("Md Afsar Reja", "Solid State and Structural Chemistry Unit", None, None)]),
+ ("Kolkata and West Bengal", [
+  ("Debnarayan Jana", "Professor of Physics, University of Calcutta", GS % "43SR0GsAAAAJ", "GS"),
+  ("Arunava Chakrabarti", "Professor of Physics, University of Kalyani",
+   "https://scispace.com/authors/arunava-chakrabarti-7pqvtc1c09", "WEB"),
+  ("Dirtha Sanyal", "Variable Energy Cyclotron Centre", GS % "ReD7dBWTPcwC", "GS"),
+  ("Atanu Nandy", "Acharya Prafulla Chandra College", GS % "9eE-LGcAAAAJ", "GS"),
+  ("Subhadip Nath", "Assistant Professor of Physics, Krishnagar Government College", GS % "kwKfWjwAAAAJ", "GS"),
+  ("Debaprem Bhattacharya", "Government College of Engineering &amp; Textile Technology, Berhampore", GS % "7LZ-wgQAAAAJ", "GS")]),
+ ("Across India", [
+  ("Ajit C. Balram", "Institute of Mathematical Sciences, Chennai", GS % "T1vffdAAAAAJ", "GS"),
+  ("Amrita Mukherjee", "Tata Institute of Fundamental Research", None, None),
+  ("Supriya Ghosal", "Theoretical Sciences Unit, JNCASR, Bengaluru", GS % "QIltrEEAAAAJ", "GS"),
+  ("Deep Mondal", "Indian Institute of Technology Bombay", GS % "TbMI07YAAAAJ", "GS"),
+  ("Anju Ahlawat", "Institute of Sciences, SAGE University, Indore", GS % "A72iJqMAAAAJ", "GS"),
+  ("Basanta Roul", "Central Research Laboratory, Bharat Electronics, Bengaluru", GS % "0eUYcSQAAAAJ", "GS"),
+  ("Suman Chowdhury", "Department of Physics &amp; Astrophysics, University of Delhi", GS % "Do_yowMAAAAJ", "GS")]),
+ ("International partners", [
+  ("Claudia Felser", "Director, Max Planck Institute for Chemical Physics of Solids, Dresden", GS % "QOdCHXMAAAAJ", "GS"),
+  ("T. Venky Venkatesan", "Center for Quantum Research and Technology, University of Oklahoma", GS % "brdyAZ4AAAAJ", "GS"),
+  ("Rajeev Ahuja", "Uppsala University", GS % "OqyvV_oAAAAJ", "GS"),
+  ("Faxian Xiu", "Department of Physics, Fudan University", GS % "0QMB9ZUAAAAJ", "GS"),
+  ("Simon Moser", "Professor of Experimental Physics, Ruhr-Universit&auml;t Bochum", GS % "WCSgzGwAAAAJ", "GS"),
+  ("Hendrik Bentmann", "Associate Professor, Center for Quantum Spintronics, NTNU Trondheim", GS % "tNbD2eMAAAAJ", "GS"),
+  ("Domenico Di Sante", "University of Bologna", GS % "EVyjBUYAAAAJ", "GS"),
+  ("Carmine Ortix", "University of Salerno", GS % "5tgyU54AAAAJ", "GS"),
+  ("Enze Zhang", "School of Physics, Nanjing University", GS % "fp_HNTAAAAAJ", "GS"),
+  ("Moritz Hoesch", "PETRA III, Deutsches Elektronen-Synchrotron (DESY), Hamburg", GS % "PtrvJRoAAAAJ", "GS"),
+  ("Manuel Valvidares", "ALBA Synchrotron Light Source, Barcelona", GS % "n21FAZYAAAAJ", "GS"),
+  ("Akbar Ali Mohamad", "Assistant Professor of Chemistry, Khalifa University, Abu Dhabi", GS % "f9iY8woAAAAJ", "GS"),
+  ("Md. Mohi Uddin", "Professor of Physics, Chittagong University of Engineering &amp; Technology", GS % "VkzVBBkAAAAJ", "GS"),
+  ("Anumita Bose", "Condensed Matter Theory, SISSA, Trieste", GS % "-iKh_vkAAAAJ", "GS"),
+  ("Ayan Banerjee", "Max Planck Institute for the Science of Light, Erlangen", GS % "AGIwnYEAAAAJ", "GS")]),
+]
+
+
+def collaborators():
+    blocks, total = [], 0
+    for title, people in GROUPS:
+        total += len(people)
+        rows = []
+        for name, aff, url, badge in people:
+            link = ('<a class="gs" href="%s" target="_blank" rel="noopener" title="%s profile for %s">%s</a>'
+                    % (url, "Google Scholar" if badge == "GS" else "Homepage", name, badge)) if url else ''
+            rows.append('          <li><div><span class="who">%s</span><span class="where">%s</span></div>%s</li>'
+                        % (name, aff, link))
+        blocks.append("""      <details class="collab-group">
+        <summary>%s <span class="n">%d</span></summary>
+        <ul class="collab-list">
+%s
+        </ul>
+      </details>""" % (title, len(people), "\n".join(rows)))
+    return "\n".join(blocks), total
+
+
+COLLAB_HTML, COLLAB_N = collaborators()
+
+RESEARCH = """
+<section class="section">
+  <div class="wrap">
+    <div class="section-head prose">
+      <p class="eyebrow">Research</p>
+      <h1>Quantum materials, from structure to signal</h1>
+      <p>Quantum materials are interesting because several things matter at once. The crystal structure
+        fixes which orbitals lie close in energy; symmetry decides which responses are allowed at all;
+        spin&ndash;orbit coupling and magnetic order reshape the bands; interactions can reorganise them
+        entirely. My work asks how these ingredients combine to produce unusual electronic states and
+        transport, and how far that understanding can be pushed towards prediction.</p>
+      <p>The question does not sit inside a single discipline. Crystal chemistry determines orbital
+        structure; an interface modifies symmetry and spin&ndash;orbit coupling; molecular design can set
+        lattice geometry directly; and experiment decides which mechanism actually matters. A good part of
+        my work is therefore done with chemists, materials scientists and experimental physicists, and
+        close to half of my papers have appeared in chemistry and materials-chemistry journals.</p>
+      <p>I work in both directions. Sometimes a measurement arrives without an explanation and the task is
+        to identify the mechanism; sometimes a model predicts a signature and the question is which
+        material and which probe could show it. I do not perform experiments myself &mdash; the transport,
+        photoemission, X-ray spectroscopy and synthesis behind the work below are my collaborators&rsquo;
+        &mdash; but the theory is built so that it can be compared with them.</p>
+    </div>
+
+    <div class="keypapers prose" style="margin-bottom:var(--s6)">
+      <h2>How the programme developed</h2>
+      <ul>
+        <li>Predicting low-dimensional materials and finding Dirac physics away from the honeycomb lattice</li>
+        <li>Topology and unconventional electronic states in those lattices</li>
+        <li>Quantum geometry and its consequences for transport</li>
+        <li>Flat bands, line-graph structure and kagome quantum matter</li>
+        <li>Magnetism, correlations and increasingly materials-realistic quantum matter</li>
+      </ul>
+    </div>
+
+%(sections)s
+  </div>
+</section>
+
+<section class="section section--tint" id="collaborators">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">People</p>
+      <h2>Collaborators</h2>
+      <p>My research has benefited enormously from collaboration across theory, experiment and materials
+        synthesis. The longest-standing are with <strong>Prof. Awadhesh Narayan</strong> at the Indian
+        Institute of Science, <strong>Prof. Ronny Thomale</strong> and <strong>Prof. Giorgio
+        Sangiovanni</strong> at Universit&auml;t W&uuml;rzburg, and <strong>Prof. Debnarayan Jana</strong>
+        at the University of Calcutta. The groups below span condensed-matter theory, photoemission and
+        X-ray spectroscopy, transport measurement, thin-film growth and synthetic chemistry.</p>
+    </div>
+%(collab)s
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap prose">
+    <p class="eyebrow">Methods</p>
+    <h2>How the work is done</h2>
+    <div class="tool-grid" style="margin-top:var(--s4)">
+      <div class="tool-card"><h3>Electronic structure</h3>
+        <p>Density-functional theory (Quantum ESPRESSO, VASP, SIESTA, OpenMX); Wannier functions and
+          quantum-geometric quantities (Wannier90, WannierTools, WannierBerri).</p></div>
+      <div class="tool-card"><h3>Models &amp; symmetry</h3>
+        <p>Symmetry-adapted tight-binding models, real-space decimation and renormalisation, topological
+          invariants, non-Hermitian formulations.</p></div>
+      <div class="tool-card"><h3>Transport &amp; many-body</h3>
+        <p>Green-function and NEGF transport; Boltzmann and quantum-geometric response theory; dynamical
+          mean-field theory (<a href="https://github.com/w2dynamics/w2dynamics" target="_blank" rel="noopener">w2dynamics</a>)
+          and functional renormalisation group (<a href="https://git.rwth-aachen.de/frg/divERGe" target="_blank" rel="noopener">divERGe</a>).</p></div>
+      <div class="tool-card"><h3>Computing</h3>
+        <p>Python (NumPy, SciPy, Matplotlib), Fortran, Mathematica, Linux and HPC workflows.</p></div>
+    </div>
+    <p style="margin-top:var(--s4);color:var(--muted);font-size:.92rem">I am glad to discuss any of these
+      with someone who wants to learn them.</p>
+  </div>
+</section>
+""" % {"sections": pillar_sections(), "collab": COLLAB_HTML}
+
+
+# =========================================================================
+#  Publications
+# =========================================================================
+CHIPS = [("all", "All")] + [(k, t) for k, _n, t, _c, _b in
+         [(p[0], p[1], p[2], p[3], p[4]) for p in PILLARS]]
+CHIP_LABELS = {"geometry": "Quantum geometry", "topology": "Topology &amp; flat bands",
+               "magnetism": "Magnetism &amp; correlations", "interfaces": "Interfaces",
+               "materials": "Low-dimensional materials"}
+
+PUBLICATIONS = """
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Publications</p>
+      <h1>Complete record</h1>
+      <p>Peer-reviewed papers, newest first, numbered so that each keeps its number as the list grows.
+        Every entry links to the DOI, and to the arXiv posting where one exists. The filters follow the
+        five research threads. Also on
+        <a href="https://orcid.org/0000-0003-3386-4289" target="_blank" rel="noopener">ORCID</a> and
+        <a href="https://scholar.google.com/citations?user=EcM27vQAAAAJ" target="_blank" rel="noopener">Google Scholar</a>.</p>
+    </div>
+
+    <div class="pubtools">
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <label for="pub-search" class="skip">Search publications</label>
+        <input id="pub-search" type="search" placeholder="Search title, author, journal or year&hellip;" autocomplete="off">
+      </div>
+      <div class="chips" role="group" aria-label="Filter publications by research thread">
+        <button class="chip" type="button" data-tag="all" aria-pressed="true">All</button>
+        <button class="chip" type="button" data-tag="geometry" aria-pressed="false">Quantum geometry</button>
+        <button class="chip" type="button" data-tag="topology" aria-pressed="false">Topology &amp; flat bands</button>
+        <button class="chip" type="button" data-tag="magnetism" aria-pressed="false">Magnetism &amp; correlations</button>
+        <button class="chip" type="button" data-tag="interfaces" aria-pressed="false">Interfaces</button>
+        <button class="chip" type="button" data-tag="materials" aria-pressed="false">Low-dimensional materials</button>
+        <button class="chip" type="button" data-tag="review" aria-pressed="false">Reviews</button>
+        <button class="chip" type="button" data-tag="applied" aria-pressed="false">Energy &amp; devices</button>
+      </div>
+    </div>
+
+    <p class="pubcount" id="pub-count" role="status"></p>
+    <div id="pub-list"></div>
+    <noscript>
+      <p class="nojs">This list is generated from a data file, which needs JavaScript. The complete,
+        identical record is available on
+        <a href="https://orcid.org/0000-0003-3386-4289" rel="noopener">ORCID</a> and
+        <a href="https://scholar.google.com/citations?user=EcM27vQAAAAJ" rel="noopener">Google Scholar</a>.</p>
+    </noscript>
+
+  </div>
+</section>
+
+<section class="section section--tint">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Not yet refereed</p>
+      <h2>Manuscripts under review and in preparation</h2>
+      <p>Listed separately, and clearly labelled, so that the refereed record above stands on its own.
+        Where a journal is named, the manuscript is currently under consideration there &mdash; not
+        accepted. Manuscripts still in preparation are marked as such.</p>
+    </div>
+    <div id="preprint-list"></div>
+    <noscript>
+      <p class="nojs">This list is generated from a data file, which needs JavaScript. The complete,
+        identical record is available on
+        <a href="https://orcid.org/0000-0003-3386-4289" rel="noopener">ORCID</a> and
+        <a href="https://scholar.google.com/citations?user=EcM27vQAAAAJ" rel="noopener">Google Scholar</a>.</p>
+    </noscript>
+
+  </div>
+</section>
+"""
+
+# =========================================================================
+#  News
+# =========================================================================
+NEWS = """
+<section class="section">
+  <div class="wrap prose">
+    <div class="section-head">
+      <p class="eyebrow">Updates</p>
+      <h1>News</h1>
+      <p>Papers, awards, talks and research visits.</p>
+    </div>
+    <ul class="timeline" data-news="0"></ul>
+    <noscript>
+      <p class="nojs">The news feed is generated from a data file, which needs JavaScript. Recent papers
+        and talks are listed on <a href="https://orcid.org/0000-0003-3386-4289" rel="noopener">ORCID</a>.</p>
+    </noscript>
+
+  </div>
+</section>
+"""
+
+# =========================================================================
+#  CV
+# =========================================================================
+CV = """
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Curriculum vitae</p>
+      <h1>Arka Bandyopadhyay</h1>
+      <p>Theoretical condensed-matter physicist &mdash; quantum materials, quantum geometry and
+        unconventional transport.</p>
+      <div class="actions" style="margin-top:var(--s3)">
+        <a class="btn btn--primary" href="publications.html">Publication record</a>
+        <a class="btn" href="research.html">Research programme</a>
+      </div>
+    </div>
+
+    <div class="cv-block">
+      <h2>Research profile</h2>
+      <p>I am a theoretical condensed-matter physicist working on quantum materials. My work asks how
+        symmetry, electronic structure, quantum geometry, topology, magnetism and electronic correlations
+        act together to produce unusual electronic states and transport, and how those principles can be
+        turned into predictions that an experiment can test or into rules for designing a material.</p>
+      <p>Methodologically this means first-principles and Wannier calculations, symmetry-adapted
+        tight-binding models, quantum transport and many-body approaches, applied to specific compounds
+        rather than to idealised Hamiltonians. A substantial part of the work sits at the boundary with
+        chemistry and materials science: close to half of my papers have appeared in chemistry and
+        materials-chemistry journals, and several of the projects below began with an experimental
+        observation rather than a model.</p>
+    </div>
+
+    <div class="cv-block">
+      <h2>Positions</h2>
+      <div class="cv-entry">
+        <div><span class="what">Postdoctoral Researcher</span><br><span class="where">Julius-Maximilians-Universit&auml;t W&uuml;rzburg, Germany</span></div>
+        <div class="when">Oct 2024 &ndash; present</div>
+        <p class="detail">Quantum geometry, correlated and topological electronic structure and unconventional
+          transport in the Computational Quantum Materials group, within the DFG Cluster of Excellence
+          <em>ct.qmat</em>. Developing an independent line on quantum-geometric transport in metal&ndash;organic
+          frameworks; mentoring junior researchers and coordinating experiment&ndash;theory collaborations.</p>
+      </div>
+      <div class="cv-entry">
+        <div><span class="what">Visiting Researcher</span><br><span class="where">Indian Institute of Science, Bengaluru</span></div>
+        <div class="when">May &ndash; Sep 2024</div>
+        <p class="detail">First-principles studies and collaborative manuscripts on magnetic oxide interfaces.</p>
+      </div>
+      <div class="cv-entry">
+        <div><span class="what">IISc-IoE Postdoctoral Fellow</span><br><span class="where">Indian Institute of Science, Bengaluru</span></div>
+        <div class="when">May 2022 &ndash; May 2024</div>
+        <p class="detail">Berry-curvature-dipole physics, flat bands and non-Hermitian topology; built
+          experimental collaborations.</p>
+      </div>
+      <div class="cv-entry">
+        <div><span class="what">Research Associate</span><br><span class="where">Indian Institute of Science, Bengaluru</span></div>
+        <div class="when">Jul 2021 &ndash; May 2022</div>
+        <p class="detail">Dirac fermions in non-honeycomb lattices; Berry-curvature dipoles across quantum
+          spin Hall transitions.</p>
+      </div>
+    </div>
+
+    <div class="cv-block">
+      <h2>Academics</h2>
+      <div class="cv-entry">
+        <div><span class="what">Highest degree &mdash; Ph.D. in Physics</span><br><span class="where">University of Calcutta, India</span></div>
+        <div class="when">Awarded Apr 2022</div>
+        <p class="detail">Thesis: <em>Electronic and optical properties of graphene allotropes</em>.
+          Supervisor: Prof. Debnarayan Jana.</p>
+      </div>
+    </div>
+
+    <div class="cv-block">
+      <h2>Awards &amp; distinctions</h2>
+      <div class="cv-entry"><div><span class="what">Physical Review B Editors&rsquo; Suggestion</span><br><span class="where">for &ldquo;Refraction-induced transverse charge transport&rdquo;</span></div><div class="when">2026</div></div>
+      <div class="cv-entry"><div><span class="what">IOP India Top Cited Paper Award</span><br><span class="where">for &ldquo;Emerging properties of carbon based 2D material beyond graphene&rdquo;</span></div><div class="when">2025</div></div>
+      <div class="cv-entry"><div><span class="what">Journal of Materials Chemistry C cover article</span><br><span class="where">nodal flexible-surface three-dimensional carbon network</span></div><div class="when">2024</div></div>
+      <div class="cv-entry"><div><span class="what">IOP India Top Cited Paper Award</span><br><span class="where">for &ldquo;A review on role of tetra-rings in the graphene systems&rdquo;</span></div><div class="when">2023</div></div>
+      <div class="cv-entry"><div><span class="what">IOP Trusted Reviewer</span></div><div class="when">2023</div></div>
+      <div class="cv-entry"><div><span class="what">Best Oral Presentation</span><br><span class="where">Functional Oxides: Materials and Devices (FOMAD), Indian Institute of Science</span></div><div class="when">2023</div></div>
+      <div class="cv-entry"><div><span class="what">IISc Institute of Eminence Postdoctoral Fellowship</span></div><div class="when">2022 &ndash; 2024</div></div>
+      <div class="cv-entry"><div><span class="what">CSIR-UGC National Eligibility Test &mdash; All India Rank 85</span><br><span class="where">with UGC Junior Research Fellowship; University Research Fellowship, University of Calcutta</span></div><div class="when">2019</div></div>
+    </div>
+
+    <div class="cv-block">
+      <h2>Invited talks &amp; academic visits</h2>
+      <div class="cv-entry"><div><span class="what">Invited Talk, <a href="https://sscu50.in/" target="_blank" rel="noopener">SSCU-50</a></span><br><span class="where">Emergent materials for energy and photonics &mdash; fifty years of the Solid State and Structural Chemistry Unit, Indian Institute of Science, Bengaluru</span></div><div class="when">Dec 2026</div></div>
+      <div class="cv-entry"><div><span class="what">Departmental Seminar</span><br><span class="where">Solid State and Structural Chemistry Unit, Indian Institute of Science, Bengaluru</span></div><div class="when">Jan 2026</div></div>
+      <div class="cv-entry"><div><span class="what">Departmental Seminar</span><br><span class="where">Theoretical Sciences Unit, JNCASR, Bengaluru</span></div><div class="when">Jan 2026</div></div>
+      <div class="cv-entry"><div><span class="what">Resource Person, CMQF-2026 National Seminar</span><br><span class="where">Sidho-Kanho-Birsha University, Purulia</span></div><div class="when">2026</div></div>
+      <div class="cv-entry"><div><span class="what">Academic visit &amp; seminar</span><br><span class="where">Department of Quantum Matter Physics, University of Geneva</span></div><div class="when">Apr 2025</div></div>
+      <div class="cv-entry"><div><span class="what">Departmental Seminar</span><br><span class="where">Institute for Theoretical Physics and Astrophysics, Universit&auml;t W&uuml;rzburg</span></div><div class="when">Jun 2024</div></div>
+      <div class="cv-entry"><div><span class="what">Invited enrichment lecture</span><br><span class="where">C. K. Majumdar Memorial Workshop in Physics</span></div><div class="when">2022</div></div>
+    </div>
+
+    <div class="cv-block">
+      <h2>Teaching &amp; mentoring</h2>
+      <p>I have mentored doctoral and junior researchers at W&uuml;rzburg, IISc and the University of
+        Calcutta, from problem formulation and computation through to publication and presentation, and I
+        look forward to taking on formal supervision of my own.</p>
+      <div class="tool-grid" style="margin-top:var(--s3)">
+        <div class="tool-card"><h3>Core courses</h3><p>Quantum Mechanics &middot; Solid State and Condensed Matter Physics &middot; Mathematical and Computational Physics.</p></div>
+        <div class="tool-card"><h3>Advanced courses</h3><p>Electronic Structure and DFT &middot; Topological Quantum Matter &middot; Quantum Transport &middot; Low-Dimensional Materials &middot; Semiconductor and Many-Body Physics.</p></div>
+      </div>
+    </div>
+
+    <div class="cv-block">
+      <h2>Professional service</h2>
+      <p>Referee for 14 journals including <em>Physical Review Letters</em>, <em>Physical Review B</em>,
+        <em>New Journal of Physics</em>, <em>Communications Physics</em> and <em>2D Materials</em> &mdash;
+        34 review reports to date. Session Chair, NAMMA Psi-k Workshop and Conference (2023). Invited
+        lecturer and resource person at national workshops.</p>
+    </div>
+
+    <div class="cv-block">
+      <h2>Technical expertise</h2>
+      <div class="tool-grid">
+        <div class="tool-card"><h3>Electronic structure</h3><p>Quantum ESPRESSO &middot; VASP &middot; SIESTA &middot; OpenMX &middot; Gaussian &middot; ORCA.</p></div>
+        <div class="tool-card"><h3>Wannier &amp; quantum geometry</h3><p>Wannier90 &middot; WannierTools &middot; WannierBerri; Berry curvature, quantum metric and topological invariants.</p></div>
+        <div class="tool-card"><h3>Models &amp; transport</h3><p>Symmetry-adapted tight-binding &middot; real-space decimation &middot; Green-function and NEGF transport &middot; non-Hermitian models.</p></div>
+        <div class="tool-card"><h3>Many-body methods</h3><p>Dynamical mean-field theory (w2dynamics) &middot; functional renormalisation group (divERGe).</p></div>
+        <div class="tool-card"><h3>Computing</h3><p>Python (NumPy, SciPy, Matplotlib) &middot; Fortran &middot; Mathematica &middot; Linux &middot; HPC &middot; LaTeX.</p></div>
+        <div class="tool-card"><h3>Languages</h3><p>English &middot; Bengali &middot; Hindi.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+"""
+
+# =========================================================================
+#  Build
+# =========================================================================
+DESC_HOME = ("Arka Bandyopadhyay is a theoretical condensed-matter physicist at the University of "
+             "Würzburg working on quantum materials: quantum geometry, topology, magnetism, "
+             "electronic correlations and unconventional transport.")
+
+written = [
+  page("index.html", "Arka Bandyopadhyay — Quantum Materials Theory", DESC_HOME, HOME,
+       "index.html", JSONLD),
+  page("research.html", "Research — Arka Bandyopadhyay",
+       "Research programme: quantum geometry and unconventional transport; topology, flat bands and "
+       "kagome quantum matter; magnetism, correlations and spin-orbit physics; oxide interfaces; and "
+       "low-dimensional, chemically designed materials.", RESEARCH, "research.html"),
+  page("publications.html", "Publications — Arka Bandyopadhyay",
+       "Complete publication record of Arka Bandyopadhyay: peer-reviewed papers with DOI and arXiv "
+       "links, filterable by research thread, plus manuscripts under review and in preparation.", PUBLICATIONS,
+       "publications.html"),
+  page("news.html", "News — Arka Bandyopadhyay",
+       "Recent papers, awards, invited talks and research visits.", NEWS, "news.html"),
+  page("cv.html", "CV — Arka Bandyopadhyay",
+       "Curriculum vitae of Arka Bandyopadhyay, theoretical condensed-matter physicist working on "
+       "quantum materials: positions, doctorate, awards, invited talks, teaching and expertise.",
+       CV, "cv.html"),
+]
+print("built:", ", ".join(written))
+print("collaborators:", COLLAB_N, "in", len(GROUPS), "groups")
