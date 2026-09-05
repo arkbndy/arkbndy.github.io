@@ -43,6 +43,7 @@ JSONLD = """
   "sameAs": [
     "https://orcid.org/0000-0003-3386-4289",
     "https://scholar.google.com/citations?user=EcM27vQAAAAJ",
+    "https://www.linkedin.com/in/arka-bandyopadhyay-315293381/",
     "https://github.com/arkbndy",
     "https://www.physik.uni-wuerzburg.de/en/cqm/team/postdocs/dr-arka-bandyopadhyay/"
   ]
@@ -56,6 +57,7 @@ FOOTER = """
     <div class="idlinks">
       <a href="https://orcid.org/0000-0003-3386-4289" target="_blank" rel="noopener">ORCID 0000-0003-3386-4289</a>
       <a href="https://scholar.google.com/citations?user=EcM27vQAAAAJ" target="_blank" rel="noopener">Google Scholar</a>
+      <a href="https://www.linkedin.com/in/arka-bandyopadhyay-315293381/" target="_blank" rel="noopener">LinkedIn</a>
       <a href="https://github.com/arkbndy" target="_blank" rel="noopener">GitHub</a>
     </div>
   </div>
@@ -505,6 +507,7 @@ HOME = """
         <div class="idlinks" style="margin-top:var(--s3)">
           <a href="https://orcid.org/0000-0003-3386-4289" target="_blank" rel="noopener">ORCID</a>
           <a href="https://scholar.google.com/citations?user=EcM27vQAAAAJ" target="_blank" rel="noopener">Google Scholar</a>
+          <a href="https://www.linkedin.com/in/arka-bandyopadhyay-315293381/" target="_blank" rel="noopener">LinkedIn</a>
           <a href="https://github.com/arkbndy" target="_blank" rel="noopener">GitHub</a>
           <a href="https://www.physik.uni-wuerzburg.de/en/cqm/team/postdocs/dr-arka-bandyopadhyay/" target="_blank" rel="noopener">Group page</a>
         </div>
@@ -1062,7 +1065,7 @@ CV = """
         <div><span class="what">Highest degree &mdash; Ph.D. in Physics</span><br><span class="where">University of Calcutta, India</span></div>
         <div class="when">Awarded Apr 2022</div>
         <p class="detail">Thesis: <em>Electronic and optical properties of graphene allotropes</em>.
-          Supervisor: Prof. Debnarayan Jana.</p>
+          Supervisor: Prof. Debnarayan Jana. Thesis submitted 4 May 2021.</p>
       </div>
     </div>
 
@@ -1074,8 +1077,25 @@ CV = """
       <div class="cv-entry"><div><span class="what">IOP India Top Cited Paper Award</span><br><span class="where">for &ldquo;A review on role of tetra-rings in the graphene systems&rdquo;</span></div><div class="when">2023</div></div>
       <div class="cv-entry"><div><span class="what">IOP Trusted Reviewer</span></div><div class="when">2023</div></div>
       <div class="cv-entry"><div><span class="what">Best Oral Presentation</span><br><span class="where">Functional Oxides: Materials and Devices (FOMAD), Indian Institute of Science</span></div><div class="when">2023</div></div>
-      <div class="cv-entry"><div><span class="what">IISc Institute of Eminence Postdoctoral Fellowship</span></div><div class="when">2022 &ndash; 2024</div></div>
-      <div class="cv-entry"><div><span class="what">CSIR-UGC National Eligibility Test &mdash; All India Rank 85</span><br><span class="where">with UGC Junior Research Fellowship; University Research Fellowship, University of Calcutta</span></div><div class="when">2019</div></div>
+      <div class="cv-entry"><div><span class="what">CSIR-UGC National Eligibility Test &mdash; All India Rank 85</span><br><span class="where">qualified for Junior Research Fellowship and Lectureship</span></div><div class="when">2019</div></div>
+    </div>
+
+    <div class="cv-block">
+      <h2>Research funding</h2>
+      <p>Every position I have held has been carried by competitively awarded funding, and my current work
+        sits inside a large collaborative programme.</p>
+      <div class="cv-entry">
+        <div><span class="what">DFG Cluster of Excellence <em>ct.qmat</em> &mdash; Complexity and Topology in Quantum Matter</span><br><span class="where">Universit&auml;t W&uuml;rzburg; my postdoctoral position is supported through the Cluster and the group&rsquo;s DFG funding</span></div>
+        <div class="when">2024 &ndash; present</div>
+      </div>
+      <div class="cv-entry">
+        <div><span class="what">Institute of Eminence (IoE) Postdoctoral Fellowship</span><br><span class="where">Indian Institute of Science, Bengaluru &mdash; awarded competitively under the Institute of Eminence scheme, funding two years of independent postdoctoral research</span></div>
+        <div class="when">2022 &ndash; 2024</div>
+      </div>
+      <div class="cv-entry">
+        <div><span class="what">UGC Junior Research Fellowship</span><br><span class="where">awarded through the CSIR-UGC National Eligibility Test (All India Rank 85), and held with a University Research Fellowship at the University of Calcutta; supported the doctoral research</span></div>
+        <div class="when">2019 &ndash; 2021</div>
+      </div>
     </div>
 
     <div class="cv-block">
