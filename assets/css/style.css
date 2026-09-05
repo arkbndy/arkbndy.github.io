@@ -453,3 +453,12 @@ a.taglink:hover { text-decoration: none; border-color: var(--accent); color: var
 }
 .collab-list a.gs:hover { text-decoration: none; color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
 .collab-more { font-size: .885rem; color: var(--muted); margin-top: 1.75rem; max-width: 74ch; }
+
+/* ---------- Collaborator groups ---------- */
+.collab-group { margin-bottom: 2.4rem; }
+.collab-group:last-child { margin-bottom: 0; }
+.collab-group h3 {
+  font-family: var(--sans); font-size: .72rem; font-weight: 700; letter-spacing: .13em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: .35rem;
+  padding-bottom: .55rem; border-bottom: 1px solid var(--line);
+}
