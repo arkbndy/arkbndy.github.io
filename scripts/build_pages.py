@@ -159,14 +159,14 @@ MAP_SVG = """<svg viewBox="0 0 960 250" role="img" aria-labelledby="maptitle map
     <text x="104" y="94">Materials</text><text x="104" y="112">&amp; structure</text>
     <text x="292" y="94">Symmetry &amp;</text><text x="292" y="112">electronic structure</text>
     <text x="480" y="94">Quantum geometry,</text><text x="480" y="112">topology, magnetism</text>
-    <text x="668" y="94">Emergent states &amp;</text><text x="668" y="112">unconventional transport</text>
+    <text x="668" y="94">Anomalous &amp; nonlinear</text><text x="668" y="112">electronic response</text>
     <text x="856" y="94">Measurable</text><text x="856" y="112">signatures</text>
   </g>
   <g style="fill:var(--muted);font:400 10.5px var(--sans)" text-anchor="middle">
     <text x="104" y="136">crystal chemistry,</text><text x="104" y="150">interfaces, molecules</text>
     <text x="292" y="136">first-principles, Wannier,</text><text x="292" y="150">tight-binding models</text>
-    <text x="480" y="136">Berry curvature, quantum</text><text x="480" y="150">metric, correlations</text>
-    <text x="668" y="136">nonlinear Hall, anomalous</text><text x="668" y="150">Hall and Nernst, flat bands</text>
+    <text x="480" y="136">Berry curvature, quantum</text><text x="480" y="150">metric, flat bands, order</text>
+    <text x="668" y="136">nonlinear Hall, anomalous</text><text x="668" y="150">Hall and Nernst effects</text>
     <text x="856" y="136">transport, ARPES,</text><text x="856" y="150">spectroscopy</text>
   </g>
 
@@ -195,8 +195,8 @@ FIG_GEOMETRY = """<svg viewBox="0 0 360 240" role="img" aria-label="Berry curvat
   <path d="M16 112 H64" style="stroke:var(--accent);stroke-width:1.8;fill:none" marker-end="url(#gArr)"/>
   <text x="16" y="100" style="fill:var(--ink-2);font:600 11px var(--sans)">E(&#969;)</text>
   <path d="M180 224 V192" style="stroke:var(--accent);stroke-width:1.8;fill:none" marker-end="url(#gArr)"/>
-  <text x="190" y="219" style="fill:var(--ink-2);font:600 11px var(--sans)">J&#8869;(2&#969;)</text>
-  <text x="298" y="112" style="fill:var(--muted);font:italic 400 11px var(--serif)">D &#8733; &#8747; &#8706;&#937;/&#8706;k</text>
+  <text x="190" y="219" style="fill:var(--ink-2);font:600 11px var(--sans)">J&#8869;(0, 2&#969;)</text>
+  <text x="298" y="112" style="fill:var(--muted);font:italic 400 11px var(--serif)">D &#8733; &#8747; f &#8706;&#937;/&#8706;k</text>
 </svg>"""
 
 FIG_KAGOME = """<svg viewBox="0 0 360 240" role="img" aria-label="A kagome lattice and its band structure, showing a flat band above two dispersive bands that touch at a Dirac point">
@@ -289,7 +289,7 @@ FIG_INTERFACE = """<svg viewBox="0 0 360 240" role="img" aria-label="Oxygen octa
   <g style="stroke:var(--accent);stroke-width:1.8;fill:none">
     <path d="M102 56 V84" marker-end="url(#iArr)"/><path d="M178 84 V56" marker-end="url(#iArr)"/><path d="M254 56 V84" marker-end="url(#iArr)"/>
   </g>
-  <text x="26" y="42" style="fill:var(--muted);font:500 10px var(--sans)">tilted; spin&#8211;orbit environment reconstructed</text>
+  <text x="26" y="42" style="fill:var(--muted);font:500 10px var(--sans)">tilted; spin&#8211;orbit-entangled state reconstructed</text>
   <text x="26" y="210" style="fill:var(--muted);font:500 10px var(--sans)">bulk-like substrate</text>
 </svg>"""
 
@@ -352,17 +352,18 @@ PILLARS = [
   "Berry curvature, the quantum metric and the transverse responses they generate — nonlinear Hall, "
   "anomalous Hall and Nernst — in materials where symmetry allows them."),
  ("topology", "02", "Topology, flat bands &amp; kagome quantum matter", count_line("topology"),
-  "Where flat bands come from in kagome and line-graph lattices, when they carry non-trivial topology, "
+  "Where flat bands come from in kagome and other line-graph lattices, when they carry non-trivial topology, "
   "and what exactly solvable lattice methods reveal that numerics alone do not."),
  ("magnetism", "03", "Magnetism, correlations &amp; spin–orbit physics", count_line("magnetism"),
-  "Magnetic quantum materials, altermagnetism, and the interplay of spin–orbit coupling with electronic "
-  "correlations — the direction I am currently expanding most."),
+  "Magnetic order and spin–orbit coupling decide which anomalous and nonlinear responses are allowed. "
+  "Altermagnetism, magnetic Weyl semimetals, molecular magnetism — and correlated methods as an "
+  "expanding direction."),
  ("interfaces", "04", "Interfaces &amp; materials-realistic quantum matter", count_line("interfaces"),
   "Complex-oxide heterostructures, where a structural distortion of a few degrees reorganises the "
   "electronic and magnetic state, tested directly against spectroscopy and transport."),
  ("materials", "05", "Low-dimensional &amp; chemically designed materials", count_line("materials"),
-  "Predicting two-dimensional and molecular materials from first principles — Dirac systems beyond the "
-  "honeycomb, metal–organic lattices, and the functional properties that follow."),
+  "The largest part of my record: predicting two-dimensional and molecular lattices from first "
+  "principles, and working out where their Dirac points, nodal lines and band gaps come from."),
 ]
 
 
@@ -389,16 +390,20 @@ HOME = """
       <div>
         <p class="kicker">Theoretical Condensed-Matter Physicist</p>
         <h1>Arka Bandyopadhyay</h1>
-        <p class="keywords">Quantum materials &middot; quantum geometry &middot; topology &middot; magnetism &middot; unconventional transport</p>
+        <p class="keywords">Quantum materials &middot; topology &amp; Dirac physics &middot; quantum geometry &middot; magnetism &middot; unconventional transport</p>
         <p class="affil">Computational Quantum Materials, Institute for Theoretical Physics and Astrophysics<br>
           Julius-Maximilians-Universit&auml;t W&uuml;rzburg &middot; Cluster of Excellence <em>ct.qmat</em></p>
-        <p class="lede">I am a theoretical condensed-matter physicist working on quantum materials. I am
-          interested in how symmetry, electronic structure, quantum geometry, topology, magnetism and
-          electronic correlations act together to produce unusual electronic states and transport. I combine
-          first-principles calculations with realistic lattice models, symmetry analysis, quantum transport
-          and many-body methods, and try to carry each question through to something a measurement can
-          decide. Much of the work develops with experimental groups, and with chemists who can change a
-          material&rsquo;s structure on purpose.</p>
+        <p class="lede">I am a theoretical condensed-matter physicist working on quantum materials. My
+          research examines how the electronic structure and symmetry of a material give rise to
+          topological, quantum-geometric and magnetic properties, and how those show up in transport and
+          spectroscopy. I am drawn to lattices where geometry does something specific &mdash; Dirac and
+          nodal-line systems away from the honeycomb, kagome and other line-graph flat bands, oxide interfaces
+          where a few degrees of octahedral tilt decide which spin&ndash;orbit-entangled state the layer
+          settles into. The work is done
+          with first-principles and Wannier-based calculations, symmetry-adapted tight-binding models,
+          quantum transport and, increasingly, many-body methods. Several projects run with experimental groups,
+          where the calculations either identify the mechanism behind a measurement or point to a signature
+          worth looking for.</p>
         <div class="actions">
           <a class="btn btn--primary" href="research.html">Research programme</a>
           <a class="btn" href="publications.html">Publications</a>
@@ -424,21 +429,22 @@ HOME = """
   <div class="wrap">
     <div class="section-head">
       <p class="eyebrow">Research programme</p>
-      <h2>One question, five ways in</h2>
-      <p>How do symmetry, electronic structure, quantum geometry, topology, magnetism and electronic
-        correlations act together to produce unusual states and transport in quantum materials &mdash; and how
-        can those principles be turned into predictions an experiment can test, or into rules for designing a
-        material?</p>
-      <p>The five threads below are different entry points to that question. They share a method: start from
-        the structure and symmetry of a real material, build a model faithful enough to be quantitative, and
-        follow it through to something measurable.</p>
+      <h2>Five threads, one way of working</h2>
+      <p>The threads below are separate research directions, not variations on a single question. What they
+        share is a way of working: start from the structure and symmetry of a specific material, build an
+        electronic-structure model faithful enough to be quantitative, and follow it through to a response a
+        measurement can resolve.</p>
+      <p>They also overlap in practice. The symmetry analysis that decides whether a nonlinear Hall
+        response is allowed at all is the same one that decides which magnetic orders can give an
+        anomalous Hall effect, and the tight-binding and Wannier machinery is shared across all five.</p>
     </div>
     <figure class="map">
       <div class="map-scroll" tabindex="0" role="group" aria-label="Diagram: how the research programme moves from structure to measurement (scrollable)">%(map)s</div>
-      <figcaption>The same path, whichever thread I am following. Structure and chemistry set the symmetry
-        and the orbitals; those fix the quantum geometry, the topology and the magnetic behaviour; and those
-        decide what a transport or spectroscopy measurement will see. The return arrow matters as much as the
-        forward one.</figcaption>
+      <figcaption>The chain most of my projects follow. Structure and chemistry set the local symmetry and
+        which orbitals matter; those decide what topology, Berry curvature and magnetic order are possible;
+        and those fix what a transport or spectroscopy measurement can see. The return arrow matters as much
+        as the forward one: a measurement that resists explanation is often what selects the next
+        model.</figcaption>
     </figure>
     <div class="pillars" style="margin-top:var(--s5)">
 %(cards)s
@@ -514,54 +520,69 @@ HOME = """
 # =========================================================================
 DETAIL = [
  dict(key="geometry", n="01", figs=[(FIG_GEOMETRY,
-      "Berry curvature distributed asymmetrically across the Fermi surface. In a "
-      "time-reversal-symmetric metal without inversion symmetry this dipole converts a drive at "
-      "&omega; into a transverse current at 2&omega;, with no magnetic field.")],
+      "Berry curvature distributed asymmetrically over the Fermi surface. Weighted by the equilibrium "
+      "occupation and summed over the zone, its momentum derivative gives the Berry-curvature dipole. "
+      "Where the point group "
+      "allows that dipole to be non-zero, a drive at &omega; produces a second-order transverse current "
+      "with a rectified and a 2&omega; component, and no magnetic field is needed.")],
    title="Quantum geometry &amp; unconventional transport",
    thesis="Band energies are only half the story: the wavefunctions carry a geometry of their own, and "
           "it shows up directly in what a sample conducts.",
    body="""<p>Berry curvature and the quantum metric describe how Bloch states change across the
      Brillouin zone. Where symmetry permits, that geometry appears in transport. The nonlinear Hall
-     effect is the clearest case: in non-magnetic metals without inversion symmetry the leading
-     intrinsic contribution comes from the Berry-curvature dipole, whereas in magnetic systems
-     quantum-metric and disorder-induced mechanisms can dominate instead &mdash; so establishing which
-     applies in a given compound is part of the problem, not a detail.</p>
+     effect is the clearest case. In a non-magnetic metal, time-reversal symmetry forbids a linear
+     anomalous Hall response, but a second-order one survives when inversion symmetry is broken
+     <em>and</em> the point group leaves a Berry-curvature dipole non-zero &mdash; a Fermi-surface
+     quantity whose contribution scales with the scattering time. In magnetic metals that keep the product of
+     inversion and time reversal, the picture changes: a scattering-time-independent term set by the
+     quantum metric can lead, alongside disorder-induced contributions that scale differently again
+     &mdash; skew scattering as &tau;<sup>2</sup>, side-jump-like terms as &tau;<sup>0</sup>. Establishing which mechanism applies in a given
+     compound is part of the problem, not a detail.</p>
      <p>My contribution has been to move these ideas from model Hamiltonians to specific materials, and
      to look for handles that change the geometry itself rather than merely the band filling: gating,
      strain, structural chirality, and the choice of molecular building block.</p>""",
    highlights=[
-     "A perpendicular electric field reverses the sign and magnitude of the Berry-curvature dipole in silicene, germanene and stanene, making a quantum-geometric quantity gate-tunable",
+     "A perpendicular electric field reverses the sign of the Berry-curvature dipole in silicene, germanene and stanene and changes its magnitude, making a quantum-geometric quantity gate-tunable",
      "Strain plays the same role in layered phosphorene; structural chirality provides an independent handle in tellurium-based systems",
      "Not every transverse response is geometric &mdash; refraction of carriers at an internal interface produces one without Berry curvature at all",
      "Current work extends this to metal&ndash;organic frameworks, where the lattice geometry follows from the choice of linker",
    ],
    papers=[
      ("Non-linear Hall effects: mechanisms and materials", "Materials Today Electronics <strong>8</strong>, 100101 (2024) &mdash; first and corresponding author"),
-     ("Electrically switchable giant Berry curvature dipole in silicene, germanene and stanene", "2D Materials <strong>9</strong>, 035013 (2022)"),
-     ("Refraction-induced transverse charge transport", "Phys. Rev. B <strong>114</strong>, 105406 (2026) &mdash; Editors&rsquo; Suggestion"),
+     ("Berry curvature dipole and its strain engineering in layered phosphorene", "Materials Today Electronics <strong>6</strong>, 100076 (2023) &mdash; first and corresponding author"),
+     ("Electrically switchable giant Berry curvature dipole in silicene, germanene and stanene", "2D Materials <strong>9</strong>, 035013 (2022) &mdash; first author"),
+     ("Refraction-induced transverse charge transport", "Phys. Rev. B <strong>114</strong>, 105406 (2026) &mdash; corresponding author; Editors&rsquo; Suggestion"),
    ]),
 
  dict(key="topology", n="02", figs=[(FIG_KAGOME,
-      "Destructive interference on the kagome lattice quenches the dispersion of one band entirely. "
-      "The flat band sits above two dispersive bands that touch at a symmetry-protected point."),
+      "Destructive interference on the kagome lattice quenches one band entirely. It is not isolated: "
+      "it meets a dispersive band quadratically at the zone centre, while the two dispersive bands cross "
+      "linearly at K. Which side of the pair the flat band lies on follows the sign of the hopping."),
       (FIG_DECIMATION,
-      "Decimation removes sites exactly, leaving an energy-dependent effective lattice. With gain and "
-      "loss the spectrum becomes complex and eigenvalues can coalesce at exceptional points.")],
+      "Decimation removes sites exactly, leaving an effective lattice with energy-dependent hoppings. "
+      "Made non-Hermitian, its spectrum moves into the complex plane, and eigenvalues together with "
+      "their eigenvectors can coalesce at exceptional points.")],
    title="Topology, flat bands &amp; kagome quantum matter",
-   thesis="Some lattices are generous: their structure alone tells you where the flat bands are, and "
-          "whether they carry topology.",
-   body="""<p>A flat band has no dispersion, so kinetic energy is quenched and interactions set the
-     scale. On kagome and line-graph lattices these bands arise from destructive interference, which
-     makes their origin structural rather than accidental &mdash; and therefore predictable. With coupled
-     kagome layers we traced the flat bands to their line-graph origin and identified the conditions
-     under which interlayer coupling gaps them into topologically non-trivial bands.</p>
+   thesis="Some lattices are generous: their connectivity alone tells you where the flat band is. "
+          "Whether it carries topology is then a question about the terms you add.",
+   body="""<p>A flat band has no dispersion, so kinetic energy is quenched and whatever else is present
+     sets the scale. On the kagome lattice &mdash; the line graph of the honeycomb &mdash; the flat band
+     comes from compact states that live on the hexagonal plaquettes and interfere destructively at the
+     apex sites, so its origin is structural rather than accidental. With uniform nearest-neighbour
+     hopping that argument carries across the whole line-graph family; longer-range hopping and orbital
+     multiplicity lift the flatness, which is what makes the multi-orbital case interesting. With coupled
+     kagome layers we traced the flat bands to that origin and worked out when interlayer coupling
+     separates the nearly flat band from the dispersive ones, and when what remains is topologically
+     non-trivial.</p>
      <p>The same interest in exactly solvable structure runs through my work on real-space decimation,
-     which eliminates sites exactly and replaces a numerical parameter scan with a closed-form
-     condition. It extends naturally to non-Hermitian lattices, where gain and loss make the spectrum
-     complex and eigenvectors &mdash; not just eigenvalues &mdash; can coalesce.</p>""",
+     which eliminates sites exactly and turns a numerical parameter scan into conditions on
+     energy-dependent effective hoppings. It extends naturally to non-Hermitian lattices, where the two usual
+     ingredients typically do different things: balanced gain and loss bring eigenvalues <em>and their
+     eigenvectors</em> together at exceptional points, while non-reciprocal hopping gives the spectrum a
+     non-zero point-gap winding, and with it skin modes that pile up at a boundary.</p>""",
    highlights=[
-     "Line-graph origin of the flat bands in coupled kagome lattices, and the criterion for non-trivial topology",
-     "Exact decimation yields closed-form conditions for flat bands and skin modes in decorated non-Hermitian lattices",
+     "Line-graph origin of the flat bands in coupled kagome lattices, and the condition on interlayer coupling for the separated band to stay topologically non-trivial",
+     "Exact decimation gives analytic conditions &mdash; evaluated at the flat-band energy &mdash; for flat bands, and for skin modes in decorated non-reciprocal lattices",
      "Exceptional points located analytically in a dice-lattice Haldane model",
      "With W&uuml;rzburg experimental groups, a minimal two-dimensional multi-orbital kagome model realised in a grown system and tested by photoemission (manuscript in preparation)",
    ],
@@ -572,26 +593,35 @@ DETAIL = [
    ]),
 
  dict(key="magnetism", n="03", figs=[(FIG_MAGNETISM,
-      "In an altermagnet the two magnetic sublattices are related by a rotation rather than a "
-      "translation. The net magnetisation vanishes, yet the bands acquire a spin splitting whose sign "
-      "depends on the direction in the Brillouin zone.")],
+      "In an altermagnet the two magnetic sublattices are related by a rotation, and not by a "
+      "translation or by inversion. The net magnetisation vanishes by symmetry, yet the bands acquire a "
+      "spin splitting that is even in momentum and changes sign between directions. Drawn here for a "
+      "d<sub><i>x</i>&sup2;&minus;<i>y</i>&sup2;</sub> form factor; other wave symmetries put the nodal "
+      "directions elsewhere.")],
    title="Magnetism, correlations &amp; spin&ndash;orbit physics",
    thesis="Magnetic order, spin&ndash;orbit coupling and interactions do not merely shift bands &mdash; "
           "they change which responses are allowed at all.",
-   body="""<p>This is the direction I am currently expanding most. Magnetic order lowers symmetry, and
-     what survives determines whether an anomalous Hall or Nernst response can exist, how spin and
-     orbital degrees of freedom mix, and whether a flat band becomes a correlated state.
-     Altermagnetism is an instructive case: a collinear order with vanishing net magnetisation that
-     nonetheless produces a momentum-dependent spin splitting, because the two sublattices are related
-     by a rotation rather than a translation. Our review restates those symmetry conditions in the
-     language of crystal chemistry, so that they can be applied when choosing candidate compounds.</p>
-     <p>Alongside this I work on magnetism at the molecular scale, and I am bringing correlated methods
-     &mdash; dynamical mean-field theory and functional renormalisation group approaches &mdash; to bear
-     on flat-band and kagome problems. That part is in progress rather than concluded.</p>""",
+   body="""<p>Magnetism has become a larger part of my work, and electronic correlations are the newest
+     addition to it. Magnetic order lowers symmetry, and what survives determines whether an anomalous Hall
+     or Nernst response can exist at all, how spin and orbital degrees of freedom mix, and whether a flat
+     band can become a correlated state.
+     Altermagnetism is an instructive case: a collinear order whose net magnetisation vanishes by
+     symmetry in the absence of spin&ndash;orbit coupling, and which nonetheless produces a
+     momentum-dependent spin splitting. The reason is that the two sublattices are connected by a rotation
+     or rotoreflection and <em>not</em> by a translation or by inversion &mdash; either of which would
+     restore spin degeneracy. The splitting is even in momentum and survives without spin&ndash;orbit
+     coupling, which is what separates it from Rashba- and Dresselhaus-type splitting. Our review restates
+     those symmetry conditions in the language of crystal chemistry, so that they can be applied when
+     screening candidate compounds.</p>
+     <p>Alongside this I work on magnetism at the molecular scale, where ligand-field chemistry and
+     crystal packing set the spin state. I am now applying correlated methods &mdash; dynamical mean-field
+     theory and the functional renormalisation group &mdash; to flat-band and kagome problems. That work is
+     under way rather than concluded, and I describe it as a direction rather than a result.</p>""",
    highlights=[
      "Altermagnetism restated as chemical and symmetry criteria that can guide the search for candidate materials",
      "Anomalous Hall and Nernst responses tuned by composition in magnetic Weyl semimetals",
      "Spin-state switching in manganese(III) complexes, where ligand-field chemistry and crystal packing set the magnetic state",
+     "Magnon&ndash;electromagnon anomalies in rare-earth-doped BiFeO<sub>3</sub> films &mdash; manuscript under review",
      "Correlated approaches (DMFT via w2dynamics, FRG via divERGe) applied to flat-band and kagome systems &mdash; work in progress",
    ],
    papers=[
@@ -601,17 +631,21 @@ DETAIL = [
    ]),
 
  dict(key="interfaces", n="04", figs=[(FIG_INTERFACE,
-      "Octahedral rotations propagate across a complex-oxide interface, changing orbital overlaps and "
-      "the local spin&ndash;orbit environment of the layer above.")],
+      "Octahedral rotations propagate across a complex-oxide interface. The changed "
+      "metal&ndash;oxygen&ndash;metal angles alter orbital overlap, bandwidth and crystal-field splitting "
+      "in the layer above, and so the state it settles into.")],
    title="Interfaces &amp; materials-realistic quantum matter",
-   thesis="At an oxide interface a few degrees of octahedral tilt can reorganise the spin&ndash;orbit "
-          "ground state.",
+   thesis="At an oxide interface a few degrees of octahedral tilt can decide which "
+          "spin&ndash;orbit-entangled ground state the layer settles into.",
    body="""<p>Where two perovskite oxides meet, the oxygen octahedra do not simply join: the tilt
-     pattern of one propagates into the other over several unit cells. That structural detail changes
-     orbital overlaps and the local spin&ndash;orbit environment, and with them the magnetic and
-     transport behaviour of the layer.</p>
+     pattern of one propagates into the other over several unit cells. Changing the
+     metal&ndash;oxygen&ndash;metal angles changes the orbital overlaps and so the bandwidth, while the
+     accompanying local distortion lowers the site symmetry and splits the t<sub>2g</sub> manifold. The
+     atomic spin&ndash;orbit coupling itself is fixed; what the tilt moves is the balance between it, the
+     crystal field and the bandwidth &mdash; and that balance decides which spin&ndash;orbit-entangled
+     state the layer settles into, and how it conducts.</p>
      <p>Working with groups performing X-ray spectroscopy, photoemission and transport, we established a
-     route from the measured tilt coupling to the reconstructed spin&ndash;orbit state. This is the part
+     route from the measured tilt coupling to the reconstructed spin&ndash;orbit-entangled state. This is the part
      of my work where theory is most tightly constrained by experiment: the calculations are done for
      the structure that was actually grown, not an idealised one. The experimental measurements are my
      collaborators&rsquo; work; my contribution is the electronic-structure modelling and its
@@ -620,7 +654,6 @@ DETAIL = [
      "Octahedral tilt coupling related to spin&ndash;orbit reconstruction at a complex-oxide interface, published in <em>Nature Communications</em>",
      "Berry-curvature-dipole nonlinear Hall response predicted for oxide heterostructures",
      "Antiferromagnetic tunnel barriers producing discrete tunnelling-magnetoresistance states &mdash; manuscript under review",
-     "Magnon&ndash;electromagnon anomalies in rare-earth-doped BiFeO<sub>3</sub> films &mdash; manuscript under review",
    ],
    papers=[
      ("An unconventional pathway to correlate the octahedral tilt coupling and spin&ndash;orbit reconstruction at oxide interfaces", "Nature Communications <strong>17</strong>, 332 (2026) &mdash; joint first author"),
@@ -629,17 +662,21 @@ DETAIL = [
 
  dict(key="materials", n="05", figs=[(FIG_MATERIALS,
       "Dirac cones do not require a honeycomb. Square-and-octagon carbon networks host anisotropic "
-      "cones and nodal lines carrying non-trivial Zak indices.")],
+      "cones and nodal lines. A node is located by the jump in the Zak phase &mdash; symmetry-quantised to "
+      "0 or &pi; &mdash; between one-dimensional cuts on either side of it.")],
    title="Low-dimensional &amp; chemically designed materials",
-   thesis="Before you can ask about the quantum geometry of a material, someone has to propose the "
-          "material.",
+   thesis="Dirac physics does not require a honeycomb &mdash; and much of what I ask later about "
+          "topology and transport began as a question about which lattices could exist at all.",
    body="""<p>This is the largest part of my published record and, in a real sense, the origin of the
-     rest. Beginning in my doctoral work I have predicted two-dimensional carbon, silicon and nitride
-     networks built from squares, octagons and acetylenic links, and worked out what their electrons do:
+     rest. Beginning in my doctoral work, this line has predicted two-dimensional carbon, silicon and
+     nitride networks built from squares, octagons and acetylenic links and worked out what their
+     electrons do &mdash; some of it led by me, some by colleagues whose electronic-structure analysis I
+     contributed to:
      S-graphene, whose two Dirac cones survive distortion; 8-16-4 graphyne, a square-lattice nodal-line
-     semimetal with a non-trivial Zak index; the dumbbell C<sub>3</sub>NX family and its
-     quasi-one-dimensional derivatives. Two reviews map the wider landscape and have each received an
-     IOP India Top Cited Paper Award.</p>
+     semimetal whose nodal lines are located by a symmetry-quantised Zak phase along
+     one-dimensional cuts of the Brillouin zone; the dumbbell C<sub>3</sub>NX family and its
+     quasi-one-dimensional derivatives. Two reviews map the wider landscape and have each received an IOP
+     India Top Cited Paper Award; I led the first and was second author on the second.</p>
      <p>The same first-principles workflow, pointed at a device figure of merit rather than a topological
      invariant, produced an earlier interdisciplinary thread on lithium storage, supercapacitance,
      thermoelectrics, photocatalysis and redox polymers. It is not where my current questions lie, but it
@@ -647,7 +684,7 @@ DETAIL = [
    highlights=[
      "S-graphene and 8-16-4 graphyne: Dirac cones and nodal lines away from the honeycomb lattice",
      "The dumbbell C<sub>3</sub>NX family (X = C, Si, Ge) and its quasi-one-dimensional derivatives",
-     "Semiconductor device responses from first principles &mdash; negative differential resistance, rectification, gas sensing &mdash; via Green-function and NEGF transport",
+     "Semiconductor device responses from first principles &mdash; negative differential resistance, rectification, gas sensing &mdash; via non-equilibrium Green-function (NEGF) transport",
      "Functional properties with chemists: lithium storage, supercapacitance, thermoelectrics, photocatalysis and &pi;-conjugated redox polymers",
    ],
    papers=[
@@ -670,6 +707,7 @@ def pillar_sections():
       <div>
         <span class="n">%(n)s</span>
         <h2>%(title)s</h2>
+        <p class="pillar-count">%(count)s</p>
         <p class="thesis">%(thesis)s</p>
         %(body)s
         <ul class="highlights">
@@ -686,7 +724,7 @@ def pillar_sections():
 %(figs)s
       </div>
     </article>""" % dict(key=d["key"], n=d["n"], title=d["title"], thesis=d["thesis"],
-                         body=d["body"], hl=hl, pp=pp, figs=figs))
+                         count=count_line(d["key"]), body=d["body"], hl=hl, pp=pp, figs=figs))
     return "\n".join(out)
 
 
@@ -778,31 +816,33 @@ RESEARCH = """
     <div class="section-head prose">
       <p class="eyebrow">Research</p>
       <h1>Quantum materials, from structure to signal</h1>
-      <p>Quantum materials are interesting because several things matter at once. The crystal structure
-        fixes which orbitals lie close in energy; symmetry decides which responses are allowed at all;
-        spin&ndash;orbit coupling and magnetic order reshape the bands; interactions can reorganise them
-        entirely. My work asks how these ingredients combine to produce unusual electronic states and
-        transport, and how far that understanding can be pushed towards prediction.</p>
-      <p>The question does not sit inside a single discipline. Crystal chemistry determines orbital
-        structure; an interface modifies symmetry and spin&ndash;orbit coupling; molecular design can set
-        lattice geometry directly; and experiment decides which mechanism actually matters. A good part of
-        my work is therefore done with chemists, materials scientists and experimental physicists, and
-        close to half of my papers have appeared in chemistry and materials-chemistry journals.</p>
-      <p>I work in both directions. Sometimes a measurement arrives without an explanation and the task is
-        to identify the mechanism; sometimes a model predicts a signature and the question is which
-        material and which probe could show it. I do not perform experiments myself &mdash; the transport,
-        photoemission, X-ray spectroscopy and synthesis behind the work below are my collaborators&rsquo;
-        &mdash; but the theory is built so that it can be compared with them.</p>
+      <p>In a quantum material the lattice does more than hold the atoms in place. The crystal structure
+        fixes which orbitals lie near the Fermi level; the symmetry of that structure decides which
+        responses are allowed to be non-zero; spin&ndash;orbit coupling and magnetic order reshape the
+        bands; and where a band is flat, interactions set the remaining energy scale. My work follows that
+        chain in specific compounds, and asks which transport or spectroscopic signature distinguishes one
+        mechanism from another.</p>
+      <p>The chain runs through more than one discipline. Coordination and crystal chemistry set orbital
+        overlap and local symmetry; an oxide interface changes octahedral tilts and with them the
+        spin&ndash;orbit-entangled state a layer settles into; the choice of molecular linker sets lattice geometry directly. That
+        is why a substantial part of my work is done with chemists and materials scientists &mdash; not as
+        an aside, but because those are the practical handles on electronic structure.</p>
+      <p>Several projects run in close collaboration with experimental groups, and the exchange goes both
+        ways. In one direction, first-principles calculations and microscopic models are used to interpret
+        measured transport and spectra and to identify which mechanism is responsible. In the other, a
+        model points to a signature, a parameter regime or a candidate compound that can then be tested. I
+        do not perform experiments myself &mdash; the transport, photoemission, X-ray spectroscopy and
+        synthesis behind the work below are my collaborators&rsquo;.</p>
     </div>
 
     <div class="keypapers prose" style="margin-bottom:var(--s6)">
       <h2>How the programme developed</h2>
       <ul>
-        <li>Predicting low-dimensional materials and finding Dirac physics away from the honeycomb lattice</li>
-        <li>Topology and unconventional electronic states in those lattices</li>
-        <li>Quantum geometry and its consequences for transport</li>
-        <li>Flat bands, line-graph structure and kagome quantum matter</li>
-        <li>Magnetism, correlations and increasingly materials-realistic quantum matter</li>
+        <li>Predicting two-dimensional carbon and nitride lattices, and finding Dirac cones away from the honeycomb</li>
+        <li>Nodal lines and Zak phases in those lattices</li>
+        <li>Berry curvature and the quantum metric, and the nonlinear and anomalous transport they produce</li>
+        <li>Flat bands traced to line-graph structure, with kagome systems as the testbed, and exact real-space methods extended to non-Hermitian lattices</li>
+        <li>Magnetism and spin&ndash;orbit coupling in real compounds and at oxide interfaces &mdash; correlated methods now being added</li>
       </ul>
     </div>
 
@@ -816,11 +856,12 @@ RESEARCH = """
       <p class="eyebrow">People</p>
       <h2>Collaborators</h2>
       <p>My research has benefited enormously from collaboration across theory, experiment and materials
-        synthesis. The longest-standing are with <strong>Prof. Awadhesh Narayan</strong> at the Indian
-        Institute of Science, <strong>Prof. Ronny Thomale</strong> and <strong>Prof. Giorgio
-        Sangiovanni</strong> at Universit&auml;t W&uuml;rzburg, and <strong>Prof. Debnarayan Jana</strong>
-        at the University of Calcutta. The groups below span condensed-matter theory, photoemission and
-        X-ray spectroscopy, transport measurement, thin-film growth and synthetic chemistry.</p>
+        synthesis. The longest-running are with <strong>Prof. Debnarayan Jana</strong> at the University of
+        Calcutta, which goes back to my doctoral work, and <strong>Prof. Awadhesh Narayan</strong> at the
+        Indian Institute of Science. In W&uuml;rzburg I work with <strong>Prof. Ronny Thomale</strong> and
+        <strong>Prof. Giorgio Sangiovanni</strong>. The groups below span condensed-matter theory,
+        photoemission and X-ray spectroscopy, transport measurement, thin-film growth and synthetic
+        chemistry.</p>
     </div>
 %(collab)s
   </div>
@@ -838,7 +879,7 @@ RESEARCH = """
         <p>Symmetry-adapted tight-binding models, real-space decimation and renormalisation, topological
           invariants, non-Hermitian formulations.</p></div>
       <div class="tool-card"><h3>Transport &amp; many-body</h3>
-        <p>Green-function and NEGF transport; Boltzmann and quantum-geometric response theory; dynamical
+        <p>non-equilibrium Green-function (NEGF) transport; Boltzmann and quantum-geometric response theory; dynamical
           mean-field theory (<a href="https://github.com/w2dynamics/w2dynamics" target="_blank" rel="noopener">w2dynamics</a>)
           and functional renormalisation group (<a href="https://git.rwth-aachen.de/frg/divERGe" target="_blank" rel="noopener">divERGe</a>).</p></div>
       <div class="tool-card"><h3>Computing</h3>
@@ -954,8 +995,8 @@ CV = """
     <div class="section-head">
       <p class="eyebrow">Curriculum vitae</p>
       <h1>Arka Bandyopadhyay</h1>
-      <p>Theoretical condensed-matter physicist &mdash; quantum materials, quantum geometry and
-        unconventional transport.</p>
+      <p>Theoretical condensed-matter physicist &mdash; quantum materials, topology and quantum geometry,
+        magnetism, and unconventional transport.</p>
       <div class="actions" style="margin-top:var(--s3)">
         <a class="btn btn--primary" href="publications.html">Publication record</a>
         <a class="btn" href="research.html">Research programme</a>
@@ -964,16 +1005,20 @@ CV = """
 
     <div class="cv-block">
       <h2>Research profile</h2>
-      <p>I am a theoretical condensed-matter physicist working on quantum materials. My work asks how
-        symmetry, electronic structure, quantum geometry, topology, magnetism and electronic correlations
-        act together to produce unusual electronic states and transport, and how those principles can be
-        turned into predictions that an experiment can test or into rules for designing a material.</p>
-      <p>Methodologically this means first-principles and Wannier calculations, symmetry-adapted
-        tight-binding models, quantum transport and many-body approaches, applied to specific compounds
-        rather than to idealised Hamiltonians. A substantial part of the work sits at the boundary with
-        chemistry and materials science: close to half of my papers have appeared in chemistry and
-        materials-chemistry journals, and several of the projects below began with an experimental
-        observation rather than a model.</p>
+      <p>I am a theoretical condensed-matter physicist working on quantum materials. My research examines
+        how the electronic structure and symmetry of a material give rise to topological, quantum-geometric
+        and magnetic properties, and how these are reflected in transport and spectroscopic measurements. I
+        am particularly interested in cases where lattice geometry, spin&ndash;orbit coupling, magnetic
+        order or electronic correlations qualitatively change the underlying electronic states: Dirac and
+        nodal-line systems outside the honeycomb lattice, kagome and other line-graph flat bands, non-Hermitian
+        lattices, and complex-oxide interfaces.</p>
+      <p>The methods are first-principles electronic structure and Wannier-based modelling,
+        symmetry-adapted tight-binding Hamiltonians, quantum transport and, increasingly, many-body
+        approaches &mdash; applied to specific compounds rather than idealised Hamiltonians. The work also
+        meets materials chemistry and computational materials science, where bonding, coordination geometry,
+        interfaces and molecular design give concrete control over electronic structure. Several projects
+        run with experimental groups &mdash; I do not perform experiments myself; the calculations serve
+        either to identify the mechanism behind a measurement or to propose a signature worth testing.</p>
     </div>
 
     <div class="cv-block">
@@ -981,27 +1026,33 @@ CV = """
       <div class="cv-entry">
         <div><span class="what">Postdoctoral Researcher</span><br><span class="where">Julius-Maximilians-Universit&auml;t W&uuml;rzburg, Germany</span></div>
         <div class="when">Oct 2024 &ndash; present</div>
-        <p class="detail">Quantum geometry, correlated and topological electronic structure and unconventional
-          transport in the Computational Quantum Materials group, within the DFG Cluster of Excellence
-          <em>ct.qmat</em>. Developing an independent line on quantum-geometric transport in metal&ndash;organic
-          frameworks; mentoring junior researchers and coordinating experiment&ndash;theory collaborations.</p>
+        <p class="detail">Topological and quantum-geometric electronic structure of quantum materials in the
+          Computational Quantum Materials group, within the DFG Cluster of Excellence <em>ct.qmat</em>: kagome
+          and flat-band systems, anomalous and nonlinear transport, and magnetic quantum materials, treated
+          with first-principles and Wannier-based models alongside correlated methods. Several projects are
+          carried out jointly with theory and experimental groups in W&uuml;rzburg. Independent direction:
+          quantum-geometric transport in metal&ndash;organic frameworks, where the choice of linker sets the
+          lattice geometry. Mentoring of junior researchers.</p>
       </div>
       <div class="cv-entry">
         <div><span class="what">Visiting Researcher</span><br><span class="where">Indian Institute of Science, Bengaluru</span></div>
         <div class="when">May &ndash; Sep 2024</div>
-        <p class="detail">First-principles studies and collaborative manuscripts on magnetic oxide interfaces.</p>
+        <p class="detail">First-principles electronic-structure calculations on magnetic complex-oxide
+          interfaces, carried out with the experimental groups measuring them.</p>
       </div>
       <div class="cv-entry">
         <div><span class="what">IISc-IoE Postdoctoral Fellow</span><br><span class="where">Indian Institute of Science, Bengaluru</span></div>
         <div class="when">May 2022 &ndash; May 2024</div>
-        <p class="detail">Berry-curvature-dipole physics, flat bands and non-Hermitian topology; built
-          experimental collaborations.</p>
+        <p class="detail">Berry-curvature dipoles and nonlinear Hall response, flat bands in coupled kagome
+          lattices, and non-Hermitian topology treated by exact real-space decimation. Started the
+          collaborations with oxide-interface and transport experimentalists from which several later papers
+          came.</p>
       </div>
       <div class="cv-entry">
         <div><span class="what">Research Associate</span><br><span class="where">Indian Institute of Science, Bengaluru</span></div>
         <div class="when">Jul 2021 &ndash; May 2022</div>
-        <p class="detail">Dirac fermions in non-honeycomb lattices; Berry-curvature dipoles across quantum
-          spin Hall transitions.</p>
+        <p class="detail">Dirac and nodal-line electronic structure in non-honeycomb two-dimensional
+          lattices; Berry-curvature dipoles across a quantum spin Hall transition.</p>
       </div>
     </div>
 
@@ -1029,7 +1080,7 @@ CV = """
 
     <div class="cv-block">
       <h2>Invited talks &amp; academic visits</h2>
-      <div class="cv-entry"><div><span class="what">Invited Talk, <a href="https://sscu50.in/" target="_blank" rel="noopener">SSCU-50</a></span><br><span class="where">Emergent materials for energy and photonics &mdash; fifty years of the Solid State and Structural Chemistry Unit, Indian Institute of Science, Bengaluru</span></div><div class="when">Dec 2026</div></div>
+      <div class="cv-entry"><div><span class="what">Invited Talk, <a href="https://sscu50.in/" target="_blank" rel="noopener">SSCU-50</a> <span class="flag">upcoming</span></span><br><span class="where">Emergent materials for energy and photonics &mdash; fifty years of the Solid State and Structural Chemistry Unit, Indian Institute of Science, Bengaluru</span></div><div class="when">Dec 2026</div></div>
       <div class="cv-entry"><div><span class="what">Departmental Seminar</span><br><span class="where">Solid State and Structural Chemistry Unit, Indian Institute of Science, Bengaluru</span></div><div class="when">Jan 2026</div></div>
       <div class="cv-entry"><div><span class="what">Departmental Seminar</span><br><span class="where">Theoretical Sciences Unit, JNCASR, Bengaluru</span></div><div class="when">Jan 2026</div></div>
       <div class="cv-entry"><div><span class="what">Resource Person, CMQF-2026 National Seminar</span><br><span class="where">Sidho-Kanho-Birsha University, Purulia</span></div><div class="when">2026</div></div>
@@ -1041,11 +1092,13 @@ CV = """
     <div class="cv-block">
       <h2>Teaching &amp; mentoring</h2>
       <p>I have mentored doctoral and junior researchers at W&uuml;rzburg, IISc and the University of
-        Calcutta, from problem formulation and computation through to publication and presentation, and I
-        look forward to taking on formal supervision of my own.</p>
-      <div class="tool-grid" style="margin-top:var(--s3)">
-        <div class="tool-card"><h3>Core courses</h3><p>Quantum Mechanics &middot; Solid State and Condensed Matter Physics &middot; Mathematical and Computational Physics.</p></div>
-        <div class="tool-card"><h3>Advanced courses</h3><p>Electronic Structure and DFT &middot; Topological Quantum Matter &middot; Quantum Transport &middot; Low-Dimensional Materials &middot; Semiconductor and Many-Body Physics.</p></div>
+        Calcutta on theoretical and computational projects &mdash; problem formulation, numerical
+        implementation, analysis, and the preparation of manuscripts and presentations. Several of these
+        projects led to co-authored publications.</p>
+      <p class="detail" style="margin-top:var(--s2)">Courses I am prepared to teach:</p>
+      <div class="tool-grid" style="margin-top:var(--s2)">
+        <div class="tool-card"><h3>Core</h3><p>Quantum Mechanics &middot; Condensed Matter and Solid State Physics &middot; Mathematical Physics &middot; Computational Physics.</p></div>
+        <div class="tool-card"><h3>Advanced</h3><p>Electronic Structure Theory and DFT &middot; Topological Quantum Matter &middot; Quantum Transport &middot; Low-Dimensional and Semiconductor Physics &middot; Introduction to Many-Body Physics.</p></div>
       </div>
     </div>
 
@@ -1060,11 +1113,11 @@ CV = """
     <div class="cv-block">
       <h2>Technical expertise</h2>
       <div class="tool-grid">
-        <div class="tool-card"><h3>Electronic structure</h3><p>Quantum ESPRESSO &middot; VASP &middot; SIESTA &middot; OpenMX &middot; Gaussian &middot; ORCA.</p></div>
-        <div class="tool-card"><h3>Wannier &amp; quantum geometry</h3><p>Wannier90 &middot; WannierTools &middot; WannierBerri; Berry curvature, quantum metric and topological invariants.</p></div>
-        <div class="tool-card"><h3>Models &amp; transport</h3><p>Symmetry-adapted tight-binding &middot; real-space decimation &middot; Green-function and NEGF transport &middot; non-Hermitian models.</p></div>
-        <div class="tool-card"><h3>Many-body methods</h3><p>Dynamical mean-field theory (w2dynamics) &middot; functional renormalisation group (divERGe).</p></div>
-        <div class="tool-card"><h3>Computing</h3><p>Python (NumPy, SciPy, Matplotlib) &middot; Fortran &middot; Mathematica &middot; Linux &middot; HPC &middot; LaTeX.</p></div>
+        <div class="tool-card"><h3>Electronic structure</h3><p>Density-functional theory including DFT+<em>U</em>, spin&ndash;orbit coupling and collinear and non-collinear magnetism.<br><span class="codes">Quantum ESPRESSO &middot; VASP &middot; SIESTA &middot; OpenMX; Gaussian and ORCA for molecular and coordination complexes</span></p></div>
+        <div class="tool-card"><h3>Wannier &amp; quantum-geometric response</h3><p>Wannier interpolation; Berry curvature, Berry-curvature dipole and quantum metric; anomalous, nonlinear and thermoelectric transport coefficients; topological invariants.<br><span class="codes">Wannier90 &middot; WannierBerri &middot; WannierTools</span></p></div>
+        <div class="tool-card"><h3>Model Hamiltonians &amp; transport</h3><p>Symmetry-adapted tight-binding models; real-space decimation and renormalisation; equilibrium and non-equilibrium Green-function (NEGF) quantum transport; non-Hermitian formulations.</p></div>
+        <div class="tool-card"><h3>Many-body methods</h3><p>Dynamical mean-field theory and the functional renormalisation group, applied to flat-band and kagome problems &mdash; an expanding part of the work.<br><span class="codes">w2dynamics &middot; divERGe</span></p></div>
+        <div class="tool-card"><h3>Scientific computing</h3><p>Python (NumPy, SciPy, Matplotlib) &middot; Fortran &middot; Mathematica &middot; Linux and HPC workflows &middot; LaTeX.</p></div>
         <div class="tool-card"><h3>Languages</h3><p>English &middot; Bengali &middot; Hindi.</p></div>
       </div>
     </div>
@@ -1075,16 +1128,16 @@ CV = """
 # =========================================================================
 #  Build
 # =========================================================================
-DESC_HOME = ("Arka Bandyopadhyay is a theoretical condensed-matter physicist at the University of "
-             "Würzburg working on quantum materials: quantum geometry, topology, magnetism, "
-             "electronic correlations and unconventional transport.")
+DESC_HOME = ("Arka Bandyopadhyay is a theoretical condensed-matter physicist at Universität Würzburg "
+             "working on quantum materials: topology and Dirac physics, quantum geometry and nonlinear "
+             "transport, kagome flat bands, magnetism and complex-oxide interfaces.")
 
 written = [
   page("index.html", "Arka Bandyopadhyay — Quantum Materials Theory", DESC_HOME, HOME,
        "index.html", JSONLD),
   page("research.html", "Research — Arka Bandyopadhyay",
        "Research programme: quantum geometry and unconventional transport; topology, flat bands and "
-       "kagome quantum matter; magnetism, correlations and spin-orbit physics; oxide interfaces; and "
+       "kagome quantum matter; magnetism and spin-orbit physics; complex-oxide interfaces; and "
        "low-dimensional, chemically designed materials.", RESEARCH, "research.html"),
   page("publications.html", "Publications — Arka Bandyopadhyay",
        "Complete publication record of Arka Bandyopadhyay: peer-reviewed papers with DOI and arXiv "

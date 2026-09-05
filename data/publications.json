@@ -18,7 +18,7 @@
         "interfaces"
       ],
       "selected": true,
-      "summary": "With spectroscopy and transport collaborators, relates octahedral tilt coupling across a complex-oxide interface to the reconstruction of the spin–orbit ground state, giving a structural handle on interfacial magnetism."
+      "summary": "Working with spectroscopy and transport groups, my electronic-structure calculations relate the octahedral tilt coupling measured across a complex-oxide interface to the reconstruction of the spin–orbit-entangled ground state, giving a structural handle on interfacial magnetism."
     },
     {
       "id": "sarkar2026refraction",
@@ -325,7 +325,7 @@
         "geometry"
       ],
       "selected": true,
-      "summary": "Shows that a gate field reverses the sign and magnitude of the Berry-curvature dipole in silicene, germanene and stanene, turning a quantum-geometric quantity into a tunable device parameter."
+      "summary": "Shows that a gate field reverses the sign of the Berry-curvature dipole and changes its magnitude in silicene, germanene and stanene, turning a quantum-geometric quantity into a tunable device parameter."
     },
     {
       "id": "mondal2022raman",
@@ -610,7 +610,7 @@
       "id": "liu2026kagome",
       "title": "Experimental realization of the minimal two-dimensional multi-orbital kagome model",
       "authors": "Bing Liu, Arka Bandyopadhyay, Manish Verma, Jonas Erhardt, Tim Wagner, Jing Qi, Kilian Strauß, Domenico Di Sante, Carmine Ortix, Simon Moser, Jörg Schäfer, Ronny Thomale, Giorgio Sangiovanni, Ralph Claessen",
-      "journal": "To be submitted",
+      "journal": "In preparation",
       "year": 2026,
       "role": "Joint first author",
       "tags": [

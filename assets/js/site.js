@@ -128,7 +128,7 @@
     var lead = pr.filter(function (p) { return /first/i.test(p.role || ''); }).length;
     var corr = pr.filter(function (p) { return /corresponding/i.test(p.role || ''); }).length;
     recEl.innerHTML =
-      '<div><b>' + pr.length + '</b><span>peer-reviewed papers</span></div>' +
+      '<div><b>' + pr.length + '</b><span>peer-reviewed publications</span></div>' +
       '<div><b>' + lead + '</b><span>as first or joint-first author</span></div>' +
       '<div><b>' + corr + '</b><span>as corresponding author</span></div>' +
       '<div><b>' + d.preprints.length + '</b><span>manuscripts under review or in preparation</span></div>';
