@@ -864,7 +864,8 @@ RESEARCH = """
         Indian Institute of Science. In W&uuml;rzburg I work with <strong>Prof. Ronny Thomale</strong> and
         <strong>Prof. Giorgio Sangiovanni</strong>. The groups below span condensed-matter theory,
         photoemission and X-ray spectroscopy, transport measurement, thin-film growth and synthetic
-        chemistry.</p>
+        chemistry, and include both co-authors on published work and colleagues I am currently working
+        with.</p>
     </div>
 %(collab)s
   </div>
