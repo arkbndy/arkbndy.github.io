@@ -1068,7 +1068,7 @@ PEOPLE = [
 
  ("Arunava Chakrabarti", "Professor of Physics, University of Kalyani", "https://scispace.com/authors/arunava-chakrabarti-7pqvtc1c09", "WEB"),
  ("Md. Mohi Uddin", "Professor of Physics, Chittagong University of Engineering &amp; Technology", GS % "VkzVBBkAAAAJ", "GS"),
- ("Akbar Ali Mohamad", "Assistant Professor of Chemistry, Khalifa University, Abu Dhabi", GS % "f9iY8woAAAAJ", "GS"),
+ ("Mohamad Akbar Ali", "Assistant Professor of Chemistry, Khalifa University, Abu Dhabi", GS % "f9iY8woAAAAJ", "GS"),
  ("Dirtha Sanyal", "Variable Energy Cyclotron Centre, Kolkata", GS % "5DVDPCwAAAAJ", "GS"),
  ("Moritz Hoesch", "PETRA III, Deutsches Elektronen-Synchrotron (DESY), Hamburg", GS % "PtrvJRoAAAAJ", "GS"),
  ("Manuel Valvidares", "ALBA Synchrotron Light Source, Barcelona", GS % "n21FAZYAAAAJ", "GS"),
