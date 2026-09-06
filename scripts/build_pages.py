@@ -1037,80 +1037,69 @@ def pillar_sections(keys):
 #  Collaborators
 # =========================================================================
 GS = "https://scholar.google.com/citations?user=%s"
-GROUPS = [
- ("Universit&auml;t W&uuml;rzburg", [
-  ("Ronny Thomale", "Professor of Theoretical Physics", GS % "RJ8vWeoAAAAJ", "GS"),
-  ("Giorgio Sangiovanni", "Professor of Theoretical Physics", GS % "SeCV78UAAAAJ", "GS"),
-  ("Ralph Claessen", "Professor of Experimental Physics", GS % "t8wpk5sAAAAJ", "GS"),
-  ("J&ouml;rg Sch&auml;fer", "Professor of Experimental Physics", GS % "25yzQPYAAAAJ", "GS"),
-  ("Lennart Klebl", "Institute for Theoretical Physics and Astrophysics",
-   "https://www.physik.uni-wuerzburg.de/tp1/team/postdocs/dr-lennart-klebl/", "WEB"),
-  ("Manish Verma", "Computational Quantum Materials", GS % "7EljkOAAAAAJ", "GS")]),
- ("Indian Institute of Science, Bengaluru", [
-  ("Awadhesh Narayan", "Associate Professor, Solid State and Structural Chemistry Unit", GS % "kHOQvgQAAAAJ", "GS"),
-  ("Diptiman Sen", "Professor, Centre for High Energy Physics", GS % "4TZdOPIAAAAJ", "GS"),
-  ("Sujit Das", "Assistant Professor, Materials Research Centre", GS % "L8j4ld8AAAAJ", "GS"),
-  ("Satish Patil", "Professor of Polymer Chemistry", GS % "Tyfe7LcAAAAJ", "GS"),
-  ("Bhagwati Prasad", "Department of Materials Engineering", GS % "8lDnePMAAAAJ", "GS"),
-  ("Abhishake Mondal", "Associate Professor, Solid State and Structural Chemistry Unit", GS % "wZkA5s0AAAAJ", "GS"),
-  ("Naga Phani B. Aetukuri", "Solid State and Structural Chemistry Unit", GS % "Te2ZTYgAAAAJ", "GS"),
-  ("N. Ravishankar", "Professor, Materials Research Centre", GS % "v5FUPi4AAAAJ", "GS"),
-  ("S. B. Krupanidhi", "Materials Research Centre", GS % "ieUCCasAAAAJ", "GS"),
-  ("Nesta Benno Joseph", "Solid State and Structural Chemistry Unit", GS % "3cfchUgAAAAJ", "GS"),
-  ("Ronika Sarkar", "Department of Physics", GS % "WuKSGW8AAAAJ", "GS"),
-  ("Md Afsar Reja", "Solid State and Structural Chemistry Unit", None, None)]),
- ("Kolkata and West Bengal", [
-  ("Debnarayan Jana", "Professor of Physics, University of Calcutta", GS % "43SR0GsAAAAJ", "GS"),
-  ("Arunava Chakrabarti", "Professor of Physics, University of Kalyani",
-   "https://scispace.com/authors/arunava-chakrabarti-7pqvtc1c09", "WEB"),
-  ("Dirtha Sanyal", "Variable Energy Cyclotron Centre", GS % "ReD7dBWTPcwC", "GS"),
-  ("Atanu Nandy", "Acharya Prafulla Chandra College", GS % "9eE-LGcAAAAJ", "GS"),
-  ("Subhadip Nath", "Assistant Professor of Physics, Krishnagar Government College", GS % "kwKfWjwAAAAJ", "GS"),
-  ("Debaprem Bhattacharya", "Government College of Engineering &amp; Textile Technology, Berhampore", GS % "7LZ-wgQAAAAJ", "GS")]),
- ("Across India", [
-  ("Ajit C. Balram", "Institute of Mathematical Sciences, Chennai", GS % "T1vffdAAAAAJ", "GS"),
-  ("Amrita Mukherjee", "Tata Institute of Fundamental Research", None, None),
-  ("Supriya Ghosal", "Theoretical Sciences Unit, JNCASR, Bengaluru", GS % "QIltrEEAAAAJ", "GS"),
-  ("Deep Mondal", "Indian Institute of Technology Bombay", GS % "TbMI07YAAAAJ", "GS"),
-  ("Anju Ahlawat", "Institute of Sciences, SAGE University, Indore", GS % "A72iJqMAAAAJ", "GS"),
-  ("Basanta Roul", "Central Research Laboratory, Bharat Electronics, Bengaluru", GS % "0eUYcSQAAAAJ", "GS"),
-  ("Suman Chowdhury", "Department of Physics &amp; Astrophysics, University of Delhi", GS % "Do_yowMAAAAJ", "GS")]),
- ("International partners", [
-  ("Claudia Felser", "Director, Max Planck Institute for Chemical Physics of Solids, Dresden", GS % "QOdCHXMAAAAJ", "GS"),
-  ("T. Venky Venkatesan", "Center for Quantum Research and Technology, University of Oklahoma", GS % "brdyAZ4AAAAJ", "GS"),
-  ("Rajeev Ahuja", "Uppsala University", GS % "OqyvV_oAAAAJ", "GS"),
-  ("Faxian Xiu", "Department of Physics, Fudan University", GS % "0QMB9ZUAAAAJ", "GS"),
-  ("Simon Moser", "Professor of Experimental Physics, Ruhr-Universit&auml;t Bochum", GS % "WCSgzGwAAAAJ", "GS"),
-  ("Hendrik Bentmann", "Associate Professor, Center for Quantum Spintronics, NTNU Trondheim", GS % "tNbD2eMAAAAJ", "GS"),
-  ("Domenico Di Sante", "University of Bologna", GS % "EVyjBUYAAAAJ", "GS"),
-  ("Carmine Ortix", "University of Salerno", GS % "5tgyU54AAAAJ", "GS"),
-  ("Enze Zhang", "School of Physics, Nanjing University", GS % "fp_HNTAAAAAJ", "GS"),
-  ("Moritz Hoesch", "PETRA III, Deutsches Elektronen-Synchrotron (DESY), Hamburg", GS % "PtrvJRoAAAAJ", "GS"),
-  ("Manuel Valvidares", "ALBA Synchrotron Light Source, Barcelona", GS % "n21FAZYAAAAJ", "GS"),
-  ("Akbar Ali Mohamad", "Assistant Professor of Chemistry, Khalifa University, Abu Dhabi", GS % "f9iY8woAAAAJ", "GS"),
-  ("Md. Mohi Uddin", "Professor of Physics, Chittagong University of Engineering &amp; Technology", GS % "VkzVBBkAAAAJ", "GS"),
-  ("Anumita Bose", "Condensed Matter Theory, SISSA, Trieste", GS % "-iKh_vkAAAAJ", "GS"),
-  ("Ayan Banerjee", "Max Planck Institute for the Science of Light, Erlangen", GS % "AGIwnYEAAAAJ", "GS")]),
+
+# One list, ordered by how long and how closely we have worked together.
+PEOPLE = [
+ ("Awadhesh Narayan", "Associate Professor, Solid State and Structural Chemistry Unit, Indian Institute of Science", GS % "GKvOteUAAAAJ", "GS"),
+ ("Ronny Thomale", "Professor of Theoretical Physics, Universit&auml;t W&uuml;rzburg", GS % "vFCXAB4AAAAJ", "GS"),
+ ("Giorgio Sangiovanni", "Professor of Theoretical Physics, Universit&auml;t W&uuml;rzburg", GS % "n2SjyxsAAAAJ", "GS"),
+ ("Debnarayan Jana", "Professor of Physics, University of Calcutta", GS % "SPqLU7cAAAAJ", "GS"),
+ ("Diptiman Sen", "Professor, Centre for High Energy Physics, Indian Institute of Science", GS % "gDIJvxIAAAAJ", "GS"),
+ ("Ralph Claessen", "Professor of Experimental Physics, Universit&auml;t W&uuml;rzburg", GS % "6JLmDLwAAAAJ", "GS"),
+ ("Claudia Felser", "Director, Max Planck Institute for Chemical Physics of Solids, Dresden", GS % "L5LuBmoAAAAJ", "GS"),
+
+ ("Ajit C. Balram", "Institute of Mathematical Sciences, Chennai", GS % "5ZQPGCwAAAAJ", "GS"),
+ ("Sujit Das", "Assistant Professor, Materials Research Centre, Indian Institute of Science", GS % "yQjTUKQAAAAJ", "GS"),
+ ("Satish Patil", "Professor of Polymer Chemistry, Indian Institute of Science", GS % "2gRKZ8QAAAAJ", "GS"),
+ ("Abhishake Mondal", "Associate Professor, Solid State and Structural Chemistry Unit, Indian Institute of Science", GS % "gwFaJpsAAAAJ", "GS"),
+ ("Bhagwati Prasad", "Department of Materials Engineering, Indian Institute of Science", GS % "8lDnePMAAAAJ", "GS"),
+ ("Naga Phani B. Aetukuri", "Solid State and Structural Chemistry Unit, Indian Institute of Science", GS % "0nCzUB0AAAAJ", "GS"),
+ ("N. Ravishankar", "Professor, Materials Research Centre, Indian Institute of Science", GS % "gPPFOZoAAAAJ", "GS"),
+ ("S. B. Krupanidhi", "Materials Research Centre, Indian Institute of Science", GS % "ieUCCasAAAAJ", "GS"),
+
+ ("T. Venky Venkatesan", "Center for Quantum Research and Technology, University of Oklahoma", GS % "iXTNCJAAAAAJ", "GS"),
+ ("J&ouml;rg Sch&auml;fer", "Professor of Experimental Physics, Universit&auml;t W&uuml;rzburg", GS % "25yzQPYAAAAJ", "GS"),
+ ("Simon Moser", "Professor of Experimental Physics, Ruhr-Universit&auml;t Bochum", GS % "WCSgzGwAAAAJ", "GS"),
+ ("Hendrik Bentmann", "Associate Professor, Center for Quantum Spintronics, NTNU Trondheim", GS % "tNbD2eMAAAAJ", "GS"),
+ ("Rajeev Ahuja", "Uppsala University", GS % "OqyvV_oAAAAJ", "GS"),
+ ("Faxian Xiu", "Department of Physics, Fudan University", GS % "0QMB9ZUAAAAJ", "GS"),
+ ("Domenico Di Sante", "University of Bologna", GS % "EVyjBUYAAAAJ", "GS"),
+ ("Carmine Ortix", "University of Salerno", GS % "5tgyU54AAAAJ", "GS"),
+
+ ("Arunava Chakrabarti", "Professor of Physics, University of Kalyani", "https://scispace.com/authors/arunava-chakrabarti-7pqvtc1c09", "WEB"),
+ ("Md. Mohi Uddin", "Professor of Physics, Chittagong University of Engineering &amp; Technology", GS % "VkzVBBkAAAAJ", "GS"),
+ ("Akbar Ali Mohamad", "Assistant Professor of Chemistry, Khalifa University, Abu Dhabi", GS % "f9iY8woAAAAJ", "GS"),
+ ("Dirtha Sanyal", "Variable Energy Cyclotron Centre, Kolkata", GS % "5DVDPCwAAAAJ", "GS"),
+ ("Moritz Hoesch", "PETRA III, Deutsches Elektronen-Synchrotron (DESY), Hamburg", GS % "PtrvJRoAAAAJ", "GS"),
+ ("Manuel Valvidares", "ALBA Synchrotron Light Source, Barcelona", GS % "n21FAZYAAAAJ", "GS"),
+ ("Anju Ahlawat", "Institute of Sciences, SAGE University, Indore", GS % "y1nEir0AAAAJ", "GS"),
+ ("Basanta Roul", "Central Research Laboratory, Bharat Electronics, Bengaluru", GS % "6QEcSb0AAAAJ", "GS"),
+ ("Subhadip Nath", "Assistant Professor of Physics, Krishnagar Government College", GS % "0mfBrLIAAAAJ", "GS"),
+ ("Atanu Nandy", "Acharya Prafulla Chandra College", GS % "9eE-LGcAAAAJ", "GS"),
+ ("Debaprem Bhattacharya", "Government College of Engineering &amp; Textile Technology, Berhampore", GS % "6ZJDPBcAAAAJ", "GS"),
+ ("Suman Chowdhury", "Department of Physics &amp; Astrophysics, University of Delhi", GS % "1oFY4-wAAAAJ", "GS"),
+ ("Deep Mondal", "Indian Institute of Technology Bombay", GS % "MtCsRHYAAAAJ", "GS"),
+ ("Anumita Bose", "Condensed Matter Theory, SISSA, Trieste", GS % "-iKh_vkAAAAJ", "GS"),
+ ("Ayan Banerjee", "Max Planck Institute for the Science of Light, Erlangen", GS % "AGIwnYEAAAAJ", "GS"),
+ ("Enze Zhang", "School of Physics, Nanjing University", GS % "fp_HNTAAAAAJ", "GS"),
+ ("Lennart Klebl", "Institute for Theoretical Physics and Astrophysics, Universit&auml;t W&uuml;rzburg", "https://www.physik.uni-wuerzburg.de/tp1/team/postdocs/dr-lennart-klebl/", "WEB"),
+ ("Manish Verma", "Computational Quantum Materials, Universit&auml;t W&uuml;rzburg", GS % "5Yx3-fMAAAAJ", "GS"),
+ ("Nesta Benno Joseph", "Solid State and Structural Chemistry Unit, Indian Institute of Science", GS % "d1xIBpwAAAAJ", "GS"),
+ ("Ronika Sarkar", "Department of Physics, Indian Institute of Science", GS % "kJUYbLcAAAAJ", "GS"),
+ ("Supriya Ghosal", "Theoretical Sciences Unit, JNCASR, Bengaluru", GS % "6mUJTScAAAAJ", "GS"),
+ ("Md Afsar Reja", "Solid State and Structural Chemistry Unit, Indian Institute of Science", None, None),
+ ("Amrita Mukherjee", "Tata Institute of Fundamental Research", None, None),
 ]
 
 
 def collaborators():
-    blocks, total = [], 0
-    for title, people in GROUPS:
-        total += len(people)
-        rows = []
-        for name, aff, url, badge in people:
-            link = ('<a class="gs" href="%s" target="_blank" rel="noopener" title="%s profile for %s">%s</a>'
-                    % (url, "Google Scholar" if badge == "GS" else "Homepage", name, badge)) if url else ''
-            rows.append('          <li><div><span class="who">%s</span><span class="where">%s</span></div>%s</li>'
-                        % (name, aff, link))
-        blocks.append("""      <details class="collab-group">
-        <summary>%s <span class="n">%d</span></summary>
-        <ul class="collab-list">
-%s
-        </ul>
-      </details>""" % (title, len(people), "\n".join(rows)))
-    return "\n".join(blocks), total
+    rows = []
+    for name, aff, url, badge in PEOPLE:
+        link = ('<a class="gs" href="%s" target="_blank" rel="noopener" title="%s profile for %s">%s</a>'
+                % (url, "Google Scholar" if badge == "GS" else "Homepage", name, badge)) if url else ''
+        rows.append('        <li><div><span class="who">%s</span><span class="where">%s</span></div>%s</li>'
+                    % (name, aff, link))
+    return '      <ul class="collab-list">\n%s\n      </ul>' % "\n".join(rows), len(PEOPLE)
 
 
 COLLAB_HTML, COLLAB_N = collaborators()
@@ -1187,15 +1176,12 @@ RESEARCH = """
   <div class="wrap">
     <div class="section-head">
       <p class="eyebrow">People</p>
-      <h2>Collaborators</h2>
-      <p>My research has benefited enormously from collaboration across theory, experiment and materials
-        synthesis. The longest-running are with <strong>Prof. Debnarayan Jana</strong> at the University of
-        Calcutta, which goes back to my doctoral work, and <strong>Prof. Awadhesh Narayan</strong> at the
-        Indian Institute of Science. In W&uuml;rzburg I work with <strong>Prof. Ronny Thomale</strong> and
-        <strong>Prof. Giorgio Sangiovanni</strong>. The groups below span condensed-matter theory,
-        photoemission and X-ray spectroscopy, transport measurement, thin-film growth and synthetic
-        chemistry, and include both co-authors on published work and colleagues I am currently working
-        with.</p>
+      <h2>Collaborators &amp; co-authors</h2>
+      <p>My research has benefited enormously from long-standing, active collaboration across theory,
+        experiment and materials synthesis. Very little of it would exist without the groups I have been
+        part of: in W&uuml;rzburg, at the Indian Institute of Science and at the University of Calcutta. I
+        am grateful to have worked inside them. Listed below are co-authors on published work and
+        colleagues I am currently working with.</p>
     </div>
 %(collab)s
   </div>
@@ -1505,4 +1491,4 @@ written = [
        CV, "cv.html"),
 ]
 print("built:", ", ".join(written))
-print("collaborators:", COLLAB_N, "in", len(GROUPS), "groups")
+print("collaborators:", COLLAB_N)
