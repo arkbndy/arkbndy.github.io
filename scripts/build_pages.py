@@ -580,9 +580,9 @@ HOME = """
       <p class="eyebrow">Get in touch</p>
       <h2>Contact</h2>
       <p>I am always glad to hear from researchers working on quantum materials, unconventional transport,
-        topology, magnetism and related problems &mdash; particularly where theory can work closely with
-        experiment or with materials design. A material worth calculating, a measurement that resists
-        explanation, or a question you want to think through are all good reasons to write.</p>
+        topology, magnetism and related problems, particularly where theory can work closely with experiment
+        or with materials design. A material worth calculating, a measurement that demands an explanation,
+        a question worth thinking through together, or simply a hello are all good reasons to write.</p>
     </div>
     <div class="contact-grid">
       <address>
