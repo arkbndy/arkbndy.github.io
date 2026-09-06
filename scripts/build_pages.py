@@ -353,6 +353,56 @@ FIG_MAGNETISM = """<svg viewBox="0 0 360 240" role="img" aria-label="Left: two m
   <text x="272" y="222" text-anchor="middle" style="fill:var(--muted);font:400 10px var(--sans)">&#916; = E<tspan dy="2" font-size="8">&#8593;</tspan><tspan dy="-2"> &#8722; E</tspan><tspan dy="2" font-size="8">&#8595;</tspan><tspan dy="-2">; nodes on the diagonals</tspan></text>
 </svg>"""
 
+FIG_CORRELATIONS = """<svg viewBox="0 0 360 240" role="img" aria-label="Top: the Dyson equation drawn as diagrams, with the full propagator equal to the bare propagator plus the bare propagator dressed by a self-energy. Bottom: the second-order self-energy, two interaction vertices joined by a particle-hole bubble.">
+  <text x="24" y="30" style="fill:var(--muted);font:500 10px var(--sans)">Dyson equation</text>
+
+  <g style="stroke:var(--ink-2);fill:none;stroke-width:2.6">
+    <path d="M24 66 H80"/>
+  </g>
+  <path d="M46 60 L58 66 L46 72 z" style="fill:var(--ink-2)"/>
+  <text x="94" y="71" text-anchor="middle" style="fill:var(--ink-2);font:600 15px var(--serif)">=</text>
+
+  <g style="stroke:var(--ink-2);fill:none;stroke-width:1.4">
+    <path d="M108 66 H164"/>
+  </g>
+  <path d="M130 61 L140 66 L130 71 z" style="fill:var(--ink-2)"/>
+  <text x="178" y="71" text-anchor="middle" style="fill:var(--ink-2);font:600 15px var(--serif)">+</text>
+
+  <g style="stroke:var(--ink-2);fill:none;stroke-width:1.4">
+    <path d="M192 66 H219"/><path d="M249 66 H286"/>
+  </g>
+  <path d="M198 61 L208 66 L198 71 z" style="fill:var(--ink-2)"/>
+  <path d="M262 61 L272 66 L262 71 z" style="fill:var(--ink-2)"/>
+  <circle cx="234" cy="66" r="15" style="fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.6"/>
+  <text x="234" y="71" text-anchor="middle" style="fill:var(--accent-2);font:600 13px var(--serif)">&#931;</text>
+
+  <text x="52"  y="92" text-anchor="middle" style="fill:var(--muted);font:italic 500 11.5px var(--serif)">G</text>
+  <text x="136" y="92" text-anchor="middle" style="fill:var(--muted);font:italic 500 11.5px var(--serif)">G<tspan dy="2" font-size="8">0</tspan></text>
+  <text x="234" y="94" text-anchor="middle" style="fill:var(--muted);font:400 9.5px var(--sans)">self-energy</text>
+
+  <line x1="24" y1="112" x2="336" y2="112" style="stroke:var(--rule-soft);stroke-width:1"/>
+  <text x="24" y="132" style="fill:var(--muted);font:500 10px var(--sans)">second-order self-energy</text>
+
+  <ellipse cx="180" cy="158" rx="48" ry="19" style="fill:none;stroke:var(--accent);stroke-width:1.6"/>
+  <path d="M172 135 L184 139 L172 143 z" style="fill:var(--accent)"/>
+  <path d="M188 181 L176 177 L188 173 z" style="fill:var(--accent)"/>
+
+  <g style="stroke:var(--gold);stroke-width:1.6;fill:none">
+    <path d="M132 190 q5 -3.75 0 -7.5 q-5 -3.75 0 -7.5 q5 -3.75 0 -7.5 q-5 -3.75 0 -7.5"/>
+    <path d="M228 190 q5 -3.75 0 -7.5 q-5 -3.75 0 -7.5 q5 -3.75 0 -7.5 q-5 -3.75 0 -7.5"/>
+  </g>
+  <text x="120" y="178" text-anchor="end" style="fill:var(--gold);font:italic 600 12.5px var(--serif)">U</text>
+  <text x="240" y="178" style="fill:var(--gold);font:italic 600 12.5px var(--serif)">U</text>
+
+  <path d="M64 192 H296" style="stroke:var(--ink-2);stroke-width:1.4;fill:none"/>
+  <path d="M92 187 L102 192 L92 197 z" style="fill:var(--ink-2)"/>
+  <path d="M258 187 L268 192 L258 197 z" style="fill:var(--ink-2)"/>
+  <circle cx="132" cy="192" r="3.6" style="fill:var(--ink)"/>
+  <circle cx="228" cy="192" r="3.6" style="fill:var(--ink)"/>
+
+  <text x="180" y="222" text-anchor="middle" style="fill:var(--muted);font:400 10px var(--sans)">the loop is a particle&#8211;hole pair; U is the local interaction</text>
+</svg>"""
+
 FIG_INTERFACE = """<svg viewBox="0 0 360 240" role="img" aria-label="Oxygen octahedra tilting across an oxide interface, altering the local spin-orbit environment of the layer above">
   <defs><marker id="iArr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" style="fill:var(--accent)"/></marker></defs>
   <rect x="20" y="24" width="320" height="92" rx="4" style="fill:var(--accent);opacity:.05"/>
@@ -814,7 +864,13 @@ DETAIL = [
      (FIG_INTERFACE,
       "Octahedral rotations propagate across a complex-oxide interface. The changed "
       "metal&ndash;oxygen&ndash;metal angles alter orbital overlap, bandwidth and crystal-field splitting "
-      "in the layer above, and so the state it settles into.")],
+      "in the layer above, and so the state it settles into."),
+     (FIG_CORRELATIONS,
+      "Correlations enter through the self-energy: the propagator that a measurement sees is the bare one "
+      "dressed by &Sigma;. Dynamical mean-field theory computes &Sigma; on a site and solves for it "
+      "self-consistently; the functional renormalisation group instead follows how the interaction itself "
+      "changes as the energy scale is lowered. This part of the work is under way rather than "
+      "concluded.")],
    thesis="Magnetic order and interactions decide which responses a material is allowed to have at all, "
           "not merely where its bands sit.",
    body="""<p>Magnetic order lowers symmetry, and what survives decides whether an anomalous Hall or
