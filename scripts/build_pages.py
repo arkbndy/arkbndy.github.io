@@ -151,7 +151,7 @@ MAP_SVG = """<svg viewBox="0 0 1080 280" role="img" aria-labelledby="maptitle ma
     </marker>
   </defs>
 
-  <text x="540" y="24" text-anchor="middle" style="fill:var(--accent);font:650 12px var(--sans);letter-spacing:.22em">QUANTUM MATERIALS</text>
+  <text x="540" y="24" text-anchor="middle" style="fill:var(--accent);font:650 13px var(--sans);letter-spacing:.2em">QUANTUM MATERIALS</text>
   <line x1="40" y1="36" x2="1040" y2="36" style="stroke:var(--accent-line);stroke-width:1"/>
 
   <g style="fill:var(--surface);stroke:var(--rule);stroke-width:1">
@@ -163,7 +163,7 @@ MAP_SVG = """<svg viewBox="0 0 1080 280" role="img" aria-labelledby="maptitle ma
     <rect x="906" y="56" width="158" height="102" rx="8"/>
   </g>
 
-  <g style="fill:var(--ink);font:600 12.5px var(--sans)" text-anchor="middle">
+  <g style="fill:var(--ink);font:600 14px var(--sans)" text-anchor="middle">
     <text x="95"  y="86">Structure &amp;</text><text x="95"  y="103">chemistry</text>
     <text x="273" y="86">Symmetry &amp;</text><text x="273" y="103">electronic structure</text>
     <text x="451" y="86">Dirac states</text><text x="451" y="103">&amp; topology</text>
@@ -171,7 +171,7 @@ MAP_SVG = """<svg viewBox="0 0 1080 280" role="img" aria-labelledby="maptitle ma
     <text x="807" y="86">Quantum</text><text x="807" y="103">geometry</text>
     <text x="985" y="86">Unconventional</text><text x="985" y="103">transport</text>
   </g>
-  <g style="fill:var(--muted);font:400 10px var(--sans)" text-anchor="middle">
+  <g style="fill:var(--muted);font:400 11.5px var(--sans)" text-anchor="middle">
     <text x="95"  y="126">bonding, coordination,</text><text x="95"  y="139">interfaces, molecules</text>
     <text x="273" y="126">first-principles, Wannier,</text><text x="273" y="139">tight-binding models</text>
     <text x="451" y="126">nodal lines, Berry</text><text x="451" y="139">and Zak phases</text>
@@ -186,14 +186,14 @@ MAP_SVG = """<svg viewBox="0 0 1080 280" role="img" aria-labelledby="maptitle ma
   </g>
 
   <rect x="16" y="196" width="1048" height="40" rx="8" style="fill:var(--accent-soft);stroke:var(--accent-line);stroke-width:1"/>
-  <text x="540" y="221" text-anchor="middle" style="fill:var(--accent-2);font:600 12px var(--sans)">Magnetism &amp; electronic correlations &mdash; reshaping symmetry, bands and response at every level</text>
+  <text x="540" y="221" text-anchor="middle" style="fill:var(--accent-2);font:600 13.5px var(--sans)">Magnetism &amp; electronic correlations &mdash; reshaping symmetry, bands and response at every level</text>
   <g style="stroke:var(--accent-line);stroke-width:1.3;fill:none;stroke-dasharray:4 4" marker-end="url(#mArrowSoft)">
     <path d="M273 194 V166"/><path d="M451 194 V166"/><path d="M629 194 V166"/>
     <path d="M807 194 V166"/><path d="M985 194 V166"/>
   </g>
 
   <path d="M1040 158 V178 H95 V166" style="stroke:var(--accent-line);stroke-width:1.3;fill:none;stroke-dasharray:5 4" marker-end="url(#mArrowSoft)"/>
-  <text x="540" y="264" text-anchor="middle" style="fill:var(--muted);font:italic 400 11.5px var(--serif)">what a measurement resolves decides which mechanism the next model has to contain</text>
+  <text x="540" y="264" text-anchor="middle" style="fill:var(--muted);font:italic 400 13px var(--serif)">what a measurement resolves decides which mechanism the next model has to contain</text>
 </svg>"""
 
 FIG_GEOMETRY = """<svg viewBox="0 0 360 240" role="img" aria-label="Berry curvature distributed asymmetrically over a Fermi surface, converting a drive at frequency omega into a transverse current at twice omega">
