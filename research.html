@@ -372,27 +372,49 @@
         </dl>
       </div>
       <div class="figure">
-        <figure><div class="box"><svg viewBox="0 0 360 240" role="img" aria-label="Two magnetic sublattices in rotated crystal environments, and bands whose spin splitting reverses between two directions in the Brillouin zone">
-  <defs><marker id="sUp" markerWidth="8" markerHeight="8" refX="4" refY="1" orient="auto"><path d="M0,6 L4,0 L8,6" style="fill:none;stroke:#b4553f;stroke-width:1.6"/></marker></defs>
-  <g style="stroke:var(--rule);stroke-width:1.2;fill:none">
-    <g transform="rotate(16 56 74)"><rect x="34" y="52" width="44" height="44" rx="4"/></g>
-    <g transform="rotate(-16 130 74)"><rect x="108" y="52" width="44" height="44" rx="4"/></g>
-  </g>
-  <g style="stroke:#b4553f;stroke-width:2;fill:none"><path d="M56 92 V56" marker-end="url(#sUp)"/></g>
-  <g style="stroke:var(--accent);stroke-width:2;fill:none"><path d="M130 56 V92" marker-end="url(#sUp)"/></g>
-  <text x="93" y="122" text-anchor="middle" style="fill:var(--muted);font:500 10px var(--sans)">opposite spins, rotated environments</text>
-  <text x="93" y="24" text-anchor="middle" style="fill:var(--ink);font:600 11px var(--sans)">no net magnetisation</text>
+        <figure><div class="box"><svg viewBox="0 0 360 240" role="img" aria-label="Left: two magnetic sublattices with opposite spins sitting in environments related by a rotation. Right: the resulting spin splitting across the Brillouin zone, positive along one axis, negative along the other, with nodal lines along the diagonals">
+  <defs>
+    <radialGradient id="mUp"><stop offset="0" stop-color="#b4553f" stop-opacity=".72"/><stop offset=".72" stop-color="#b4553f" stop-opacity=".18"/><stop offset="1" stop-color="#b4553f" stop-opacity="0"/></radialGradient>
+    <radialGradient id="mDn"><stop offset="0" stop-color="#1c6b66" stop-opacity=".72"/><stop offset=".72" stop-color="#1c6b66" stop-opacity=".18"/><stop offset="1" stop-color="#1c6b66" stop-opacity="0"/></radialGradient>
+    <marker id="mUpTip" markerWidth="8" markerHeight="8" refX="4" refY="1.2" orient="auto"><path d="M0,6 L4,0 L8,6" style="fill:none;stroke:#b4553f;stroke-width:1.7"/></marker>
+    <marker id="mDnTip" markerWidth="8" markerHeight="8" refX="4" refY="4.8" orient="auto"><path d="M0,0 L4,6 L8,0" style="fill:none;stroke:var(--accent);stroke-width:1.7"/></marker>
+    <marker id="mRot" markerWidth="8" markerHeight="8" refX="6" refY="2.8" orient="auto"><path d="M0,0 L6,2.8 L0,5.6 z" style="fill:var(--muted)"/></marker>
+  </defs>
 
-  <path d="M210 200 V150 M210 200 H344" style="stroke:var(--rule);stroke-width:1.2"/>
-  <path d="M210 158 Q244 186 278 158" style="stroke:#b4553f;stroke-width:2;fill:none"/>
-  <path d="M210 172 Q244 200 278 172" style="stroke:var(--accent);stroke-width:2;fill:none"/>
-  <path d="M278 172 Q311 200 344 172" style="stroke:#b4553f;stroke-width:2;fill:none"/>
-  <path d="M278 158 Q311 186 344 158" style="stroke:var(--accent);stroke-width:2;fill:none"/>
-  <line x1="278" y1="150" x2="278" y2="200" style="stroke:var(--rule);stroke-width:1;stroke-dasharray:3 3"/>
-  <text x="244" y="216" text-anchor="middle" style="fill:var(--muted);font:500 10px var(--sans)">&#915;&#8594;X</text>
-  <text x="311" y="216" text-anchor="middle" style="fill:var(--muted);font:500 10px var(--sans)">&#915;&#8594;Y</text>
-  <text x="203" y="145" text-anchor="end" style="fill:var(--muted);font:500 11px var(--sans)">E</text>
-  <text x="277" y="134" text-anchor="middle" style="fill:var(--ink);font:600 10.5px var(--sans)">spin splitting reverses</text><text x="277" y="148" text-anchor="middle" style="fill:var(--ink);font:600 10.5px var(--sans)">with direction</text>
+  <!-- real space -->
+  <rect x="26" y="42" width="126" height="126" rx="6" style="fill:none;stroke:var(--rule);stroke-width:1.2"/>
+  <g transform="rotate(28 62 78)">
+    <rect x="42" y="58" width="40" height="40" rx="5" style="fill:var(--paper-2);stroke:var(--rule);stroke-width:1.2"/>
+  </g>
+  <g transform="rotate(-28 116 132)">
+    <rect x="96" y="112" width="40" height="40" rx="5" style="fill:var(--paper-2);stroke:var(--rule);stroke-width:1.2"/>
+  </g>
+  <path d="M62 94 V62" style="stroke:#b4553f;stroke-width:2.2;fill:none" marker-end="url(#mUpTip)"/>
+  <path d="M116 114 V146" style="stroke:var(--accent);stroke-width:2.2;fill:none" marker-end="url(#mDnTip)"/>
+  <path d="M84 92 A 34 34 0 0 1 102 116" style="fill:none;stroke:var(--muted);stroke-width:1.2;stroke-dasharray:3 3" marker-end="url(#mRot)"/>
+  <text x="106" y="90" style="fill:var(--muted);font:italic 500 11px var(--serif)">rotation</text>
+  <text x="89" y="188" text-anchor="middle" style="fill:var(--ink);font:600 10.5px var(--sans)">sublattices related by a rotation,</text>
+  <text x="89" y="202" text-anchor="middle" style="fill:var(--ink);font:600 10.5px var(--sans)">not a translation or inversion</text>
+  <text x="89" y="222" text-anchor="middle" style="fill:var(--muted);font:400 10px var(--sans)">net magnetisation zero</text>
+
+  <!-- momentum space -->
+  <rect x="206" y="42" width="132" height="132" rx="6" style="fill:none;stroke:var(--rule);stroke-width:1.2"/>
+  <g style="stroke:var(--rule);stroke-width:1;stroke-dasharray:4 4">
+    <path d="M206 42 L338 174"/><path d="M338 42 L206 174"/>
+  </g>
+  <ellipse cx="302" cy="108" rx="30" ry="17" fill="url(#mUp)"/>
+  <ellipse cx="242" cy="108" rx="30" ry="17" fill="url(#mUp)"/>
+  <ellipse cx="272" cy="72"  rx="17" ry="27" fill="url(#mDn)"/>
+  <ellipse cx="272" cy="144" rx="17" ry="27" fill="url(#mDn)"/>
+  <text x="308" y="112" text-anchor="middle" style="fill:#b4553f;font:700 12px var(--sans)">+&#916;</text>
+  <text x="272" y="78"  text-anchor="middle" style="fill:var(--accent);font:700 12px var(--sans)">&#8722;&#916;</text>
+  <circle cx="272" cy="108" r="2" style="fill:var(--ink-2)"/>
+  <text x="266" y="120" text-anchor="end" style="fill:var(--muted);font:500 10px var(--sans)">&#915;</text>
+  <text x="333" y="120" text-anchor="end" style="fill:var(--muted);font:500 10px var(--sans)">k<tspan dy="2" font-size="8">x</tspan></text>
+  <text x="290" y="56" style="fill:var(--muted);font:500 10px var(--sans)">k<tspan dy="2" font-size="8">y</tspan></text>
+  <text x="272" y="188" text-anchor="middle" style="fill:var(--ink);font:600 10.5px var(--sans)">spin splitting changes sign</text>
+  <text x="272" y="202" text-anchor="middle" style="fill:var(--ink);font:600 10.5px var(--sans)">between directions</text>
+  <text x="272" y="222" text-anchor="middle" style="fill:var(--muted);font:400 10px var(--sans)">&#916; = E<tspan dy="2" font-size="8">&#8593;</tspan><tspan dy="-2"> &#8722; E</tspan><tspan dy="2" font-size="8">&#8595;</tspan><tspan dy="-2">; nodes on the diagonals</tspan></text>
 </svg></div><figcaption>In an altermagnet the two magnetic sublattices are related by a rotation, and not by a translation or by inversion. The net magnetisation vanishes by symmetry, yet the bands acquire a spin splitting that is even in momentum and changes sign between directions. Drawn here for a d<sub><i>x</i>&sup2;&minus;<i>y</i>&sup2;</sub> form factor; other wave symmetries put the nodal directions elsewhere.</figcaption></figure>
         <figure><div class="box"><svg viewBox="0 0 360 240" role="img" aria-label="Oxygen octahedra tilting across an oxide interface, altering the local spin-orbit environment of the layer above">
   <defs><marker id="iArr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" style="fill:var(--accent)"/></marker></defs>
