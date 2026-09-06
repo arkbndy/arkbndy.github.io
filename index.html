@@ -219,7 +219,7 @@
         one, then the papers that sit primarily elsewhere but genuinely belong here too.</p>
     </div>
     <div class="pillars">
-        <a class="pillar-card pillar-card--lead" href="research.html#geometry">
+        <a class="pillar-card" href="research.html#geometry">
           <span class="card-fig" aria-hidden="true"><svg viewBox="0 0 360 240" role="img" aria-label="Berry curvature distributed asymmetrically over a Fermi surface, converting a drive at frequency omega into a transverse current at twice omega">
   <defs>
     <radialGradient id="gPos"><stop offset="0" stop-color="#b4553f" stop-opacity=".85"/><stop offset="1" stop-color="#b4553f" stop-opacity="0"/></radialGradient>
@@ -330,49 +330,55 @@
           <span class="more">Read more &rarr;</span>
         </a>
         <a class="pillar-card" href="research.html#magnetism">
-          <span class="card-fig" aria-hidden="true"><svg viewBox="0 0 360 240" role="img" aria-label="Left: two magnetic sublattices with opposite spins sitting in environments related by a rotation. Right: the resulting spin splitting across the Brillouin zone, positive along one axis, negative along the other, with nodal lines along the diagonals">
-  <defs>
-    <radialGradient id="mUp"><stop offset="0" stop-color="#b4553f" stop-opacity=".72"/><stop offset=".72" stop-color="#b4553f" stop-opacity=".18"/><stop offset="1" stop-color="#b4553f" stop-opacity="0"/></radialGradient>
-    <radialGradient id="mDn"><stop offset="0" stop-color="#1c6b66" stop-opacity=".72"/><stop offset=".72" stop-color="#1c6b66" stop-opacity=".18"/><stop offset="1" stop-color="#1c6b66" stop-opacity="0"/></radialGradient>
-    <marker id="mUpTip" markerWidth="8" markerHeight="8" refX="4" refY="1.2" orient="auto"><path d="M0,6 L4,0 L8,6" style="fill:none;stroke:#b4553f;stroke-width:1.7"/></marker>
-    <marker id="mDnTip" markerWidth="8" markerHeight="8" refX="4" refY="4.8" orient="auto"><path d="M0,0 L4,6 L8,0" style="fill:none;stroke:var(--accent);stroke-width:1.7"/></marker>
-    <marker id="mRot" markerWidth="8" markerHeight="8" refX="6" refY="2.8" orient="auto"><path d="M0,0 L6,2.8 L0,5.6 z" style="fill:var(--muted)"/></marker>
-  </defs>
+          <span class="card-fig" aria-hidden="true"><svg viewBox="0 0 360 240" role="img" aria-label="Left: a d orbital with four alternating lobes holding two electrons of opposite spin, whose local Coulomb repulsion U is drawn as a wavy line. Right: the self-energy diagram, a propagator dressed by two interaction vertices joined by a particle-hole loop.">
+  <text x="20" y="26" style="fill:var(--muted);font:500 10.5px var(--sans)">local d orbital</text>
+  <text x="212" y="26" style="fill:var(--muted);font:500 10.5px var(--sans)">self-energy &#931;</text>
+  <line x1="192" y1="14" x2="192" y2="212" style="stroke:var(--rule-soft);stroke-width:1"/>
 
-  <!-- real space -->
-  <rect x="26" y="42" width="126" height="126" rx="6" style="fill:none;stroke:var(--rule);stroke-width:1.2"/>
-  <g transform="rotate(28 62 78)">
-    <rect x="42" y="58" width="40" height="40" rx="5" style="fill:var(--paper-2);stroke:var(--rule);stroke-width:1.2"/>
+  <!-- four-lobe d orbital; opposite lobes share the sign of the wavefunction -->
+  <g transform="translate(92,94)" style="stroke-width:1.4">
+    <ellipse cx="0" cy="-26" rx="13" ry="26" transform="rotate(45)"
+             style="fill:var(--accent-soft);stroke:var(--accent)"/>
+    <ellipse cx="0" cy="-26" rx="13" ry="26" transform="rotate(225)"
+             style="fill:var(--accent-soft);stroke:var(--accent)"/>
+    <ellipse cx="0" cy="-26" rx="13" ry="26" transform="rotate(135)"
+             style="fill:var(--gold-soft);stroke:var(--gold)"/>
+    <ellipse cx="0" cy="-26" rx="13" ry="26" transform="rotate(315)"
+             style="fill:var(--gold-soft);stroke:var(--gold)"/>
+    <circle cx="0" cy="0" r="2.8" style="fill:var(--ink);stroke:none"/>
+    <text x="18"  y="-14" text-anchor="middle" style="fill:var(--accent-2);font:600 12px var(--sans);stroke:none">+</text>
+    <text x="-18" y="-14" text-anchor="middle" style="fill:var(--gold);font:600 13px var(--sans);stroke:none">&#8722;</text>
   </g>
-  <g transform="rotate(-28 116 132)">
-    <rect x="96" y="112" width="40" height="40" rx="5" style="fill:var(--paper-2);stroke:var(--rule);stroke-width:1.2"/>
-  </g>
-  <path d="M62 94 V62" style="stroke:#b4553f;stroke-width:2.2;fill:none" marker-end="url(#mUpTip)"/>
-  <path d="M116 114 V146" style="stroke:var(--accent);stroke-width:2.2;fill:none" marker-end="url(#mDnTip)"/>
-  <path d="M84 92 A 34 34 0 0 1 102 116" style="fill:none;stroke:var(--muted);stroke-width:1.2;stroke-dasharray:3 3" marker-end="url(#mRot)"/>
-  <text x="106" y="90" style="fill:var(--muted);font:italic 500 11px var(--serif)">rotation</text>
-  <text x="89" y="188" text-anchor="middle" style="fill:var(--ink);font:600 10.5px var(--sans)">sublattices related by a rotation,</text>
-  <text x="89" y="202" text-anchor="middle" style="fill:var(--ink);font:600 10.5px var(--sans)">not a translation or inversion</text>
-  <text x="89" y="222" text-anchor="middle" style="fill:var(--muted);font:400 10px var(--sans)">net magnetisation zero</text>
 
-  <!-- momentum space -->
-  <rect x="206" y="42" width="132" height="132" rx="6" style="fill:none;stroke:var(--rule);stroke-width:1.2"/>
-  <g style="stroke:var(--rule);stroke-width:1;stroke-dasharray:4 4">
-    <path d="M206 42 L338 174"/><path d="M338 42 L206 174"/>
+  <!-- two electrons of opposite spin in that shell, repelling through U -->
+  <g style="stroke:var(--ink);stroke-width:1.8;fill:none;stroke-linecap:round">
+    <path d="M64 186 V158"/><path d="M60 163 L64 157 L68 163"/>
+    <path d="M120 158 V186"/><path d="M116 181 L120 187 L124 181"/>
   </g>
-  <ellipse cx="302" cy="108" rx="30" ry="17" fill="url(#mUp)"/>
-  <ellipse cx="242" cy="108" rx="30" ry="17" fill="url(#mUp)"/>
-  <ellipse cx="272" cy="72"  rx="17" ry="27" fill="url(#mDn)"/>
-  <ellipse cx="272" cy="144" rx="17" ry="27" fill="url(#mDn)"/>
-  <text x="308" y="112" text-anchor="middle" style="fill:#b4553f;font:700 12px var(--sans)">+&#916;</text>
-  <text x="272" y="78"  text-anchor="middle" style="fill:var(--accent);font:700 12px var(--sans)">&#8722;&#916;</text>
-  <circle cx="272" cy="108" r="2" style="fill:var(--ink-2)"/>
-  <text x="266" y="120" text-anchor="end" style="fill:var(--muted);font:500 10px var(--sans)">&#915;</text>
-  <text x="333" y="120" text-anchor="end" style="fill:var(--muted);font:500 10px var(--sans)">k<tspan dy="2" font-size="8">x</tspan></text>
-  <text x="290" y="56" style="fill:var(--muted);font:500 10px var(--sans)">k<tspan dy="2" font-size="8">y</tspan></text>
-  <text x="272" y="188" text-anchor="middle" style="fill:var(--ink);font:600 10.5px var(--sans)">spin splitting changes sign</text>
-  <text x="272" y="202" text-anchor="middle" style="fill:var(--ink);font:600 10.5px var(--sans)">between directions</text>
-  <text x="272" y="222" text-anchor="middle" style="fill:var(--muted);font:400 10px var(--sans)">&#916; = E<tspan dy="2" font-size="8">&#8593;</tspan><tspan dy="-2"> &#8722; E</tspan><tspan dy="2" font-size="8">&#8595;</tspan><tspan dy="-2">; nodes on the diagonals</tspan></text>
+  <g style="stroke:var(--gold);stroke-width:1.6;fill:none">
+    <path d="M72 172 q5 -4 10 0 q5 4 10 0 q5 -4 10 0 q5 4 10 0"/>
+  </g>
+  <text x="92" y="154" text-anchor="middle" style="fill:var(--gold);font:italic 600 12.5px var(--serif)">U</text>
+  <text x="92" y="212" text-anchor="middle" style="fill:var(--muted);font:400 10px var(--sans)">two electrons, one shell</text>
+
+  <!-- second-order self-energy: two U vertices joined by a particle-hole loop -->
+  <ellipse cx="276" cy="112" rx="40" ry="17" style="fill:none;stroke:var(--accent);stroke-width:1.6"/>
+  <path d="M269 91 L280 95 L269 99 z" style="fill:var(--accent)"/>
+  <path d="M283 133 L272 129 L283 125 z" style="fill:var(--accent)"/>
+
+  <g style="stroke:var(--gold);stroke-width:1.6;fill:none">
+    <path d="M236 142 q4.5 -3.5 0 -7 q-4.5 -3.5 0 -7 q4.5 -3.5 0 -7"/>
+    <path d="M316 142 q4.5 -3.5 0 -7 q-4.5 -3.5 0 -7 q4.5 -3.5 0 -7"/>
+  </g>
+  <text x="228" y="132" text-anchor="end" style="fill:var(--gold);font:italic 600 12px var(--serif)">U</text>
+  <text x="326" y="132" style="fill:var(--gold);font:italic 600 12px var(--serif)">U</text>
+
+  <path d="M208 144 H344" style="stroke:var(--ink-2);stroke-width:1.5;fill:none"/>
+  <path d="M218 139 L228 144 L218 149 z" style="fill:var(--ink-2)"/>
+  <path d="M320 139 L330 144 L320 149 z" style="fill:var(--ink-2)"/>
+  <circle cx="236" cy="144" r="3.4" style="fill:var(--ink)"/>
+  <circle cx="316" cy="144" r="3.4" style="fill:var(--ink)"/>
+  <text x="276" y="212" text-anchor="middle" style="fill:var(--muted);font:400 10px var(--sans)">what dresses the propagator</text>
 </svg></span>
           <span class="n">04</span>
           <h3>Magnetism &amp; correlated quantum matter</h3>
@@ -387,8 +393,8 @@
       <h3>Interdisciplinary materials research</h3>
       <p>The broader materials work with chemists and materials scientists that the rest grew out of.</p>
     </div>
-    <div class="pillars pillars--quiet">
-        <a class="pillar-card" href="research.html#materials">
+    <div class="pillars pillars--single">
+        <a class="pillar-card pillar-card--wide" href="research.html#materials">
           <span class="card-fig" aria-hidden="true"><svg viewBox="0 0 360 240" role="img" aria-label="A square-and-octagon carbon network and an anisotropic Dirac cone">
   <g style="stroke:var(--accent);stroke-width:1.4;fill:none;opacity:.92">
     <rect x="30" y="30" width="36" height="36"/><rect x="104" y="30" width="36" height="36"/>

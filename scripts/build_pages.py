@@ -450,8 +450,61 @@ FIG_MATERIALS = """<svg viewBox="0 0 360 240" role="img" aria-label="A square-an
   <text x="282" y="119" style="fill:var(--muted);font:500 10px var(--sans)">Dirac point</text>
 </svg>"""
 
+# Card figure for theme 04: the local d orbitals that carry the moment, and the
+# self-energy through which the interaction between two electrons in them is felt.
+FIG_ORBITAL_SE = """<svg viewBox="0 0 360 240" role="img" aria-label="Left: a d orbital with four alternating lobes holding two electrons of opposite spin, whose local Coulomb repulsion U is drawn as a wavy line. Right: the self-energy diagram, a propagator dressed by two interaction vertices joined by a particle-hole loop.">
+  <text x="20" y="26" style="fill:var(--muted);font:500 10.5px var(--sans)">local d orbital</text>
+  <text x="212" y="26" style="fill:var(--muted);font:500 10.5px var(--sans)">self-energy &#931;</text>
+  <line x1="192" y1="14" x2="192" y2="212" style="stroke:var(--rule-soft);stroke-width:1"/>
+
+  <!-- four-lobe d orbital; opposite lobes share the sign of the wavefunction -->
+  <g transform="translate(92,94)" style="stroke-width:1.4">
+    <ellipse cx="0" cy="-26" rx="13" ry="26" transform="rotate(45)"
+             style="fill:var(--accent-soft);stroke:var(--accent)"/>
+    <ellipse cx="0" cy="-26" rx="13" ry="26" transform="rotate(225)"
+             style="fill:var(--accent-soft);stroke:var(--accent)"/>
+    <ellipse cx="0" cy="-26" rx="13" ry="26" transform="rotate(135)"
+             style="fill:var(--gold-soft);stroke:var(--gold)"/>
+    <ellipse cx="0" cy="-26" rx="13" ry="26" transform="rotate(315)"
+             style="fill:var(--gold-soft);stroke:var(--gold)"/>
+    <circle cx="0" cy="0" r="2.8" style="fill:var(--ink);stroke:none"/>
+    <text x="18"  y="-14" text-anchor="middle" style="fill:var(--accent-2);font:600 12px var(--sans);stroke:none">+</text>
+    <text x="-18" y="-14" text-anchor="middle" style="fill:var(--gold);font:600 13px var(--sans);stroke:none">&#8722;</text>
+  </g>
+
+  <!-- two electrons of opposite spin in that shell, repelling through U -->
+  <g style="stroke:var(--ink);stroke-width:1.8;fill:none;stroke-linecap:round">
+    <path d="M64 186 V158"/><path d="M60 163 L64 157 L68 163"/>
+    <path d="M120 158 V186"/><path d="M116 181 L120 187 L124 181"/>
+  </g>
+  <g style="stroke:var(--gold);stroke-width:1.6;fill:none">
+    <path d="M72 172 q5 -4 10 0 q5 4 10 0 q5 -4 10 0 q5 4 10 0"/>
+  </g>
+  <text x="92" y="154" text-anchor="middle" style="fill:var(--gold);font:italic 600 12.5px var(--serif)">U</text>
+  <text x="92" y="212" text-anchor="middle" style="fill:var(--muted);font:400 10px var(--sans)">two electrons, one shell</text>
+
+  <!-- second-order self-energy: two U vertices joined by a particle-hole loop -->
+  <ellipse cx="276" cy="112" rx="40" ry="17" style="fill:none;stroke:var(--accent);stroke-width:1.6"/>
+  <path d="M269 91 L280 95 L269 99 z" style="fill:var(--accent)"/>
+  <path d="M283 133 L272 129 L283 125 z" style="fill:var(--accent)"/>
+
+  <g style="stroke:var(--gold);stroke-width:1.6;fill:none">
+    <path d="M236 142 q4.5 -3.5 0 -7 q-4.5 -3.5 0 -7 q4.5 -3.5 0 -7"/>
+    <path d="M316 142 q4.5 -3.5 0 -7 q-4.5 -3.5 0 -7 q4.5 -3.5 0 -7"/>
+  </g>
+  <text x="228" y="132" text-anchor="end" style="fill:var(--gold);font:italic 600 12px var(--serif)">U</text>
+  <text x="326" y="132" style="fill:var(--gold);font:italic 600 12px var(--serif)">U</text>
+
+  <path d="M208 144 H344" style="stroke:var(--ink-2);stroke-width:1.5;fill:none"/>
+  <path d="M218 139 L228 144 L218 149 z" style="fill:var(--ink-2)"/>
+  <path d="M320 139 L330 144 L320 149 z" style="fill:var(--ink-2)"/>
+  <circle cx="236" cy="144" r="3.4" style="fill:var(--ink)"/>
+  <circle cx="316" cy="144" r="3.4" style="fill:var(--ink)"/>
+  <text x="276" y="212" text-anchor="middle" style="fill:var(--muted);font:400 10px var(--sans)">what dresses the propagator</text>
+</svg>"""
+
 CARD_FIGS = {"geometry": FIG_GEOMETRY, "kagome": FIG_KAGOME, "topology": FIG_TOPOLOGY,
-             "magnetism": FIG_MAGNETISM, "materials": FIG_MATERIALS}
+             "magnetism": FIG_ORBITAL_SE, "materials": FIG_MATERIALS}
 
 # ---- counts, computed from data/publications.json so nothing is typed twice ----
 _DATA = json.loads((ROOT / "data" / "publications.json").read_text(encoding="utf-8"))
@@ -522,12 +575,14 @@ PILLARS = [
 CORE_KEYS = ["geometry", "kagome", "topology", "magnetism"]
 
 
-def pillar_cards(keys, lead=False):
+def pillar_cards(keys, wide=False):
+    """Every card is the same size. Theme 05 uses the wide variant: one full-width
+    band, which reads as a different tier without being a different size."""
     out = []
     for key, n, title, question, blurb in PILLARS:
         if key not in keys:
             continue
-        cls = "pillar-card" + (" pillar-card--lead" if lead and key == "geometry" else "")
+        cls = "pillar-card" + (" pillar-card--wide" if wide else "")
         out.append("""        <a class="%s" href="research.html#%s">
           <span class="card-fig" aria-hidden="true">%s</span>
           <span class="n">%s</span>
@@ -631,7 +686,7 @@ HOME = """
       <h3>Interdisciplinary materials research</h3>
       <p>The broader materials work with chemists and materials scientists that the rest grew out of.</p>
     </div>
-    <div class="pillars pillars--quiet">
+    <div class="pillars pillars--single">
 %(cards5)s
     </div>
   </div>
@@ -699,8 +754,8 @@ HOME = """
     </div>
   </div>
 </section>
-""" % {"map": MAP_SVG, "cards": pillar_cards(CORE_KEYS, lead=True),
-           "cards5": pillar_cards(["materials"])}
+""" % {"map": MAP_SVG, "cards": pillar_cards(CORE_KEYS),
+           "cards5": pillar_cards(["materials"], wide=True)}
 
 
 # =========================================================================
@@ -1040,36 +1095,36 @@ GS = "https://scholar.google.com/citations?user=%s"
 
 # One list, ordered by how long and how closely we have worked together.
 PEOPLE = [
- ("Awadhesh Narayan", "Associate Professor, Solid State and Structural Chemistry Unit, Indian Institute of Science", GS % "GKvOteUAAAAJ", "GS"),
- ("Ronny Thomale", "Professor of Theoretical Physics, Universit&auml;t W&uuml;rzburg", GS % "vFCXAB4AAAAJ", "GS"),
- ("Giorgio Sangiovanni", "Professor of Theoretical Physics, Universit&auml;t W&uuml;rzburg", GS % "n2SjyxsAAAAJ", "GS"),
- ("Debnarayan Jana", "Professor of Physics, University of Calcutta", GS % "SPqLU7cAAAAJ", "GS"),
- ("Diptiman Sen", "Professor, Centre for High Energy Physics, Indian Institute of Science", GS % "gDIJvxIAAAAJ", "GS"),
- ("Ralph Claessen", "Professor of Experimental Physics, Universit&auml;t W&uuml;rzburg", GS % "6JLmDLwAAAAJ", "GS"),
- ("Claudia Felser", "Director, Max Planck Institute for Chemical Physics of Solids, Dresden", GS % "L5LuBmoAAAAJ", "GS"),
+ ("Prof. Awadhesh Narayan", "Solid State and Structural Chemistry Unit, Indian Institute of Science", GS % "GKvOteUAAAAJ", "GS"),
+ ("Prof. Ronny Thomale", "Theoretical Physics, Universit&auml;t W&uuml;rzburg", GS % "vFCXAB4AAAAJ", "GS"),
+ ("Prof. Giorgio Sangiovanni", "Theoretical Physics, Universit&auml;t W&uuml;rzburg", GS % "n2SjyxsAAAAJ", "GS"),
+ ("Prof. Debnarayan Jana", "Physics, University of Calcutta", GS % "SPqLU7cAAAAJ", "GS"),
+ ("Prof. Diptiman Sen", "Centre for High Energy Physics, Indian Institute of Science", GS % "gDIJvxIAAAAJ", "GS"),
+ ("Prof. Ralph Claessen", "Experimental Physics, Universit&auml;t W&uuml;rzburg", GS % "6JLmDLwAAAAJ", "GS"),
+ ("Prof. Claudia Felser", "Director, Max Planck Institute for Chemical Physics of Solids, Dresden", GS % "L5LuBmoAAAAJ", "GS"),
 
- ("Ajit C. Balram", "Institute of Mathematical Sciences, Chennai", GS % "5ZQPGCwAAAAJ", "GS"),
- ("Sujit Das", "Assistant Professor, Materials Research Centre, Indian Institute of Science", GS % "yQjTUKQAAAAJ", "GS"),
- ("Satish Patil", "Professor of Polymer Chemistry, Indian Institute of Science", GS % "2gRKZ8QAAAAJ", "GS"),
- ("Abhishake Mondal", "Associate Professor, Solid State and Structural Chemistry Unit, Indian Institute of Science", GS % "gwFaJpsAAAAJ", "GS"),
- ("Bhagwati Prasad", "Department of Materials Engineering, Indian Institute of Science", GS % "8lDnePMAAAAJ", "GS"),
- ("Naga Phani B. Aetukuri", "Solid State and Structural Chemistry Unit, Indian Institute of Science", GS % "0nCzUB0AAAAJ", "GS"),
- ("N. Ravishankar", "Professor, Materials Research Centre, Indian Institute of Science", GS % "gPPFOZoAAAAJ", "GS"),
- ("S. B. Krupanidhi", "Materials Research Centre, Indian Institute of Science", GS % "ieUCCasAAAAJ", "GS"),
+ ("Prof. Ajit C. Balram", "Institute of Mathematical Sciences, Chennai", GS % "5ZQPGCwAAAAJ", "GS"),
+ ("Prof. Sujit Das", "Materials Research Centre, Indian Institute of Science", GS % "yQjTUKQAAAAJ", "GS"),
+ ("Prof. Satish Patil", "Polymer Chemistry, Indian Institute of Science", GS % "2gRKZ8QAAAAJ", "GS"),
+ ("Prof. Abhishake Mondal", "Solid State and Structural Chemistry Unit, Indian Institute of Science", GS % "gwFaJpsAAAAJ", "GS"),
+ ("Prof. Bhagwati Prasad", "Department of Materials Engineering, Indian Institute of Science", GS % "8lDnePMAAAAJ", "GS"),
+ ("Prof. Naga Phani B. Aetukuri", "Solid State and Structural Chemistry Unit, Indian Institute of Science", GS % "0nCzUB0AAAAJ", "GS"),
+ ("Prof. N. Ravishankar", "Materials Research Centre, Indian Institute of Science", GS % "gPPFOZoAAAAJ", "GS"),
+ ("Prof. S. B. Krupanidhi", "Materials Research Centre, Indian Institute of Science", GS % "ieUCCasAAAAJ", "GS"),
 
- ("T. Venky Venkatesan", "Center for Quantum Research and Technology, University of Oklahoma", GS % "iXTNCJAAAAAJ", "GS"),
- ("J&ouml;rg Sch&auml;fer", "Professor of Experimental Physics, Universit&auml;t W&uuml;rzburg", GS % "25yzQPYAAAAJ", "GS"),
- ("Simon Moser", "Professor of Experimental Physics, Ruhr-Universit&auml;t Bochum", GS % "WCSgzGwAAAAJ", "GS"),
- ("Hendrik Bentmann", "Associate Professor, Center for Quantum Spintronics, NTNU Trondheim", GS % "tNbD2eMAAAAJ", "GS"),
- ("Rajeev Ahuja", "Uppsala University", GS % "OqyvV_oAAAAJ", "GS"),
- ("Faxian Xiu", "Department of Physics, Fudan University", GS % "0QMB9ZUAAAAJ", "GS"),
- ("Domenico Di Sante", "University of Bologna", GS % "EVyjBUYAAAAJ", "GS"),
- ("Carmine Ortix", "University of Salerno", GS % "5tgyU54AAAAJ", "GS"),
- ("Udo Schwingenschl&ouml;gl", "Professor of Materials Science and Applied Physics, King Abdullah University of Science and Technology (KAUST)", "https://www.kaust.edu.sa/en/study/faculty/udo-schwingenschlogl", "WEB"),
+ ("Prof. T. Venky Venkatesan", "Center for Quantum Research and Technology, University of Oklahoma", GS % "iXTNCJAAAAAJ", "GS"),
+ ("Prof. J&ouml;rg Sch&auml;fer", "Experimental Physics, Universit&auml;t W&uuml;rzburg", GS % "25yzQPYAAAAJ", "GS"),
+ ("Prof. Simon Moser", "Experimental Physics, Ruhr-Universit&auml;t Bochum", GS % "WCSgzGwAAAAJ", "GS"),
+ ("Prof. Hendrik Bentmann", "Center for Quantum Spintronics, NTNU Trondheim", GS % "tNbD2eMAAAAJ", "GS"),
+ ("Prof. Rajeev Ahuja", "Uppsala University", GS % "OqyvV_oAAAAJ", "GS"),
+ ("Prof. Faxian Xiu", "Department of Physics, Fudan University", GS % "0QMB9ZUAAAAJ", "GS"),
+ ("Prof. Domenico Di Sante", "University of Bologna", GS % "EVyjBUYAAAAJ", "GS"),
+ ("Prof. Carmine Ortix", "University of Salerno", GS % "5tgyU54AAAAJ", "GS"),
+ ("Prof. Udo Schwingenschl&ouml;gl", "Materials Science and Applied Physics, King Abdullah University of Science and Technology (KAUST)", "https://www.kaust.edu.sa/en/study/faculty/udo-schwingenschlogl", "WEB"),
 
- ("Arunava Chakrabarti", "Professor of Physics, University of Kalyani", "https://scispace.com/authors/arunava-chakrabarti-7pqvtc1c09", "WEB"),
- ("Md. Mohi Uddin", "Professor of Physics, Chittagong University of Engineering &amp; Technology", GS % "VkzVBBkAAAAJ", "GS"),
- ("Mohamad Akbar Ali", "Assistant Professor of Chemistry, Khalifa University, Abu Dhabi", GS % "f9iY8woAAAAJ", "GS"),
+ ("Prof. Arunava Chakrabarti", "Physics, University of Kalyani", "https://scispace.com/authors/arunava-chakrabarti-7pqvtc1c09", "WEB"),
+ ("Prof. Md. Mohi Uddin", "Physics, Chittagong University of Engineering &amp; Technology", GS % "VkzVBBkAAAAJ", "GS"),
+ ("Prof. Mohamad Akbar Ali", "Chemistry, Khalifa University, Abu Dhabi", GS % "f9iY8woAAAAJ", "GS"),
  ("N. V. R. Nulakani", "Department of Chemistry, Khalifa University, Abu Dhabi", GS % "7N4Ovi4AAAAJ", "GS"),
  ("Dirtha Sanyal", "Variable Energy Cyclotron Centre, Kolkata", GS % "5DVDPCwAAAAJ", "GS"),
  ("Moritz Hoesch", "PETRA III, Deutsches Elektronen-Synchrotron (DESY), Hamburg", GS % "PtrvJRoAAAAJ", "GS"),
@@ -1078,7 +1133,7 @@ PEOPLE = [
  ("Anju Ahlawat", "Institute of Sciences, SAGE University, Indore", GS % "y1nEir0AAAAJ", "GS"),
  ("Arup Kumar Mandal", "UGC-DAE Consortium for Scientific Research, Indore", "https://www.researchgate.net/scientific-contributions/Arup-Kumar-Mandal-2241663034", "WEB"),
  ("Basanta Roul", "Central Research Laboratory, Bharat Electronics, Bengaluru", GS % "6QEcSb0AAAAJ", "GS"),
- ("Subhadip Nath", "Assistant Professor of Physics, Krishnagar Government College", GS % "0mfBrLIAAAAJ", "GS"),
+ ("Prof. Subhadip Nath", "Physics, Krishnagar Government College", GS % "0mfBrLIAAAAJ", "GS"),
  ("Atanu Nandy", "Acharya Prafulla Chandra College", GS % "9eE-LGcAAAAJ", "GS"),
  ("Debaprem Bhattacharya", "Government College of Engineering &amp; Textile Technology, Berhampore", GS % "6ZJDPBcAAAAJ", "GS"),
  ("Susmita Jana", "Indian Institute of Technology Madras", GS % "QYQhf_YAAAAJ", "GS"),
@@ -1238,13 +1293,10 @@ PUBLICATIONS = """
     <div class="section-head">
       <p class="eyebrow">Publications</p>
       <h1>Complete record</h1>
-      <p>Peer-reviewed publications, newest first, numbered so that each keeps its number as the list
-        grows. Every entry links to the DOI, and to the arXiv posting where one exists. The record
-        includes review articles and one book chapter alongside original research papers; the
-        <em>Reviews</em> filter separates the reviews out, and the book chapter is labelled where it
-        appears. The theme filters follow the five research themes, and a paper that genuinely belongs to
-        two of them appears under both. &ldquo;Joint first author&rdquo; means an equal-contribution
-        designation made in the paper itself. Also on
+      <p>Newest first; the numbers stay fixed as the list grows. Each entry links to its DOI, and to
+        arXiv where one exists. Review articles and one book chapter are included and labelled as such.
+        A paper that belongs to two themes appears under both filters. &ldquo;Joint first author&rdquo;
+        is the paper&rsquo;s own equal-contribution designation. Also on
         <a href="https://orcid.org/0000-0003-3386-4289" target="_blank" rel="noopener">ORCID</a> and
         <a href="https://scholar.google.com/citations?user=EcM27vQAAAAJ" target="_blank" rel="noopener">Google Scholar</a>.</p>
     </div>
