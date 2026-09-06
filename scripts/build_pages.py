@@ -1122,24 +1122,25 @@ RESEARCH = """
       <p class="eyebrow">Research</p>
       <h1>Quantum materials, from structure to signal</h1>
       <p>In a quantum material the lattice does more than hold the atoms in place. The crystal structure
-        fixes which orbitals lie near the Fermi level; the symmetry of that structure decides which
-        responses are allowed to be non-zero; spin&ndash;orbit coupling and magnetic order reshape the
-        bands; and where a band is flat, interactions set the remaining energy scale. My work follows that
-        chain in specific compounds, and asks which transport or spectroscopic signature distinguishes one
-        mechanism from another.</p>
-      <p>The chain runs through more than one discipline, and in a specific direction. Chemical
-        environment, bonding, coordination geometry and interfaces set the local symmetry, the orbital
-        content and the strength of spin&ndash;orbit and magnetic coupling &mdash; and those, in turn, set
-        the topology, the quantum geometry and the transport. An oxide interface changes octahedral tilts;
-        the choice of molecular linker sets a lattice geometry directly. That is why a substantial part of
-        my work is done with chemists and materials scientists: they hold the practical handles on
-        electronic structure.</p>
+        fixes which orbitals lie near the Fermi level, and the symmetry of that structure decides which
+        responses are allowed to be non-zero at all.</p>
+      <p>Spin&ndash;orbit coupling and magnetic order then reshape the bands, and where a band is flat,
+        interactions set the remaining energy scale. My work follows that chain in specific compounds, and
+        asks which transport or spectroscopic signature tells one mechanism from another.</p>
+      <p>That chain runs through more than one discipline, and in practice the influence tends to run one
+        way. Chemical environment, bonding, coordination geometry and interfaces set the local symmetry,
+        the orbital content and the strength of spin&ndash;orbit and magnetic coupling, and those in turn
+        shape the topology, the quantum geometry and the transport.</p>
+      <p>An oxide interface changes octahedral tilts; the choice of molecular linker sets a lattice
+        geometry directly. That is why a substantial part of my work is done with chemists and materials
+        scientists: they hold the practical handles on electronic structure.</p>
       <p>Several projects run in close collaboration with experimental groups, and the exchange goes both
         ways. In one direction, first-principles calculations and microscopic models are used to interpret
         measured transport and spectra and to identify which mechanism is responsible. In the other, a
-        model points to a signature, a parameter regime or a candidate compound that can then be tested. I
-        do not perform experiments myself &mdash; the transport, photoemission, X-ray spectroscopy and
-        synthesis behind the work below are my collaborators&rsquo;.</p>
+        model points to a signature, a parameter regime or a candidate compound that can then be tested.
+        The transport, photoemission, X-ray spectroscopy and synthesis behind the work below are my
+        collaborators&rsquo;; what I bring is the electronic structure and the modelling that connects it
+        to what they measure.</p>
     </div>
 
     <div class="evolution prose">
@@ -1147,9 +1148,11 @@ RESEARCH = """
       <p>My work began with a fairly concrete question: how lattice geometry and chemical structure
         determine the electronic properties of low-dimensional materials. Predicting square, octagonal and
         acetylenic carbon and nitride lattices led naturally to Dirac states and to the invariants that
-        certify them, and from there to Berry-phase physics &mdash; first as a way of labelling a phase,
-        then as something that produces a measurable current. Quantum geometry and unconventional
-        transport grew out of that.</p>
+        certify them, and from there to Berry-phase physics: first as a way of labelling a phase, then as
+        something a sample can be made to show.</p>
+      <p>Once the Berry phase is a physical quantity rather than a label, how it is distributed across the
+        Brillouin zone begins to matter, and that distribution is what the Berry curvature and the quantum
+        metric describe. Quantum geometry and unconventional transport grew out of that step.</p>
       <p>Kagome and line-graph systems arrived from a different direction and turned out to be a
         complementary setting, where connectivity alone restructures the spectrum and puts flat bands,
         Dirac points and van Hove singularities in one place. My current research increasingly asks how
@@ -1455,10 +1458,10 @@ CV = """
 
     <div class="cv-block">
       <h2>Professional service</h2>
-      <p>Referee for 14 journals including <em>Physical Review Letters</em>, <em>Physical Review B</em>,
-        <em>New Journal of Physics</em>, <em>Communications Physics</em> and <em>2D Materials</em>, with
-        34 review reports to date. Session Chair, NAMMA Psi-k Workshop and Conference (2023). Invited
-        lecturer and resource person at national workshops.</p>
+      <p>Referee for <em>Physical Review Letters</em>, <em>Physical Review B</em>, <em>New Journal of
+        Physics</em>, <em>Communications Physics</em>, <em>2D Materials</em> and other journals; IOP
+        Trusted Reviewer. Session Chair, NAMMA Psi-k Workshop and Conference (2023). Invited lecturer and
+        resource person at national workshops.</p>
     </div>
 
     <div class="cv-block">
@@ -1467,7 +1470,7 @@ CV = """
         <div class="tool-card"><h3>Electronic structure</h3><p>Density-functional theory including DFT+<em>U</em>, spin&ndash;orbit coupling and collinear and non-collinear magnetism.<br><span class="codes">Quantum ESPRESSO &middot; VASP &middot; SIESTA &middot; OpenMX; Gaussian and ORCA for molecular and coordination complexes</span></p></div>
         <div class="tool-card"><h3>Wannier &amp; quantum-geometric response</h3><p>Wannier interpolation; Berry curvature, Berry-curvature dipole and quantum metric; anomalous, nonlinear and thermoelectric transport coefficients; topological invariants.<br><span class="codes">Wannier90 &middot; WannierBerri &middot; WannierTools</span></p></div>
         <div class="tool-card"><h3>Model Hamiltonians &amp; transport</h3><p>Symmetry-adapted tight-binding models; real-space decimation and renormalisation; equilibrium and non-equilibrium Green-function (NEGF) quantum transport; non-Hermitian formulations.</p></div>
-        <div class="tool-card"><h3>Many-body methods</h3><p>Dynamical mean-field theory and the functional renormalisation group, applied to flat-band and kagome problems &mdash; an expanding part of the work.<br><span class="codes">w2dynamics &middot; divERGe</span></p></div>
+        <div class="tool-card"><h3>Many-body methods</h3><p>Dynamical mean-field theory (w2dynamics) and the functional renormalisation group (divERGe), applied to flat-band and kagome problems. An expanding part of the work.</p></div>
         <div class="tool-card"><h3>Scientific computing</h3><p>Python (NumPy, SciPy, Matplotlib) &middot; Fortran &middot; Mathematica &middot; Linux and HPC workflows &middot; LaTeX.</p></div>
         <div class="tool-card"><h3>Languages</h3><p>English &middot; Bengali &middot; Hindi.</p></div>
       </div>
