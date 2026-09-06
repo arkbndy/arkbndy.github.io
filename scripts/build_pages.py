@@ -1142,6 +1142,7 @@ PEOPLE = [
  ("Dr. Deep Mondal", "Indian Institute of Technology Bombay", GS % "MtCsRHYAAAAJ", "GS"),
  ("Dr. Anumita Bose", "Condensed Matter Theory, SISSA, Trieste", GS % "-iKh_vkAAAAJ", "GS"),
  ("Dr. Ayan Banerjee", "Max Planck Institute for the Science of Light, Erlangen", GS % "AGIwnYEAAAAJ", "GS"),
+ ("Dr. Subarna Das", "Max Planck Institute for Chemical Physics of Solids, Dresden", GS % "2EW9jrsAAAAJ", "GS"),
  ("Dr. Enze Zhang", "School of Physics, Nanjing University", GS % "fp_HNTAAAAAJ", "GS"),
  ("Dr. Lennart Klebl", "Institute for Theoretical Physics and Astrophysics, Universit&auml;t W&uuml;rzburg", "https://www.physik.uni-wuerzburg.de/tp1/team/postdocs/dr-lennart-klebl/", "WEB"),
  ("Dr. Manish Verma", "Computational Quantum Materials, Universit&auml;t W&uuml;rzburg", GS % "5Yx3-fMAAAAJ", "GS"),
