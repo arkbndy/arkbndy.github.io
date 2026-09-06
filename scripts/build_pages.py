@@ -1087,10 +1087,10 @@ PEOPLE = [
  ("Nesta Benno Joseph", "Solid State and Structural Chemistry Unit, Indian Institute of Science", GS % "d1xIBpwAAAAJ", "GS"),
  ("Ronika Sarkar", "Department of Physics, Indian Institute of Science", GS % "kJUYbLcAAAAJ", "GS"),
  ("Supriya Ghosal", "Theoretical Sciences Unit, JNCASR, Bengaluru", GS % "6mUJTScAAAAJ", "GS"),
- ("Nayana Devaraj", "Solid State and Structural Chemistry Unit, Indian Institute of Science", None, None),
- ("Md Afsar Reja", "Solid State and Structural Chemistry Unit, Indian Institute of Science", None, None),
- ("Sarbajit Mazumdar", "", None, None),
- ("Amrita Mukherjee", "Tata Institute of Fundamental Research", None, None),
+ ("Nayana Devaraj", "Solid State and Structural Chemistry Unit, Indian Institute of Science", GS % "IHa8JmMAAAAJ", "GS"),
+ ("Md Afsar Reja", "Solid State and Structural Chemistry Unit, Indian Institute of Science", GS % "Tn5Njx8AAAAJ", "GS"),
+ ("Sarbajit Mazumdar", "Theoretical Physics I, Universit&auml;t W&uuml;rzburg", GS % "1YhOrqwAAAAJ", "GS"),
+ ("Amrita Mukherjee", "Tata Institute of Fundamental Research, Mumbai", GS % "XNeMaAMAAAAJ", "GS"),
 ]
 
 
