@@ -1087,7 +1087,9 @@ PEOPLE = [
  ("Nesta Benno Joseph", "Solid State and Structural Chemistry Unit, Indian Institute of Science", GS % "d1xIBpwAAAAJ", "GS"),
  ("Ronika Sarkar", "Department of Physics, Indian Institute of Science", GS % "kJUYbLcAAAAJ", "GS"),
  ("Supriya Ghosal", "Theoretical Sciences Unit, JNCASR, Bengaluru", GS % "6mUJTScAAAAJ", "GS"),
+ ("Nayana Devaraj", "Solid State and Structural Chemistry Unit, Indian Institute of Science", None, None),
  ("Md Afsar Reja", "Solid State and Structural Chemistry Unit, Indian Institute of Science", None, None),
+ ("Sarbajit Mazumdar", "", None, None),
  ("Amrita Mukherjee", "Tata Institute of Fundamental Research", None, None),
 ]
 
@@ -1097,8 +1099,9 @@ def collaborators():
     for name, aff, url, badge in PEOPLE:
         link = ('<a class="gs" href="%s" target="_blank" rel="noopener" title="%s profile for %s">%s</a>'
                 % (url, "Google Scholar" if badge == "GS" else "Homepage", name, badge)) if url else ''
-        rows.append('        <li><div><span class="who">%s</span><span class="where">%s</span></div>%s</li>'
-                    % (name, aff, link))
+        where = '<span class="where">%s</span>' % aff if aff else ''
+        rows.append('        <li><div><span class="who">%s</span>%s</div>%s</li>'
+                    % (name, where, link))
     return '      <ul class="collab-list">\n%s\n      </ul>' % "\n".join(rows), len(PEOPLE)
 
 
@@ -1350,10 +1353,10 @@ CV = """
     <div class="cv-block">
       <h2>Positions</h2>
       <div class="cv-entry">
-        <div><span class="what">Postdoctoral Researcher</span><br><span class="where">Julius-Maximilians-Universit&auml;t W&uuml;rzburg, Germany</span></div>
+        <div><span class="what">Postdoctoral Researcher</span><br><span class="where">Computational Quantum Materials, with Prof. Giorgio Sangiovanni and Prof. Ronny Thomale &middot; Julius-Maximilians-Universit&auml;t W&uuml;rzburg, Germany</span></div>
         <div class="when">Oct 2024 &ndash; present</div>
-        <p class="detail">Topological and quantum-geometric electronic structure of quantum materials in the
-          Computational Quantum Materials group, within the DFG Cluster of Excellence <em>ct.qmat</em>: kagome
+        <p class="detail">Topological and quantum-geometric electronic structure of quantum materials,
+          within the DFG Cluster of Excellence <em>ct.qmat</em>: kagome
           and flat-band systems, anomalous and nonlinear transport, and magnetic quantum materials, treated
           with first-principles and Wannier-based models alongside correlated methods. Several projects are
           carried out jointly with theory and experimental groups in W&uuml;rzburg. Independent direction:
@@ -1361,13 +1364,13 @@ CV = """
           lattice geometry. Mentoring of junior researchers.</p>
       </div>
       <div class="cv-entry">
-        <div><span class="what">Visiting Researcher</span><br><span class="where">Indian Institute of Science, Bengaluru</span></div>
+        <div><span class="what">Visiting Researcher</span><br><span class="where">With Prof. Awadhesh Narayan, Solid State and Structural Chemistry Unit &middot; Indian Institute of Science, Bengaluru</span></div>
         <div class="when">May &ndash; Sep 2024</div>
         <p class="detail">First-principles electronic-structure calculations on magnetic complex-oxide
           interfaces, carried out with the experimental groups measuring them.</p>
       </div>
       <div class="cv-entry">
-        <div><span class="what">IISc-IoE Postdoctoral Fellow</span><br><span class="where">Indian Institute of Science, Bengaluru</span></div>
+        <div><span class="what">IISc-IoE Postdoctoral Fellow</span><br><span class="where">With Prof. Awadhesh Narayan, Solid State and Structural Chemistry Unit &middot; Indian Institute of Science, Bengaluru</span></div>
         <div class="when">May 2022 &ndash; May 2024</div>
         <p class="detail">Berry-curvature dipoles and nonlinear Hall response, flat bands in coupled kagome
           lattices, and non-Hermitian topology treated by exact real-space decimation. Started the
@@ -1375,7 +1378,7 @@ CV = """
           came.</p>
       </div>
       <div class="cv-entry">
-        <div><span class="what">Research Associate</span><br><span class="where">Indian Institute of Science, Bengaluru</span></div>
+        <div><span class="what">Research Associate</span><br><span class="where">With Prof. Awadhesh Narayan, Solid State and Structural Chemistry Unit &middot; Indian Institute of Science, Bengaluru</span></div>
         <div class="when">Jul 2021 &ndash; May 2022</div>
         <p class="detail">Dirac and nodal-line electronic structure in non-honeycomb two-dimensional
           lattices; Berry-curvature dipoles across a quantum spin Hall transition.</p>
