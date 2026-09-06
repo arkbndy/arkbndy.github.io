@@ -278,28 +278,48 @@
           <span class="more">Read more &rarr;</span>
         </a>
         <a class="pillar-card" href="research.html#topology">
-          <span class="card-fig" aria-hidden="true"><svg viewBox="0 0 360 240" role="img" aria-label="A nodal line in a two-dimensional Brillouin zone, with one-dimensional cuts on either side carrying Zak phases of pi and zero">
+          <span class="card-fig" aria-hidden="true"><svg viewBox="0 0 360 240" role="img" aria-label="A closed nodal ring in a two-dimensional Brillouin zone. A one-dimensional cut passing through the ring carries a Zak phase of pi; a cut outside the ring carries zero. Beside it, a Dirac cone.">
   <defs>
     <marker id="tArr" markerWidth="8" markerHeight="8" refX="6.2" refY="2.8" orient="auto"><path d="M0,0 L6.2,2.8 L0,5.6 z" style="fill:var(--muted)"/></marker>
+    <radialGradient id="tRing"><stop offset=".55" stop-color="#1c6b66" stop-opacity="0"/><stop offset="1" stop-color="#1c6b66" stop-opacity=".16"/></radialGradient>
   </defs>
-  <rect x="46" y="34" width="188" height="150" rx="8" style="fill:none;stroke:var(--rule);stroke-width:1.2"/>
-  <text x="56" y="52" style="fill:var(--muted);font:500 10px var(--sans)">Brillouin zone</text>
-  <path d="M78 160 C104 96, 176 96, 202 60" style="fill:none;stroke:var(--accent);stroke-width:2.4;stroke-linecap:round"/>
-  <text x="150" y="150" style="fill:var(--accent-2);font:600 10.5px var(--sans)">nodal line</text>
-  <g style="stroke:var(--ink-2);stroke-width:1;opacity:.5;stroke-dasharray:3 3">
-    <path d="M92 46 V172"/><path d="M196 46 V172"/>
+
+  <rect x="34" y="34" width="192" height="146" rx="8" style="fill:none;stroke:var(--rule);stroke-width:1.2"/>
+  <text x="44" y="52" style="fill:var(--muted);font:500 10px var(--sans)">Brillouin zone</text>
+
+  <ellipse cx="118" cy="112" rx="46" ry="32" fill="url(#tRing)"/>
+  <ellipse cx="118" cy="112" rx="46" ry="32" style="fill:none;stroke:var(--accent);stroke-width:2.4"/>
+  <circle cx="118" cy="112" r="2" style="fill:var(--ink-2)"/>
+  <text x="118" y="128" text-anchor="middle" style="fill:var(--muted);font:500 10px var(--sans)">&#915;</text>
+  <text x="140" y="70" text-anchor="middle" style="fill:var(--accent-2);font:600 10.5px var(--sans)">nodal ring</text>
+
+  <g style="stroke:var(--ink-2);stroke-width:1.1;opacity:.55;stroke-dasharray:4 3">
+    <path d="M104 58 V170"/><path d="M196 58 V170"/>
+  </g>
+  <g style="fill:var(--accent)">
+    <circle cx="104" cy="82" r="3.4"/><circle cx="104" cy="142" r="3.4"/>
   </g>
   <g style="stroke:var(--muted);stroke-width:1;fill:none" marker-end="url(#tArr)">
-    <path d="M92 178 V196"/><path d="M196 178 V196"/>
+    <path d="M46 168 H70"/><path d="M46 168 V146"/>
   </g>
-  <text x="92"  y="212" text-anchor="middle" style="fill:var(--ink);font:600 12px var(--serif)">&#947; = &#960;</text>
-  <text x="196" y="212" text-anchor="middle" style="fill:var(--ink);font:600 12px var(--serif)">&#947; = 0</text>
-  <text x="144" y="230" text-anchor="middle" style="fill:var(--muted);font:400 10px var(--sans)">Zak phase on 1D cuts</text>
-  <g transform="translate(268,60)">
-    <path d="M0 78 L26 26 L52 78" style="fill:none;stroke:var(--ink-2);stroke-width:1.3"/>
-    <path d="M0 -26 L26 26 L52 -26" style="fill:none;stroke:var(--ink-2);stroke-width:1.3"/>
-    <ellipse cx="26" cy="26" rx="26" ry="7" style="fill:none;stroke:var(--accent);stroke-width:1.2;opacity:.7"/>
-    <text x="26" y="98" text-anchor="middle" style="fill:var(--muted);font:400 10px var(--sans)">Dirac cone</text>
+  <text x="74" y="171" style="fill:var(--muted);font:500 10px var(--sans)">k<tspan dy="2" font-size="8">x</tspan></text>
+  <text x="40" y="146" text-anchor="end" style="fill:var(--muted);font:500 10px var(--sans)">k<tspan dy="2" font-size="8">y</tspan></text>
+
+  <g style="stroke:var(--muted);stroke-width:1;fill:none" marker-end="url(#tArr)">
+    <path d="M104 176 V194"/><path d="M196 176 V194"/>
+  </g>
+  <text x="104" y="211" text-anchor="middle" style="fill:var(--ink);font:600 12px var(--serif)">&#947; = &#960;</text>
+  <text x="196" y="211" text-anchor="middle" style="fill:var(--ink);font:600 12px var(--serif)">&#947; = 0</text>
+  <text x="104" y="226" text-anchor="middle" style="fill:var(--muted);font:400 9.5px var(--sans)">cut through the ring</text>
+  <text x="196" y="226" text-anchor="middle" style="fill:var(--muted);font:400 9.5px var(--sans)">cut outside it</text>
+
+  <g transform="translate(266,58)">
+    <path d="M0 74 L26 24 L52 74" style="fill:none;stroke:var(--ink-2);stroke-width:1.3"/>
+    <path d="M0 -26 L26 24 L52 -26" style="fill:none;stroke:var(--ink-2);stroke-width:1.3"/>
+    <ellipse cx="26" cy="24" rx="26" ry="7" style="fill:none;stroke:var(--accent);stroke-width:1.2;opacity:.7"/>
+    <circle cx="26" cy="24" r="2.6" style="fill:var(--accent)"/>
+    <text x="26" y="94" text-anchor="middle" style="fill:var(--muted);font:400 10px var(--sans)">a point on the ring</text>
+    <text x="26" y="107" text-anchor="middle" style="fill:var(--muted);font:400 10px var(--sans)">is a Dirac cone</text>
   </g>
 </svg></span>
           <span class="n">03</span>
