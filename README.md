@@ -11,6 +11,20 @@ that the header, footer, metadata and structure can never drift apart — see §
 
 ---
 
+## 0. The one rule
+
+**Never edit `index.html`, `research.html`, `publications.html`, `news.html` or
+`cv.html`.** They are build output. The next rebuild silently overwrites anything
+you type into them. Everything you might want to change lives in one of four
+other files — see §2.
+
+Two of those four need no rebuild at all: `data/publications.json` and
+`data/news.json` are fetched by the browser at page load, so editing them and
+pushing is enough. `assets/css/style.css` is the same. Only wording and structure
+live inside the generator, and only that needs §3.
+
+---
+
 ## 1. Everyday updating
 
 ```bash
@@ -28,7 +42,7 @@ does the same thing: **Commit to main**, then **Push origin**.
 |---|---|---|
 | Change any wording on any page | `scripts/build_pages.py` | rebuild (§3) |
 | Add or rewrite a research pillar | `scripts/build_pages.py` — `PILLARS` (cards) and `DETAIL` (full sections) | rebuild |
-| Add or edit a collaborator | `scripts/build_pages.py` — `GROUPS` | rebuild |
+| Add or edit a collaborator | `scripts/build_pages.py` — `PEOPLE` | rebuild |
 | Add a publication by hand | `data/publications.json` | nothing — it is read at runtime |
 | Post a news item | `data/news.json` | nothing |
 | Change colours, spacing, type | `assets/css/style.css` — the `:root` block at the top | nothing |
@@ -67,7 +81,8 @@ Add an object at the **top** of the `peer_reviewed` array in `data/publications.
   "arxiv": "2511.15337",
   "role": "Corresponding author",
   "award": "Editors' Suggestion",
-  "tags": ["geometry"],
+  "primary": "geometry",
+  "tags": ["geometry", "magnetism"],
   "selected": true,
   "summary": "One sentence on why this paper matters. Only shown for selected papers."
 }
@@ -76,26 +91,28 @@ Add an object at the **top** of the `peer_reviewed` array in `data/publications.
 Everything except `title`, `authors`, `journal`, `year` and `id` is optional.
 The name `Arka Bandyopadhyay` is bolded automatically wherever it appears.
 
-**Tags** drive the filter chips on the publications page and the paper counts on
-the research page. Every paper must carry exactly one of the five pillar tags:
+**Themes.** Every paper carries a `primary` theme — the one it belongs to most —
+and a `tags` list holding that theme plus any others it genuinely also belongs to:
 
-| Tag | Pillar |
+| Key | Theme |
 |---|---|
 | `geometry` | Quantum geometry & unconventional transport |
-| `topology` | Topology, flat bands & kagome quantum matter |
-| `magnetism` | Magnetism, correlations & spin–orbit physics |
-| `interfaces` | Interfaces & materials-realistic quantum matter |
-| `materials` | Low-dimensional & chemically designed materials |
+| `kagome` | Kagome, flat bands & line-graph physics |
+| `topology` | Topology & Dirac quantum matter |
+| `magnetism` | Magnetism & correlated quantum matter |
+| `materials` | Materials discovery & functional materials |
 
-Two optional secondary tags may be added alongside a pillar tag: `review` and
-`applied`. The human-readable pillar names live in the `pillars` map at the top of
+`primary` decides which theme *counts* the paper on the research page; `tags`
+decides which filter chips *show* it, so a cross-listed paper appears under both.
+Two optional extra tags may be added to `tags`: `review` and `applied`. The
+human-readable names live in the `pillars` map at the bottom of
 `data/publications.json`; the chips are declared in `build_pages.py`.
 
 **`role`** is what produces the "as first or joint-first author" and "as
 corresponding author" counts on the home page. Anything matching *first* or
 *corresponding* is counted — the numbers are never written by hand anywhere.
 
-**`selected: true`** puts a paper in the "Six papers, five threads" block on the
+**`selected: true`** puts a paper in the "Six papers" block on the
 home page, together with its `summary`. Six is a good number; ten is too many.
 
 ### Adding a news item
