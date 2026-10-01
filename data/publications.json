@@ -1,9 +1,25 @@
 {
   "_comment": "Curated record. Each entry carries exactly one pillar tag (geometry | topology | magnetism | interfaces | materials) plus optional 'review' and 'applied' tags. The ORCID workflow adds entries; it never overwrites curated fields.",
-  "generated": "2026-09-05",
+  "generated": "2026-10-01",
   "orcid": "0000-0003-3386-4289",
   "me": "Arka Bandyopadhyay",
   "peer_reviewed": [
+    {
+      "id": "devaraj2026altermagnetism",
+      "title": "Altermagnetism from the viewpoint of chemistry",
+      "authors": "Nayana Devaraj, Anumita Bose, Md Afsar Reja, Arka Bandyopadhyay, Awadhesh Narayan",
+      "journal": "Chemical Society Reviews",
+      "volume": "",
+      "pages": "",
+      "year": 2026,
+      "doi": "10.1039/d6cs00793g",
+      "tags": [
+        "magnetism",
+        "materials",
+        "review"
+      ],
+      "primary": "magnetism"
+    },
     {
       "id": "dey2026oxide",
       "title": "An unconventional pathway to correlate the octahedral tilt coupling and spin–orbit reconstruction at oxide interfaces",
@@ -20,6 +36,22 @@
       "selected": true,
       "summary": "Working with spectroscopy and transport groups, my electronic-structure calculations relate the octahedral tilt coupling measured across a complex-oxide interface to the reconstruction of the spin–orbit-entangled ground state, giving a structural handle on interfacial magnetism.",
       "primary": "magnetism"
+    },
+    {
+      "id": "joseph2026oxide",
+      "title": "Berry curvature dipole-induced non-linear Hall effect in oxide heterostructures",
+      "authors": "Nesta Benno Joseph, Arka Bandyopadhyay, Ajit C. Balram, Awadhesh Narayan",
+      "journal": "Journal of Materials Chemistry C",
+      "volume": "14",
+      "pages": "11561",
+      "year": 2026,
+      "doi": "10.1039/D5TC03852A",
+      "arxiv": "2510.20746",
+      "tags": [
+        "geometry",
+        "magnetism"
+      ],
+      "primary": "geometry"
     },
     {
       "id": "sarkar2026refraction",
@@ -41,38 +73,6 @@
       "primary": "geometry"
     },
     {
-      "id": "joseph2026oxide",
-      "title": "Berry curvature dipole-induced non-linear Hall effect in oxide heterostructures",
-      "authors": "Nesta Benno Joseph, Arka Bandyopadhyay, Ajit C. Balram, Awadhesh Narayan",
-      "journal": "Journal of Materials Chemistry C",
-      "volume": "14",
-      "pages": "11561",
-      "year": 2026,
-      "doi": "10.1039/D5TC03852A",
-      "arxiv": "2510.20746",
-      "tags": [
-        "geometry",
-        "magnetism"
-      ],
-      "primary": "geometry"
-    },
-    {
-      "id": "devaraj2026altermagnetism",
-      "title": "Altermagnetism from the viewpoint of chemistry",
-      "authors": "Nayana Devaraj, Anumita Bose, Md Afsar Reja, Arka Bandyopadhyay, Awadhesh Narayan",
-      "journal": "Chemical Society Reviews",
-      "volume": "",
-      "pages": "",
-      "year": 2026,
-      "doi": "10.1039/d6cs00793g",
-      "tags": [
-        "magnetism",
-        "materials",
-        "review"
-      ],
-      "primary": "magnetism"
-    },
-    {
       "id": "bose2025kagome",
       "title": "Origin of flat bands and non-trivial topology in coupled kagome lattices",
       "authors": "Anumita Bose, Arka Bandyopadhyay, Awadhesh Narayan",
@@ -90,6 +90,21 @@
       "selected": true,
       "summary": "Traces the flat bands of coupled kagome layers to their line-graph origin and identifies when interlayer coupling gaps them into topologically non-trivial bands — a structural criterion rather than a case-by-case calculation.",
       "primary": "kagome"
+    },
+    {
+      "id": "mondal2025ssh",
+      "title": "Su–Schrieffer–Heeger model: from fundamentals to responses",
+      "authors": "Deep Mondal, Arka Bandyopadhyay, Debnarayan Jana",
+      "journal": "International Journal of Theoretical Physics",
+      "volume": "64",
+      "pages": "125",
+      "year": 2025,
+      "doi": "10.1007/s10773-025-05981-z",
+      "tags": [
+        "topology",
+        "review"
+      ],
+      "primary": "topology"
     },
     {
       "id": "deysarkar2025weyl",
@@ -122,40 +137,6 @@
       "primary": "materials"
     },
     {
-      "id": "mondal2025ssh",
-      "title": "Su–Schrieffer–Heeger model: from fundamentals to responses",
-      "authors": "Deep Mondal, Arka Bandyopadhyay, Debnarayan Jana",
-      "journal": "International Journal of Theoretical Physics",
-      "volume": "64",
-      "pages": "125",
-      "year": 2025,
-      "doi": "10.1007/s10773-025-05981-z",
-      "tags": [
-        "topology",
-        "review"
-      ],
-      "primary": "topology"
-    },
-    {
-      "id": "bandyopadhyay2024nlhe",
-      "title": "Non-linear Hall effects: mechanisms and materials",
-      "authors": "Arka Bandyopadhyay, Nesta Benno Joseph, Awadhesh Narayan",
-      "journal": "Materials Today Electronics",
-      "volume": "8",
-      "pages": "100101",
-      "year": 2024,
-      "doi": "10.1016/j.mtelec.2024.100101",
-      "arxiv": "2401.02282",
-      "role": "First & corresponding author",
-      "tags": [
-        "geometry",
-        "review"
-      ],
-      "selected": true,
-      "summary": "A review of nonlinear Hall responses that sets out the symmetry requirements, the quantum-geometric quantities involved, and the material classes where each mechanism can be expected to dominate.",
-      "primary": "geometry"
-    },
-    {
       "id": "nulakani2024carbon",
       "title": "A nodal flexible-surface three-dimensional carbon network with potential applications as a lithium-ion battery anode material",
       "authors": "N. V. R. Nulakani, Arka Bandyopadhyay, Mohamad Akbar Ali",
@@ -171,23 +152,6 @@
         "applied"
       ],
       "primary": "materials"
-    },
-    {
-      "id": "banerjee2024nonhermitian",
-      "title": "Non-Hermitian topology and flat bands via an exact real-space decimation scheme",
-      "authors": "Ayan Banerjee, Arka Bandyopadhyay, Ronika Sarkar, Awadhesh Narayan",
-      "journal": "Physical Review B",
-      "volume": "110",
-      "pages": "085431",
-      "year": 2024,
-      "doi": "10.1103/PhysRevB.110.085431",
-      "arxiv": "2310.04834",
-      "role": "Joint first author",
-      "tags": [
-        "topology",
-        "kagome"
-      ],
-      "primary": "topology"
     },
     {
       "id": "joseph2024chirality",
@@ -221,34 +185,39 @@
       "primary": "materials"
     },
     {
-      "id": "bandyopadhyay2023phosphorene",
-      "title": "Berry curvature dipole and its strain engineering in layered phosphorene",
-      "authors": "Arka Bandyopadhyay, Nesta Benno Joseph, Awadhesh Narayan",
-      "journal": "Materials Today Electronics",
-      "volume": "6",
-      "pages": "100076",
-      "year": 2023,
-      "doi": "10.1016/j.mtelec.2023.100076",
-      "arxiv": "2310.20543",
-      "role": "First & corresponding author",
+      "id": "banerjee2024nonhermitian",
+      "title": "Non-Hermitian topology and flat bands via an exact real-space decimation scheme",
+      "authors": "Ayan Banerjee, Arka Bandyopadhyay, Ronika Sarkar, Awadhesh Narayan",
+      "journal": "Physical Review B",
+      "volume": "110",
+      "pages": "085431",
+      "year": 2024,
+      "doi": "10.1103/PhysRevB.110.085431",
+      "arxiv": "2310.04834",
+      "role": "Joint first author",
       "tags": [
-        "geometry"
+        "topology",
+        "kagome"
       ],
-      "primary": "geometry"
+      "primary": "topology"
     },
     {
-      "id": "zhang2023te",
-      "title": "Hidden nontrivial Berry phase and spin-zero effect in Te nanowires",
-      "authors": "Yuda Zhang, Jiaze Li, Arka Bandyopadhyay, Zehao Jia, Nesta Benno Joseph, Pengliang Leng, Qiang Ma, Linfeng Ai, Enze Zhang, Awadhesh Narayan, Faxian Xiu",
-      "journal": "Physical Review B",
-      "volume": "108",
-      "pages": "245409",
-      "year": 2023,
-      "doi": "10.1103/PhysRevB.108.245409",
+      "id": "bandyopadhyay2024nlhe",
+      "title": "Non-linear Hall effects: mechanisms and materials",
+      "authors": "Arka Bandyopadhyay, Nesta Benno Joseph, Awadhesh Narayan",
+      "journal": "Materials Today Electronics",
+      "volume": "8",
+      "pages": "100101",
+      "year": 2024,
+      "doi": "10.1016/j.mtelec.2024.100101",
+      "arxiv": "2401.02282",
+      "role": "First & corresponding author",
       "tags": [
         "geometry",
-        "topology"
+        "review"
       ],
+      "selected": true,
+      "summary": "A review of nonlinear Hall responses that sets out the symmetry requirements, the quantum-geometric quantities involved, and the material classes where each mechanism can be expected to dominate.",
       "primary": "geometry"
     },
     {
@@ -263,66 +232,6 @@
       "tags": [
         "materials",
         "review"
-      ],
-      "primary": "materials"
-    },
-    {
-      "id": "sarkar2023dice",
-      "title": "Non-Hermiticity induced exceptional points and skin effect in the Haldane model on a dice lattice",
-      "authors": "Ronika Sarkar, Arka Bandyopadhyay, Awadhesh Narayan",
-      "journal": "Physical Review B",
-      "volume": "107",
-      "pages": "035403",
-      "year": 2023,
-      "doi": "10.1103/PhysRevB.107.035403",
-      "arxiv": "2207.14612",
-      "tags": [
-        "topology",
-        "kagome"
-      ],
-      "primary": "topology"
-    },
-    {
-      "id": "aithal2023redox",
-      "title": "Extended conjugation acceptors increase specific energy densities in π-conjugated redox polymers",
-      "authors": "Anuraag Aithal, Jibin J. Samuel, Arka Bandyopadhyay, Varun Kumar Karrothu, Chandrasekhar Gangadharappa, Satish Patil, Awadhesh Narayan, Naga Phani B. Aetukuri",
-      "journal": "The Journal of Physical Chemistry C",
-      "volume": "127",
-      "pages": "5238",
-      "year": 2023,
-      "doi": "10.1021/acs.jpcc.3c00385",
-      "tags": [
-        "materials",
-        "applied"
-      ],
-      "primary": "materials"
-    },
-    {
-      "id": "bagchi2023spinstate",
-      "title": "Spin-state switching: chemical modulation and the impact of intermolecular interactions in manganese(III) complexes",
-      "authors": "Sukanya Bagchi, Sujit Kamilya, Sakshi Mehta, Subhankar Mandal, Arka Bandyopadhyay, Awadhesh Narayan, Subrata Ghosh, Abhishake Mondal",
-      "journal": "Dalton Transactions",
-      "volume": "52",
-      "pages": "11335",
-      "year": 2023,
-      "doi": "10.1039/D3DT01707A",
-      "tags": [
-        "magnetism",
-        "materials"
-      ],
-      "primary": "magnetism"
-    },
-    {
-      "id": "nath2023graphyne",
-      "title": "Non-equivalent nature of acetylenic bonds in typical square graphynes and intricate negative differential resistance characteristics",
-      "authors": "Subhadip Nath, Niladri Sekhar Mondal, Arka Bandyopadhyay, Rajkumar Mondal, Debnarayan Jana",
-      "journal": "Journal of Physics: Condensed Matter",
-      "volume": "35",
-      "pages": "325501",
-      "year": 2023,
-      "doi": "10.1088/1361-648X/acd216",
-      "tags": [
-        "materials"
       ],
       "primary": "materials"
     },
@@ -343,6 +252,111 @@
       "primary": "topology"
     },
     {
+      "id": "bandyopadhyay2023phosphorene",
+      "title": "Berry curvature dipole and its strain engineering in layered phosphorene",
+      "authors": "Arka Bandyopadhyay, Nesta Benno Joseph, Awadhesh Narayan",
+      "journal": "Materials Today Electronics",
+      "volume": "6",
+      "pages": "100076",
+      "year": 2023,
+      "doi": "10.1016/j.mtelec.2023.100076",
+      "arxiv": "2310.20543",
+      "role": "First & corresponding author",
+      "tags": [
+        "geometry"
+      ],
+      "primary": "geometry"
+    },
+    {
+      "id": "aithal2023redox",
+      "title": "Extended conjugation acceptors increase specific energy densities in π-conjugated redox polymers",
+      "authors": "Anuraag Aithal, Jibin J. Samuel, Arka Bandyopadhyay, Varun Kumar Karrothu, Chandrasekhar Gangadharappa, Satish Patil, Awadhesh Narayan, Naga Phani B. Aetukuri",
+      "journal": "The Journal of Physical Chemistry C",
+      "volume": "127",
+      "pages": "5238",
+      "year": 2023,
+      "doi": "10.1021/acs.jpcc.3c00385",
+      "tags": [
+        "materials",
+        "applied"
+      ],
+      "primary": "materials"
+    },
+    {
+      "id": "zhang2023te",
+      "title": "Hidden nontrivial Berry phase and spin-zero effect in Te nanowires",
+      "authors": "Yuda Zhang, Jiaze Li, Arka Bandyopadhyay, Zehao Jia, Nesta Benno Joseph, Pengliang Leng, Qiang Ma, Linfeng Ai, Enze Zhang, Awadhesh Narayan, Faxian Xiu",
+      "journal": "Physical Review B",
+      "volume": "108",
+      "pages": "245409",
+      "year": 2023,
+      "doi": "10.1103/PhysRevB.108.245409",
+      "tags": [
+        "geometry",
+        "topology"
+      ],
+      "primary": "geometry"
+    },
+    {
+      "id": "sarkar2023dice",
+      "title": "Non-Hermiticity induced exceptional points and skin effect in the Haldane model on a dice lattice",
+      "authors": "Ronika Sarkar, Arka Bandyopadhyay, Awadhesh Narayan",
+      "journal": "Physical Review B",
+      "volume": "107",
+      "pages": "035403",
+      "year": 2023,
+      "doi": "10.1103/PhysRevB.107.035403",
+      "arxiv": "2207.14612",
+      "tags": [
+        "topology",
+        "kagome"
+      ],
+      "primary": "topology"
+    },
+    {
+      "id": "nath2023graphyne",
+      "title": "Non-equivalent nature of acetylenic bonds in typical square graphynes and intricate negative differential resistance characteristics",
+      "authors": "Subhadip Nath, Niladri Sekhar Mondal, Arka Bandyopadhyay, Rajkumar Mondal, Debnarayan Jana",
+      "journal": "Journal of Physics: Condensed Matter",
+      "volume": "35",
+      "pages": "325501",
+      "year": 2023,
+      "doi": "10.1088/1361-648X/acd216",
+      "tags": [
+        "materials"
+      ],
+      "primary": "materials"
+    },
+    {
+      "id": "bagchi2023spinstate",
+      "title": "Spin-state switching: chemical modulation and the impact of intermolecular interactions in manganese(III) complexes",
+      "authors": "Sukanya Bagchi, Sujit Kamilya, Sakshi Mehta, Subhankar Mandal, Arka Bandyopadhyay, Awadhesh Narayan, Subrata Ghosh, Abhishake Mondal",
+      "journal": "Dalton Transactions",
+      "volume": "52",
+      "pages": "11335",
+      "year": 2023,
+      "doi": "10.1039/D3DT01707A",
+      "tags": [
+        "magnetism",
+        "materials"
+      ],
+      "primary": "magnetism"
+    },
+    {
+      "id": "mondal2022raman",
+      "title": "Characterizing Raman modes and gas sensing features of functionalized tetragonal graphyne quantum dots: a first principles study",
+      "authors": "Deep Mondal, Susmita Jana, Arka Bandyopadhyay, Debnarayan Jana",
+      "journal": "Journal of Physics and Chemistry of Solids",
+      "volume": "167",
+      "pages": "110737",
+      "year": 2022,
+      "doi": "10.1016/j.jpcs.2022.110737",
+      "tags": [
+        "materials"
+      ],
+      "primary": "materials"
+    },
+    {
       "id": "bandyopadhyay2022bcd",
       "title": "Electrically switchable giant Berry curvature dipole in silicene, germanene and stanene",
       "authors": "Arka Bandyopadhyay, Nesta Benno Joseph, Awadhesh Narayan",
@@ -361,16 +375,18 @@
       "primary": "geometry"
     },
     {
-      "id": "mondal2022raman",
-      "title": "Characterizing Raman modes and gas sensing features of functionalized tetragonal graphyne quantum dots: a first principles study",
-      "authors": "Deep Mondal, Susmita Jana, Arka Bandyopadhyay, Debnarayan Jana",
-      "journal": "Journal of Physics and Chemistry of Solids",
-      "volume": "167",
-      "pages": "110737",
+      "id": "jana2021emerging",
+      "title": "Emerging properties of carbon based 2D material beyond graphene",
+      "authors": "Susmita Jana, Arka Bandyopadhyay, Sujoy Datta, Debaprem Bhattacharya, Debnarayan Jana",
+      "journal": "Journal of Physics: Condensed Matter",
+      "volume": "34",
+      "pages": "053001",
       "year": 2022,
-      "doi": "10.1016/j.jpcs.2022.110737",
+      "doi": "10.1088/1361-648X/ac3075",
+      "award": "IOP India Top Cited Paper Award 2025",
       "tags": [
-        "materials"
+        "materials",
+        "review"
       ],
       "primary": "materials"
     },
@@ -386,22 +402,6 @@
       "tags": [
         "materials",
         "topology"
-      ],
-      "primary": "materials"
-    },
-    {
-      "id": "jana2021emerging",
-      "title": "Emerging properties of carbon based 2D material beyond graphene",
-      "authors": "Susmita Jana, Arka Bandyopadhyay, Sujoy Datta, Debaprem Bhattacharya, Debnarayan Jana",
-      "journal": "Journal of Physics: Condensed Matter",
-      "volume": "34",
-      "pages": "053001",
-      "year": 2022,
-      "doi": "10.1088/1361-648X/ac3075",
-      "award": "IOP India Top Cited Paper Award 2025",
-      "tags": [
-        "materials",
-        "review"
       ],
       "primary": "materials"
     },
@@ -439,6 +439,20 @@
       "primary": "materials"
     },
     {
+      "id": "nath2021radiaannulene",
+      "title": "First principles investigation of structural, electronic and optical properties of synthesized radiaannulene oligomers for 6,6,12-graphyne",
+      "authors": "Subhadip Nath, Arka Bandyopadhyay, Sabyasachi Sen, Debnarayan Jana",
+      "journal": "Journal of Physics and Chemistry of Solids",
+      "volume": "153",
+      "pages": "109990",
+      "year": 2021,
+      "doi": "10.1016/j.jpcs.2021.109990",
+      "tags": [
+        "materials"
+      ],
+      "primary": "materials"
+    },
+    {
       "id": "ghosal2021qds",
       "title": "Tetragonal silicene and germanene quantum dots: candidates for enhanced nonlinear optical and photocatalytic activity",
       "authors": "Supriya Ghosal, Subhadip Nath, Arka Bandyopadhyay, Sabyasachi Sen, Debnarayan Jana",
@@ -450,20 +464,6 @@
       "tags": [
         "materials",
         "applied"
-      ],
-      "primary": "materials"
-    },
-    {
-      "id": "nath2021radiaannulene",
-      "title": "First principles investigation of structural, electronic and optical properties of synthesized radiaannulene oligomers for 6,6,12-graphyne",
-      "authors": "Subhadip Nath, Arka Bandyopadhyay, Sabyasachi Sen, Debnarayan Jana",
-      "journal": "Journal of Physics and Chemistry of Solids",
-      "volume": "153",
-      "pages": "109990",
-      "year": 2021,
-      "doi": "10.1016/j.jpcs.2021.109990",
-      "tags": [
-        "materials"
       ],
       "primary": "materials"
     },
@@ -485,20 +485,16 @@
       "primary": "materials"
     },
     {
-      "id": "bandyopadhyay2020sgraphene",
-      "title": "The topology and robustness of two Dirac cones in S-graphene: a tight binding approach",
-      "authors": "Arka Bandyopadhyay, Sujoy Datta, Debnarayan Jana, Subhadip Nath, Md. Mohi Uddin",
-      "journal": "Scientific Reports",
-      "volume": "10",
-      "pages": "2502",
+      "id": "correction2020246b",
+      "title": "Correction: Electric field induced band tuning, optical and thermoelectric responses in tetragonal germanene: a theoretical approach",
+      "authors": "Supriya Ghosal, Arka Bandyopadhyay, Debnarayan Jana",
+      "journal": "Physical Chemistry Chemical Physics",
+      "volume": "22",
+      "pages": "27458",
       "year": 2020,
-      "doi": "10.1038/s41598-020-59262-2",
-      "role": "First author",
-      "tags": [
-        "topology",
-        "materials"
-      ],
-      "primary": "topology"
+      "doi": "10.1039/d0cp90246b",
+      "tags": [],
+      "needs_review": true
     },
     {
       "id": "ghosal2020germanene",
@@ -531,6 +527,22 @@
       "primary": "materials"
     },
     {
+      "id": "bandyopadhyay2020sgraphene",
+      "title": "The topology and robustness of two Dirac cones in S-graphene: a tight binding approach",
+      "authors": "Arka Bandyopadhyay, Sujoy Datta, Debnarayan Jana, Subhadip Nath, Md. Mohi Uddin",
+      "journal": "Scientific Reports",
+      "volume": "10",
+      "pages": "2502",
+      "year": 2020,
+      "doi": "10.1038/s41598-020-59262-2",
+      "role": "First author",
+      "tags": [
+        "topology",
+        "materials"
+      ],
+      "primary": "topology"
+    },
+    {
       "id": "jana2019ynes",
       "title": "Acetylenic linkage dependent electronic and optical behavior of morphologically distinct '-ynes'",
       "authors": "Susmita Jana, Arka Bandyopadhyay, Debnarayan Jana",
@@ -559,6 +571,18 @@
       "primary": "materials"
     },
     {
+      "id": "erratum20189102",
+      "title": "Erratum to: Optical and Magnetic Properties of Free-standing Silicene, Germanene and T-graphene System",
+      "authors": "Suman Chowdhury, Arka Bandyopadhyay, Namrata Dhar, Debnarayan Jana",
+      "journal": "Physical Sciences Reviews",
+      "volume": "3",
+      "pages": "",
+      "year": 2018,
+      "doi": "10.1515/psr-2016-9102",
+      "tags": [],
+      "needs_review": true
+    },
+    {
       "id": "bandyopadhyay2018nanodot",
       "title": "Tetragonal graphene nanodot as carbon monoxide gas sensor and current rectification device",
       "authors": "Arka Bandyopadhyay, Shashikana Paria, Debnarayan Jana",
@@ -573,6 +597,34 @@
         "applied"
       ],
       "primary": "materials"
+    },
+    {
+      "id": "chowdhury2017freestanding",
+      "title": "Optical and magnetic properties of free-standing silicene, germanene and T-graphene system",
+      "authors": "Suman Chowdhury, Arka Bandyopadhyay, Namrata Dhar, Debnarayan Jana",
+      "journal": "Physical Sciences Reviews",
+      "volume": "2",
+      "pages": "0102",
+      "year": 2017,
+      "doi": "10.1515/9783110467215-002",
+      "note": "Book chapter in Computational Sciences, De Gruyter",
+      "tags": [
+        "materials",
+        "review"
+      ],
+      "primary": "materials"
+    },
+    {
+      "id": "optical20175102",
+      "title": "Optical and magnetic properties of free-standing silicene, germanene and T-graphene system",
+      "authors": "Suman Chowdhury, Arka Bandyopadhyay, Namrata Dhar, Debnarayan Jana",
+      "journal": "Physical Sciences Reviews",
+      "volume": "2",
+      "pages": "",
+      "year": 2017,
+      "doi": "10.1515/psr-2016-5102",
+      "tags": [],
+      "needs_review": true
     },
     {
       "id": "bandyopadhyay2017tgraphene",
@@ -601,22 +653,6 @@
       "doi": "10.1016/j.cap.2017.02.003",
       "tags": [
         "materials"
-      ],
-      "primary": "materials"
-    },
-    {
-      "id": "chowdhury2017freestanding",
-      "title": "Optical and magnetic properties of free-standing silicene, germanene and T-graphene system",
-      "authors": "Suman Chowdhury, Arka Bandyopadhyay, Namrata Dhar, Debnarayan Jana",
-      "journal": "Physical Sciences Reviews",
-      "volume": "2",
-      "pages": "0102",
-      "year": 2017,
-      "doi": "10.1515/9783110467215-002",
-      "note": "Book chapter in Computational Sciences, De Gruyter",
-      "tags": [
-        "materials",
-        "review"
       ],
       "primary": "materials"
     },
